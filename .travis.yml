@@ -1,0 +1,34 @@
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+    - $HOME/symfony-bridge/.phpunit
+
+env:
+  global:
+    - PHPUNIT_FLAGS="-v"
+    - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 8.1
+      env: DEPENDENCIES="symfony/flex:^2.2"
+
+  allow_failures:
+    # Dev-master is allowed to fail.
+    - env: STABILITY="dev"
+
+before_install:
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+  - if ! [ -z "$STABILITY" ]; then composer config minimum-stability ${STABILITY}; fi;
+  - if ! [ -v "$DEPENDENCIES" ]; then COMPOSER_MEMORY_LIMIT=-1 composer require --no-update ${DEPENDENCIES}; fi;
+
+install:
+  - COMPOSER_MEMORY_LIMIT=-1 composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
+  - ./vendor/bin/simple-phpunit install
+
+script:
+  - composer validate --strict --no-check-lock
+  - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
