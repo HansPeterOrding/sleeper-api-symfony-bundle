@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HansPeterOrding\NflFastrSymfonyBundle;
+namespace HansPeterOrding\SleeperApiSymfonyBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
