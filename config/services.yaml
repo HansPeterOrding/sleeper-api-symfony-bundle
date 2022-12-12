@@ -1,0 +1,71 @@
+# mapping from bundle name to table prefix
+parameters:
+    table_prefix: sasb_
+        
+services:
+    _defaults:
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        autowire: true
+        autoconfigure: true
+        public: true
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\DoctrineExtensions\TablePrefixEventListener:
+        arguments:
+            $prefix: '%table_prefix%'
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata, method: loadClassMetadata }
+    
+    # Repositories
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionRepository'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository'
+
+    # Converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter'
+    
+    # Dependent converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter:
+        arguments:
+            $sleeperPlayerProjectionRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projection'
+            $sleeperStatsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_stats'
+            $sleeperPlayerConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterConverter:
+        arguments:
+            $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
+            $sleeperRosterSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter:
+        arguments:
+            $sleeperUserRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_user'
+            $sleeperUserMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter'
+        
+    
