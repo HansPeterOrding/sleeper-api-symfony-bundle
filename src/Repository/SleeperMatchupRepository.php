@@ -10,6 +10,9 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperMatchup as SleeperMatchupDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperMatchup as SleeperMatchupEntity;
 
 /**
+ * @method SleeperMatchupEntity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SleeperMatchupEntity|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method SleeperMatchupEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperMatchupEntity[] findAll()
  */
 class SleeperMatchupRepository extends ServiceEntityRepository

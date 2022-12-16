@@ -10,6 +10,9 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster as SleeperRosterEntity;
 
 /**
+ * @method SleeperRosterEntity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SleeperRosterEntity|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method SleeperRosterEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperRosterEntity[] findAll()
  */
 class SleeperRosterRepository extends ServiceEntityRepository

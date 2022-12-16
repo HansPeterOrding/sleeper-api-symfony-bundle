@@ -9,6 +9,12 @@ use Doctrine\Persistence\ManagerRegistry;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayer as SleeperPlayerEntity;
 
+/**
+ * @method SleeperPlayerEntity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SleeperPlayerEntity|null findOneBy(array $criteria, ?array $orderBy = null)
+ * @method SleeperPlayerEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+ * @method SleeperPlayerEntity[] findAll()
+ */
 class SleeperPlayerRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

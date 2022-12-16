@@ -26,6 +26,9 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository'
         
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_playoff_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository'
+        
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository'
         
@@ -38,6 +41,9 @@ services:
     
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupSourceConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup_source: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupSourceConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter'
@@ -55,6 +61,12 @@ services:
             $sleeperStatsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_stats'
             $sleeperPlayerConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupConverter:
+        arguments:
+            $sleeperPlayoffMatchupRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_playoff_matchup'
+            $sleeperPlayoffMatchupSourceConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup_source'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterConverter:
         arguments:
