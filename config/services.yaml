@@ -17,6 +17,15 @@ services:
             - { name: doctrine.event_listener, event: loadClassMetadata, method: loadClassMetadata }
     
     # Repositories
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_league: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueSettingsRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_league_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueSettingsRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueScoringSettingsRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_league_scoring_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueScoringSettingsRepository'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository'
     
@@ -36,6 +45,12 @@ services:
     hpo_sleeper_api_symfony_bundle.repository.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository'
 
     # Converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueSettingsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_league_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueSettingsConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueScoringSettingsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_league_scoring_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueScoringSettingsConverter'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter'
     
@@ -55,6 +70,13 @@ services:
     hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter'
     
     # Dependent converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueConverter:
+        arguments:
+            $sleeperLeagueRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_league'
+            $sleeperLeagueSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_league_settings'
+            $sleeperLeagueScoringSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_league_scoring_settings'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_league: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueConverter'
+        
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter:
         arguments:
             $sleeperPlayerProjectionRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projection'
