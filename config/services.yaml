@@ -34,6 +34,9 @@ services:
         
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerStatsRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_player_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerStatsRepository'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_playoff_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository'
@@ -83,6 +86,13 @@ services:
             $sleeperStatsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_stats'
             $sleeperPlayerConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter'
+        
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerStatsConverter:
+        arguments:
+            $sleeperPlayerStatsRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player_stats'
+            $sleeperStatsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_stats'
+            $sleeperPlayerConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_player_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerStatsConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupConverter:
         arguments:
