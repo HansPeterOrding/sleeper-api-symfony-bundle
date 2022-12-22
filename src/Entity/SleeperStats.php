@@ -39,6 +39,8 @@ class SleeperStats
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $offSnp = null;
     #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $defSnp = null;
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $tmOffSnp = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $tmDefSnp = null;
@@ -65,7 +67,7 @@ class SleeperStats
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $passFd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $pass2Pt = null;
+    private ?float $pass2pt = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $passInt = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -231,9 +233,9 @@ class SleeperStats
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $ydsAllow = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def3AndOut = null;
+    private ?float $def3andOut = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def4AndStop = null;
+    private ?float $def4andStop = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $qbHit = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -508,6 +510,17 @@ class SleeperStats
         return $this;
     }
 
+    public function getDefSnp(): ?float
+    {
+        return $this->defSnp;
+    }
+
+    public function setDefSnp(?float $defSnp): SleeperStats
+    {
+        $this->defSnp = $defSnp;
+        return $this;
+    }
+
     public function getTmOffSnp(): ?float
     {
         return $this->tmOffSnp;
@@ -618,14 +631,14 @@ class SleeperStats
         return $this;
     }
 
-    public function getPass2Pt(): ?float
+    public function getPass2pt(): ?float
     {
-        return $this->pass2Pt;
+        return $this->pass2pt;
     }
 
-    public function setPass2Pt(?float $pass2Pt): SleeperStats
+    public function setPass2pt(?float $pass2pt): SleeperStats
     {
-        $this->pass2Pt = $pass2Pt;
+        $this->pass2pt = $pass2pt;
         return $this;
     }
 
@@ -1487,25 +1500,25 @@ class SleeperStats
         return $this;
     }
 
-    public function getDef3AndOut(): ?float
+    public function getDef3andOut(): ?float
     {
-        return $this->def3AndOut;
+        return $this->def3andOut;
     }
 
-    public function setDef3AndOut(?float $def3AndOut): SleeperStats
+    public function setDef3andOut(?float $def3andOut): SleeperStats
     {
-        $this->def3AndOut = $def3AndOut;
+        $this->def3andOut = $def3andOut;
         return $this;
     }
 
-    public function getDef4AndStop(): ?float
+    public function getDef4andStop(): ?float
     {
-        return $this->def4AndStop;
+        return $this->def4andStop;
     }
 
-    public function setDef4AndStop(?float $def4AndStop): SleeperStats
+    public function setDef4andStop(?float $def4andStop): SleeperStats
     {
-        $this->def4AndStop = $def4AndStop;
+        $this->def4andStop = $def4andStop;
         return $this;
     }
 

@@ -33,6 +33,7 @@ class SleeperStatsConverter
 
         // Snap
         $sleeperStatsEntity->setOffSnp($sleeperStatsDto->getOffSnp());
+        $sleeperStatsEntity->setDefSnp($sleeperStatsDto->getDefSnp());
         $sleeperStatsEntity->setTmOffSnp($sleeperStatsDto->getTmOffSnp());
         $sleeperStatsEntity->setTmDefSnp($sleeperStatsDto->getTmDefSnp());
         $sleeperStatsEntity->setTmStSnp($sleeperStatsDto->getTmStSnp());
