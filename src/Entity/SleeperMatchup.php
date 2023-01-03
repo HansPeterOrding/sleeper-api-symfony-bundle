@@ -40,7 +40,7 @@ class SleeperMatchup
     #[ORM\Column(type: 'json', nullable: true)]
     private ?array $players = [];
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $matchupId = null;
 
     #[ORM\Column]
