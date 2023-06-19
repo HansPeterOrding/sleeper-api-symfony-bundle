@@ -37,6 +37,9 @@ class SleeperRoster
     #[ORM\Embedded(class: SleeperRosterSettings::class, columnPrefix: 'rostersettings_')]
     private SleeperRosterSettings $settings;
 
+    #[ORM\Column(type: 'json', nullable: true, options: ['jsonb' => true])]
+    private ?array $coOwners = [];
+
     public function __construct()
     {
         $this->settings = new SleeperRosterSettings();
@@ -127,6 +130,17 @@ class SleeperRoster
     public function setSettings(SleeperRosterSettings $settings): SleeperRoster
     {
         $this->settings = $settings;
+        return $this;
+    }
+
+    public function getCoOwners(): ?array
+    {
+        return $this->coOwners;
+    }
+
+    public function setCoOwners(?array $coOwners): SleeperRoster
+    {
+        $this->coOwners = $coOwners;
         return $this;
     }
 

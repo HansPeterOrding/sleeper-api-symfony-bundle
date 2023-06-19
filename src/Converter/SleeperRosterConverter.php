@@ -31,6 +31,8 @@ class SleeperRosterConverter
         $sleeperRosterSettingsEntity = $this->sleeperRosterSettingsConverter->toEntity($sleeperRosterDto->getSettings(), $sleeperRosterEntity->getSettings());
         $sleeperRosterEntity->setSettings($sleeperRosterSettingsEntity);
 
+        $sleeperRosterEntity->setCoOwners($sleeperRosterDto->getCoOwners());
+
         return $sleeperRosterEntity;
     }
 }
