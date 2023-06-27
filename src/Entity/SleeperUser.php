@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperUser as SleeperUserDto;
 
@@ -60,9 +62,23 @@ class SleeperUser
     #[ORM\Embedded(class: SleeperUserMetadata::class, columnPrefix: 'metadata_')]
     private SleeperUserMetadata $metadata;
 
+    /**
+     * @var Collection<int, SleeperTradedPick>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'previousOwner')]
+    private Collection $soldPicks;
+
+    /**
+     * @var Collection<int, SleeperTradedPick>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'owner')]
+    private Collection $acquiredPicks;
+
     public function __construct()
     {
         $this->metadata = new SleeperUserMetadata();
+        $this->soldPicks = new ArrayCollection();
+        $this->acquiredPicks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,5 +262,85 @@ class SleeperUser
         return [
             'userId' => $sleeperUserDto->getUserId()
         ];
+    }
+
+    /**+
+     * @return Collection<int, SleeperTradedPick>
+     */
+    public function getSoldPicks(): Collection
+    {
+        return $this->soldPicks;
+    }
+
+    /**
+     * @param Collection<int, SleeperTradedPick> $soldPicks
+     */
+    public function setSoldPicks(Collection $soldPicks): SleeperUser
+    {
+        $this->soldPicks = $soldPicks;
+        return $this;
+    }
+
+    public function addSoldPick(SleeperTradedPick $pick): SleeperUser
+    {
+        if(!$this->soldPicks->contains($pick)) {
+            $this->soldPicks[] = $pick;
+            $pick->setPreviousOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoldPick(SleeperTradedPick $pick): SleeperUser
+    {
+        if($this->soldPicks->contains($pick)) {
+            $this->soldPicks->removeElement($pick);
+
+            if($pick->getPreviousOwner() === $this) {
+                $pick->setPreviousOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperTradedPick>
+     */
+    public function getAcquiredPicks(): Collection
+    {
+        return $this->acquiredPicks;
+    }
+
+    /**
+     * @param Collection<int, SleeperTradedPick> $acquiredPicks
+     */
+    public function setAcquiredPicks(Collection $acquiredPicks): SleeperUser
+    {
+        $this->acquiredPicks = $acquiredPicks;
+        return $this;
+    }
+
+    public function addAcquiredPick(SleeperTradedPick $pick): SleeperUser
+    {
+        if(!$this->acquiredPicks->contains($pick)) {
+            $this->acquiredPicks[] = $pick;
+            $pick->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAcquiredPick(SleeperTradedPick $pick): SleeperUser
+    {
+        if($this->acquiredPicks->contains($pick)) {
+            $this->acquiredPicks->removeElement($pick);
+
+            if($pick->getOwner() === $this) {
+                $pick->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

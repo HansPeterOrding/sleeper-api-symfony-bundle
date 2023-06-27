@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 
 use HansPeterOrding\SleeperApiClient\Dto\SleeperLeague as SleeperLeagueDto;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\LeagueStatusEnum;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague as SleeperLeagueEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository;
 
@@ -23,9 +25,9 @@ class SleeperLeagueConverter
         $sleeperLeagueEntity = $this->sleeperLeagueRepository->findByDtoOrCreateEntity($sleeperLeagueDto);
 
         $sleeperLeagueEntity->setTotalRosters($sleeperLeagueDto->getTotalRosters());
-        $sleeperLeagueEntity->setStatus($sleeperLeagueDto->getStatus());
+        $sleeperLeagueEntity->setStatus(LeagueStatusEnum::from($sleeperLeagueDto->getStatus()));
         $sleeperLeagueEntity->setSport($sleeperLeagueDto->getSport());
-        $sleeperLeagueEntity->setSeasonType($sleeperLeagueDto->getSeasonType());
+        $sleeperLeagueEntity->setSeasonType(SeasonTypeEnum::from($sleeperLeagueDto->getSeasonType()));
         $sleeperLeagueEntity->setSeason($sleeperLeagueDto->getSeason());
         $sleeperLeagueEntity->setRosterPositions($sleeperLeagueDto->getRosterPositions());
         $sleeperLeagueEntity->setPreviousLeagueId($sleeperLeagueDto->getPreviousLeagueId());

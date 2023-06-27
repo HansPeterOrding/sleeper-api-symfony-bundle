@@ -17,6 +17,21 @@ services:
             - { name: doctrine.event_listener, event: loadClassMetadata, method: loadClassMetadata }
     
     # Repositories
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_draft: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_draft_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickMetadataRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_draft_pick_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickMetadataRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftSettingsRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_draft_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftSettingsRepository'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftMetadataRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_draft_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftMetadataRepository'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_league: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository'
     
@@ -44,10 +59,22 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository'
         
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTradedPickRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTradedPickRepository'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository'
 
     # Converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftPickMetadataConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_pick_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftPickMetadataConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftSettingsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftSettingsConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftMetadataConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftMetadataConverter'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueSettingsConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_league_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueSettingsConverter'
     
@@ -73,6 +100,19 @@ services:
     hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter'
     
     # Dependent converters
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftConverter:
+        arguments:
+            $sleeperDraftRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_draft'
+            $sleeperDraftSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_settings'
+            $sleeperDraftMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_metadata'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_draft: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftPickConverter:
+        arguments:
+            $sleeperDraftPickRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_draft_pick'
+            $sleeperDraftPickMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_pick_metadata'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftPickConverter'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueConverter:
         arguments:
             $sleeperLeagueRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_league'
@@ -105,6 +145,11 @@ services:
             $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
             $sleeperRosterSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTradedPickConverter:
+        arguments:
+            $sleeperTradedPickRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_traded_pick'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter:
         arguments:

@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperLeague as SleeperLeagueDto;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\LeagueStatusEnum;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 
 #[ORM\Entity]
 class SleeperLeague
@@ -19,7 +23,7 @@ class SleeperLeague
     private ?int $totalRosters = null;
 
     #[ORM\Column]
-    private ?string $status = null;
+    private LeagueStatusEnum $status;
 
     #[ORM\Column]
     private ?string $sport = null;
@@ -28,7 +32,7 @@ class SleeperLeague
     private SleeperLeagueSettings $settings;
 
     #[ORM\Column]
-    private ?string $seasonType = null;
+    private SeasonTypeEnum $seasonType;
 
     #[ORM\Column]
     private ?string $season = null;
@@ -54,10 +58,29 @@ class SleeperLeague
     #[ORM\Column(nullable: true)]
     private ?string $avatar = null;
 
+    /**
+     * @var Collection<int, SleeperDraft>
+     */
+    #[ORM\OneToOne(targetEntity: SleeperDraft::class, mappedBy: 'league')]
+    private ?SleeperDraft $draft = null;
+
+    /**
+     * @var Collection<int, SleeperRoster>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperRoster::class, mappedBy: 'league')]
+    private Collection $rosters;
+
+    /**
+     * @var Collection<int, SleeperTradedPick>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'league')]
+    private Collection $tradedPicks;
+
     public function __construct()
     {
         $this->settings = new SleeperLeagueSettings();
         $this->scoringSettings = new SleeperLeagueScoringSettings();
+        $this->tradedPicks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,12 +105,12 @@ class SleeperLeague
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): LeagueStatusEnum
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): SleeperLeague
+    public function setStatus(LeagueStatusEnum $status): SleeperLeague
     {
         $this->status = $status;
         return $this;
@@ -115,12 +138,12 @@ class SleeperLeague
         return $this;
     }
 
-    public function getSeasonType(): ?string
+    public function getSeasonType(): SeasonTypeEnum
     {
         return $this->seasonType;
     }
 
-    public function setSeasonType(?string $seasonType): SleeperLeague
+    public function setSeasonType(SeasonTypeEnum $seasonType): SleeperLeague
     {
         $this->seasonType = $seasonType;
         return $this;
@@ -219,5 +242,96 @@ class SleeperLeague
         return [
             'leagueId' => $sleeperLeagueDto->getLeagueId()
         ];
+    }
+
+    public function getDraft(): ?SleeperDraft
+    {
+        return $this->draft;
+    }
+
+    public function setDraft(?SleeperDraft $draft): SleeperLeague
+    {
+        $this->draft = $draft;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperRoster>
+     */
+    public function getRosters(): Collection
+    {
+        return $this->rosters;
+    }
+
+    /**
+     * @param Collection<int, SleeperRoster> $rosters
+     */
+    public function setRosters(Collection $rosters): SleeperLeague
+    {
+        $this->rosters = $rosters;
+        return $this;
+    }
+
+    public function addRoster(SleeperRoster $roster): SleeperLeague
+    {
+        if (!$this->rosters->contains($roster)) {
+            $this->rosters[] = $roster;
+            $roster->setLeague($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoster(SleeperRoster $roster): SleeperLeague
+    {
+        if ($this->rosters->contains($roster)) {
+            $this->rosters->removeElement($roster);
+
+            if ($roster->getLeague() === $this) {
+                $roster->setLeague(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperTradedPick>
+     */
+    public function getTradedPicks(): Collection
+    {
+        return $this->tradedPicks;
+    }
+
+    /**
+     * @param Collection<int, SleeperTradedPick> $tradedPicks
+     */
+    public function setTradedPicks(Collection $tradedPicks): SleeperRoster
+    {
+        $this->tradedPicks = $tradedPicks;
+        return $this;
+    }
+
+    public function addTradedPick(SleeperTradedPick $pick): SleeperRoster
+    {
+        if (!$this->draftPicks->contains($pick)) {
+            $this->draftPicks[] = $pick;
+            $pick->setRoster($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTradedPick(SleeperTradedPick $pick): SleeperRoster
+    {
+        if ($this->draftPicks->contains($pick)) {
+            $this->draftPicks->removeElement($pick);
+
+            if ($pick->getRoster() === $this) {
+                $pick->setRoster(null);
+            }
+        }
+
+        return $this;
     }
 }

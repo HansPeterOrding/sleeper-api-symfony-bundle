@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 
@@ -40,9 +42,31 @@ class SleeperRoster
     #[ORM\Column(type: 'json', nullable: true, options: ['jsonb' => true])]
     private ?array $coOwners = [];
 
+    #[ORM\OneToOne]
+    #[ORM\JoinColumn(name: 'internal_owner_id', referencedColumnName: 'id')]
+    private ?SleeperUser $owner = null;
+
+    #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'rosters')]
+    #[ORM\JoinColumn(name: 'internal_league_id')]
+    private ?SleeperLeague $league = null;
+
+    /**
+     * @var Collection<int, SleeperDraftPick>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperDraftPick::class, mappedBy: 'roster')]
+    private Collection $draftPicks;
+
+    /**
+     * @var Collection<int, SleeperTradedPick>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'roster')]
+    private Collection $tradedPicks;
+
     public function __construct()
     {
         $this->settings = new SleeperRosterSettings();
+        $this->draftPicks = new ArrayCollection();
+        $this->tradedPicks = new ArrayCollection();
     }
 
     public function getId(): int
@@ -150,5 +174,107 @@ class SleeperRoster
             'leagueId' => $sleeperRosterDto->getLeagueId(),
             'rosterId' => $sleeperRosterDto->getRosterId()
         ];
+    }
+
+    /**
+     * @return Collection<int, SleeperDraftPick>
+     */
+    public function getDraftPicks(): Collection
+    {
+        return $this->draftPicks;
+    }
+
+    /**
+     * @param Collection<int, SleeperDraftPick> $draftPicks
+     */
+    public function setDraftPicks(Collection $draftPicks): SleeperRoster
+    {
+        $this->draftPicks = $draftPicks;
+        return $this;
+    }
+
+    public function addDraftPick(SleeperDraftPick $draftPick): SleeperRoster
+    {
+        if(!$this->draftPicks->contains($draftPick)) {
+            $this->draftPicks[] = $draftPick;
+            $draftPick->setRoster($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDraftPick(SleeperDraftPick $draftPick): SleeperRoster
+    {
+        if($this->draftPicks->contains($draftPick)) {
+            $this->draftPicks->removeElement($draftPick);
+
+            if($draftPick->getRoster() === $this) {
+                $draftPick->setRoster(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOwner(): ?SleeperUser
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?SleeperUser $owner): SleeperRoster
+    {
+        $this->owner = $owner;
+        return $this;
+    }
+
+    public function getLeague(): ?SleeperLeague
+    {
+        return $this->league;
+    }
+
+    public function setLeague(?SleeperLeague $league): SleeperRoster
+    {
+        $this->league = $league;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperTradedPick>
+     */
+    public function getTradedPicks(): Collection
+    {
+        return $this->tradedPicks;
+    }
+
+    /**
+     * @param Collection<int, SleeperTradedPick> $tradedPicks
+     */
+    public function setTradedPicks(Collection $tradedPicks): SleeperRoster
+    {
+        $this->tradedPicks = $tradedPicks;
+        return $this;
+    }
+
+    public function addTradedPick(SleeperTradedPick $pick): SleeperRoster
+    {
+        if(!$this->draftPicks->contains($pick)) {
+            $this->draftPicks[] = $pick;
+            $pick->setRoster($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTradedPick(SleeperTradedPick $pick): SleeperRoster
+    {
+        if($this->draftPicks->contains($pick)) {
+            $this->draftPicks->removeElement($pick);
+
+            if($pick->getRoster() === $this) {
+                $pick->setRoster(null);
+            }
+        }
+
+        return $this;
     }
 }
