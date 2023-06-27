@@ -13,11 +13,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository;
 class SleeperLeagueConverter
 {
     public function __construct(
-        private readonly SleeperLeagueRepository $sleeperLeagueRepository,
-        private readonly SleeperLeagueSettingsConverter $sleeperLeagueSettingsConverter,
+        private readonly SleeperLeagueRepository               $sleeperLeagueRepository,
+        private readonly SleeperLeagueSettingsConverter        $sleeperLeagueSettingsConverter,
         private readonly SleeperLeagueScoringSettingsConverter $sleeperLeagueScoringSettingsConverter
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperLeagueDto $sleeperLeagueDto): SleeperLeagueEntity
@@ -36,10 +35,16 @@ class SleeperLeagueConverter
         $sleeperLeagueEntity->setDraftId($sleeperLeagueDto->getDraftId());
         $sleeperLeagueEntity->setAvatar($sleeperLeagueDto->getAvatar());
 
-        $sleeperLeagueSettingsEntity = $this->sleeperLeagueSettingsConverter->toEntity($sleeperLeagueDto->getSettings(), $sleeperLeagueEntity->getSettings());
+        $sleeperLeagueSettingsEntity = $this->sleeperLeagueSettingsConverter->toEntity(
+            $sleeperLeagueDto->getSettings(),
+            $sleeperLeagueEntity->getSettings()
+        );
         $sleeperLeagueEntity->setSettings($sleeperLeagueSettingsEntity);
 
-        $sleeperLeagueScoringSettingsEntity = $this->sleeperLeagueScoringSettingsConverter->toEntity($sleeperLeagueDto->getScoringSettings(), $sleeperLeagueEntity->getScoringSettings());
+        $sleeperLeagueScoringSettingsEntity = $this->sleeperLeagueScoringSettingsConverter->toEntity(
+            $sleeperLeagueDto->getScoringSettings(),
+            $sleeperLeagueEntity->getScoringSettings()
+        );
         $sleeperLeagueEntity->setScoringSettings($sleeperLeagueScoringSettingsEntity);
 
         return $sleeperLeagueEntity;

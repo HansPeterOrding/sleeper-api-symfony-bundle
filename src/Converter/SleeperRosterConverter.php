@@ -11,10 +11,9 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 class SleeperRosterConverter
 {
     public function __construct(
-        private readonly SleeperRosterRepository $sleeperRosterRepository,
+        private readonly SleeperRosterRepository        $sleeperRosterRepository,
         private readonly SleeperRosterSettingsConverter $sleeperRosterSettingsConverter
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperRosterDto $sleeperRosterDto): SleeperRosterEntity
@@ -28,7 +27,10 @@ class SleeperRosterConverter
         $sleeperRosterEntity->setReserve($sleeperRosterDto->getReserve());
         $sleeperRosterEntity->setPlayers($sleeperRosterDto->getPlayers());
 
-        $sleeperRosterSettingsEntity = $this->sleeperRosterSettingsConverter->toEntity($sleeperRosterDto->getSettings(), $sleeperRosterEntity->getSettings());
+        $sleeperRosterSettingsEntity = $this->sleeperRosterSettingsConverter->toEntity(
+            $sleeperRosterDto->getSettings(),
+            $sleeperRosterEntity->getSettings()
+        );
         $sleeperRosterEntity->setSettings($sleeperRosterSettingsEntity);
 
         $sleeperRosterEntity->setCoOwners($sleeperRosterDto->getCoOwners());

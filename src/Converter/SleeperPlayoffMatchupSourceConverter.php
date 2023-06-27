@@ -9,9 +9,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchupSource a
 
 class SleeperPlayoffMatchupSourceConverter
 {
-    public function toEntity(?SleeperPlayoffMatchupSourceDto $sleeperPlayoffMatchupSourceDto = null, ?SleeperPlayoffMatchupSourceEntity $sleeperPlayoffMatchupSourceEntity = null): ?SleeperPlayoffMatchupSourceEntity
-    {
-        if(null === $sleeperPlayoffMatchupSourceDto) {
+    public function toEntity(
+        ?SleeperPlayoffMatchupSourceDto    $sleeperPlayoffMatchupSourceDto = null,
+        ?SleeperPlayoffMatchupSourceEntity $sleeperPlayoffMatchupSourceEntity = null
+    ): ?SleeperPlayoffMatchupSourceEntity {
+        if (null === $sleeperPlayoffMatchupSourceDto) {
             return null;
         }
 

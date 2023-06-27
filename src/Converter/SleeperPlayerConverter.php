@@ -12,8 +12,7 @@ class SleeperPlayerConverter
 {
     public function __construct(
         private readonly SleeperPlayerRepository $sleeperPlayerRepository
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperPlayerDto $sleeperPlayerDto): SleeperPlayerEntity

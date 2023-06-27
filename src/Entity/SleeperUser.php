@@ -283,7 +283,7 @@ class SleeperUser
 
     public function addSoldPick(SleeperTradedPick $pick): SleeperUser
     {
-        if(!$this->soldPicks->contains($pick)) {
+        if (!$this->soldPicks->contains($pick)) {
             $this->soldPicks[] = $pick;
             $pick->setPreviousOwner($this);
         }
@@ -293,10 +293,10 @@ class SleeperUser
 
     public function removeSoldPick(SleeperTradedPick $pick): SleeperUser
     {
-        if($this->soldPicks->contains($pick)) {
+        if ($this->soldPicks->contains($pick)) {
             $this->soldPicks->removeElement($pick);
 
-            if($pick->getPreviousOwner() === $this) {
+            if ($pick->getPreviousOwner() === $this) {
                 $pick->setPreviousOwner(null);
             }
         }
@@ -323,7 +323,7 @@ class SleeperUser
 
     public function addAcquiredPick(SleeperTradedPick $pick): SleeperUser
     {
-        if(!$this->acquiredPicks->contains($pick)) {
+        if (!$this->acquiredPicks->contains($pick)) {
             $this->acquiredPicks[] = $pick;
             $pick->setOwner($this);
         }
@@ -333,10 +333,10 @@ class SleeperUser
 
     public function removeAcquiredPick(SleeperTradedPick $pick): SleeperUser
     {
-        if($this->acquiredPicks->contains($pick)) {
+        if ($this->acquiredPicks->contains($pick)) {
             $this->acquiredPicks->removeElement($pick);
 
-            if($pick->getOwner() === $this) {
+            if ($pick->getOwner() === $this) {
                 $pick->setOwner(null);
             }
         }

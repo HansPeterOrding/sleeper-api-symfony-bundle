@@ -287,7 +287,7 @@ class SleeperDraft
 
     public function addDraftPick(SleeperDraftPick $draftPick): SleeperDraft
     {
-        if(!$this->draftPicks->contains($draftPick)) {
+        if (!$this->draftPicks->contains($draftPick)) {
             $this->draftPicks[] = $draftPick;
             $draftPick->setDraft($this);
         }
@@ -297,10 +297,10 @@ class SleeperDraft
 
     public function removeDraftPick(SleeperDraftPick $draftPick): SleeperDraft
     {
-        if($this->draftPicks->contains($draftPick)) {
+        if ($this->draftPicks->contains($draftPick)) {
             $this->draftPicks->removeElement($draftPick);
 
-            if($draftPick->getDraft() === $this) {
+            if ($draftPick->getDraft() === $this) {
                 $draftPick->setDraft(null);
             }
         }
@@ -338,7 +338,7 @@ class SleeperDraft
 
     public function addTradedPick(SleeperTradedPick $pick): SleeperRoster
     {
-        if(!$this->draftPicks->contains($pick)) {
+        if (!$this->draftPicks->contains($pick)) {
             $this->draftPicks[] = $pick;
             $pick->setRoster($this);
         }
@@ -348,10 +348,10 @@ class SleeperDraft
 
     public function removeTradedPick(SleeperTradedPick $pick): SleeperRoster
     {
-        if($this->draftPicks->contains($pick)) {
+        if ($this->draftPicks->contains($pick)) {
             $this->draftPicks->removeElement($pick);
 
-            if($pick->getRoster() === $this) {
+            if ($pick->getRoster() === $this) {
                 $pick->setRoster(null);
             }
         }

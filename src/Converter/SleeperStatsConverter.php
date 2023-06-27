@@ -9,8 +9,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperStats as SleeperStatsE
 
 class SleeperStatsConverter
 {
-    public function toEntity(SleeperStatsDto $sleeperStatsDto, ?SleeperStatsEntity $sleeperStatsEntity = null): SleeperStatsEntity
-    {
+    public function toEntity(
+        SleeperStatsDto     $sleeperStatsDto,
+        ?SleeperStatsEntity $sleeperStatsEntity = null
+    ): SleeperStatsEntity {
         if (!$sleeperStatsEntity) {
             $sleeperStatsEntity = new SleeperStatsEntity();
         }

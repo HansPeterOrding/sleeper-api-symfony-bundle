@@ -12,10 +12,9 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository;
 class SleeperUserConverter
 {
     public function __construct(
-        private readonly SleeperUserRepository $sleeperUserRepository,
+        private readonly SleeperUserRepository        $sleeperUserRepository,
         private readonly SleeperUserMetadataConverter $sleeperUserMetadataConverter
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperUserDto $sleeperUserDto): SleeperUserEntity
@@ -37,7 +36,10 @@ class SleeperUserConverter
         $sleeperUserEntity->setDisplayName($sleeperUserDto->getDisplayName());
         $sleeperUserEntity->setAvatar($sleeperUserDto->getAvatar());
 
-        $sleeperUserMetadataEntity = $this->sleeperUserMetadataConverter->toEntity($sleeperUserDto->getMetadata(), $sleeperUserEntity->getMetadata());
+        $sleeperUserMetadataEntity = $this->sleeperUserMetadataConverter->toEntity(
+            $sleeperUserDto->getMetadata(),
+            $sleeperUserEntity->getMetadata()
+        );
         $sleeperUserEntity->setMetadata($sleeperUserMetadataEntity);
 
         return $sleeperUserEntity;

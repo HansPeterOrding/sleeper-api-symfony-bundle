@@ -12,10 +12,9 @@ class SleeperPlayerStatsConverter
 {
     public function __construct(
         private readonly SleeperPlayerStatsRepository $sleeperPlayerStatsRepository,
-        private readonly SleeperStatsConverter $sleeperStatsConverter,
-        private readonly SleeperPlayerConverter $sleeperPlayerConverter
-    )
-    {
+        private readonly SleeperStatsConverter        $sleeperStatsConverter,
+        private readonly SleeperPlayerConverter       $sleeperPlayerConverter
+    ) {
     }
 
     public function toEntity(SleeperPlayerStatsDto $sleeperPlayerStatsDto): SleeperPlayerStatsEntity
@@ -34,7 +33,10 @@ class SleeperPlayerStatsConverter
         $sleeperPlayerStatsEntity->setCompany($sleeperPlayerStatsDto->getCompany());
         $sleeperPlayerStatsEntity->setCategory($sleeperPlayerStatsDto->getCategory());
 
-        $stats = $this->sleeperStatsConverter->toEntity($sleeperPlayerStatsDto->getStats(), $sleeperPlayerStatsEntity->getStats());
+        $stats = $this->sleeperStatsConverter->toEntity(
+            $sleeperPlayerStatsDto->getStats(),
+            $sleeperPlayerStatsEntity->getStats()
+        );
         $sleeperPlayerStatsEntity->setStats($stats);
 
         $playerDto = $sleeperPlayerStatsDto->getPlayer();

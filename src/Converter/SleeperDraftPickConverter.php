@@ -11,10 +11,9 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickRepositor
 class SleeperDraftPickConverter
 {
     public function __construct(
-        private readonly SleeperDraftPickRepository $sleeperDraftPickRepository,
+        private readonly SleeperDraftPickRepository        $sleeperDraftPickRepository,
         private readonly SleeperDraftPickMetadataConverter $sleeperDraftPickMetadataConverter
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperDraftPickDto $sleeperDraftPickDto): SleeperDraftPickEntity
@@ -30,7 +29,10 @@ class SleeperDraftPickConverter
         $sleeperDraftPickEntity->setDraftSlot($sleeperDraftPickDto->getDraftSlot());
         $sleeperDraftPickEntity->setDraftId($sleeperDraftPickDto->getDraftId());
 
-        $sleeperDraftPickMetadataEntity = $this->sleeperDraftPickMetadataConverter->toEntity($sleeperDraftPickDto->getMetadata(), $sleeperDraftPickEntity->getMetadata());
+        $sleeperDraftPickMetadataEntity = $this->sleeperDraftPickMetadataConverter->toEntity(
+            $sleeperDraftPickDto->getMetadata(),
+            $sleeperDraftPickEntity->getMetadata()
+        );
         $sleeperDraftPickEntity->setMetadata($sleeperDraftPickMetadataEntity);
 
         return $sleeperDraftPickEntity;

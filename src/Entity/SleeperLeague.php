@@ -306,29 +306,29 @@ class SleeperLeague
     /**
      * @param Collection<int, SleeperTradedPick> $tradedPicks
      */
-    public function setTradedPicks(Collection $tradedPicks): SleeperRoster
+    public function setTradedPicks(Collection $tradedPicks): SleeperLeague
     {
         $this->tradedPicks = $tradedPicks;
         return $this;
     }
 
-    public function addTradedPick(SleeperTradedPick $pick): SleeperRoster
+    public function addTradedPick(SleeperTradedPick $pick): SleeperLeague
     {
-        if (!$this->draftPicks->contains($pick)) {
-            $this->draftPicks[] = $pick;
-            $pick->setRoster($this);
+        if (!$this->tradedPicks->contains($pick)) {
+            $this->tradedPicks[] = $pick;
+            $pick->setLeague($this);
         }
 
         return $this;
     }
 
-    public function removeTradedPick(SleeperTradedPick $pick): SleeperRoster
+    public function removeTradedPick(SleeperTradedPick $pick): SleeperLeague
     {
-        if ($this->draftPicks->contains($pick)) {
-            $this->draftPicks->removeElement($pick);
+        if ($this->tradedPicks->contains($pick)) {
+            $this->tradedPicks->removeElement($pick);
 
-            if ($pick->getRoster() === $this) {
-                $pick->setRoster(null);
+            if ($pick->getLeague() === $this) {
+                $pick->setLeague(null);
             }
         }
 

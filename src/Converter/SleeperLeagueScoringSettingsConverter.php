@@ -9,8 +9,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeagueScoringSettings 
 
 class SleeperLeagueScoringSettingsConverter
 {
-    public function toEntity(SleeperLeagueScoringSettingsDto $sleeperLeagueScoringSettingsDto, ?SleeperLeagueScoringSettingsEntity $sleeperLeagueScoringSettingsEntity = null): SleeperLeagueScoringSettingsEntity
-    {
+    public function toEntity(
+        SleeperLeagueScoringSettingsDto     $sleeperLeagueScoringSettingsDto,
+        ?SleeperLeagueScoringSettingsEntity $sleeperLeagueScoringSettingsEntity = null
+    ): SleeperLeagueScoringSettingsEntity {
         if (!$sleeperLeagueScoringSettingsEntity) {
             $sleeperLeagueScoringSettingsEntity = new SleeperLeagueScoringSettingsEntity();
         }

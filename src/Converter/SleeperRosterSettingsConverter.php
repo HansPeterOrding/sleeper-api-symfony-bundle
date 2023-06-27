@@ -9,8 +9,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRosterSettings as Slee
 
 class SleeperRosterSettingsConverter
 {
-    public function toEntity(SleeperRosterSettingsDto $sleeperRosterSettingsDto, ?SleeperRosterSettingsEntity $sleeperRosterSettingsEntity = null): SleeperRosterSettingsEntity
-    {
+    public function toEntity(
+        SleeperRosterSettingsDto     $sleeperRosterSettingsDto,
+        ?SleeperRosterSettingsEntity $sleeperRosterSettingsEntity = null
+    ): SleeperRosterSettingsEntity {
         if (!$sleeperRosterSettingsEntity) {
             $sleeperRosterSettingsEntity = new SleeperRosterSettingsEntity();
         }

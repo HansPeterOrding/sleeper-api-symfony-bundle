@@ -9,8 +9,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeagueSettings as Slee
 
 class SleeperLeagueSettingsConverter
 {
-    public function toEntity(SleeperLeagueSettingsDto $sleeperLeagueSettingsDto, ?SleeperLeagueSettingsEntity $sleeperLeagueSettingsEntity = null): SleeperLeagueSettingsEntity
-    {
+    public function toEntity(
+        SleeperLeagueSettingsDto     $sleeperLeagueSettingsDto,
+        ?SleeperLeagueSettingsEntity $sleeperLeagueSettingsEntity = null
+    ): SleeperLeagueSettingsEntity {
         if (!$sleeperLeagueSettingsEntity) {
             $sleeperLeagueSettingsEntity = new SleeperLeagueSettingsEntity();
         }

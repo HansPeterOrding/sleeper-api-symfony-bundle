@@ -11,14 +11,16 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepo
 class SleeperPlayoffMatchupConverter
 {
     public function __construct(
-        private readonly SleeperPlayoffMatchupRepository $sleeperPlayoffMatchupRepository,
+        private readonly SleeperPlayoffMatchupRepository      $sleeperPlayoffMatchupRepository,
         private readonly SleeperPlayoffMatchupSourceConverter $sleeperPlayoffMatchupSourceConverter
-    )
-    {
+    ) {
     }
 
-    public function toEntity(string $leagueId, string $branch, SleeperPlayoffMatchupDto $sleeperPlayoffMatchupDto): SleeperPlayoffMatchupEntity
-    {
+    public function toEntity(
+        string                   $leagueId,
+        string                   $branch,
+        SleeperPlayoffMatchupDto $sleeperPlayoffMatchupDto
+    ): SleeperPlayoffMatchupEntity {
         $sleeperPlayoffMatchupEntity = $this->sleeperPlayoffMatchupRepository->findByDtoOrCreateEntity($leagueId, $branch, $sleeperPlayoffMatchupDto);
 
         $sleeperPlayoffMatchupEntity->setLeagueId($leagueId);
@@ -31,10 +33,16 @@ class SleeperPlayoffMatchupConverter
         $sleeperPlayoffMatchupEntity->setL($sleeperPlayoffMatchupDto->getL());
         $sleeperPlayoffMatchupEntity->setP($sleeperPlayoffMatchupDto->getP());
 
-        $sleeperPlayoffMatchupSourceT1Entity = $this->sleeperPlayoffMatchupSourceConverter->toEntity($sleeperPlayoffMatchupDto->getT1From(), $sleeperPlayoffMatchupEntity->getT1From());
+        $sleeperPlayoffMatchupSourceT1Entity = $this->sleeperPlayoffMatchupSourceConverter->toEntity(
+            $sleeperPlayoffMatchupDto->getT1From(),
+            $sleeperPlayoffMatchupEntity->getT1From()
+        );
         $sleeperPlayoffMatchupEntity->setT1From($sleeperPlayoffMatchupSourceT1Entity);
 
-        $sleeperPlayoffMatchupSourceT2Entity = $this->sleeperPlayoffMatchupSourceConverter->toEntity($sleeperPlayoffMatchupDto->getT2From(), $sleeperPlayoffMatchupEntity->getT2From());
+        $sleeperPlayoffMatchupSourceT2Entity = $this->sleeperPlayoffMatchupSourceConverter->toEntity(
+            $sleeperPlayoffMatchupDto->getT2From(),
+            $sleeperPlayoffMatchupEntity->getT2From()
+        );
         $sleeperPlayoffMatchupEntity->setT2From($sleeperPlayoffMatchupSourceT2Entity);
 
         return $sleeperPlayoffMatchupEntity;

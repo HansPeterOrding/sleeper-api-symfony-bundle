@@ -12,8 +12,7 @@ class SleeperMatchupConverter
 {
     public function __construct(
         private readonly SleeperMatchupRepository $sleeperMatchupRepository
-    )
-    {
+    ) {
     }
 
     public function toEntity(string $leagueId, int $week, SleeperMatchupDto $sleeperMatchupDto): SleeperMatchupEntity

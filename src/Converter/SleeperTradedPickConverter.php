@@ -12,8 +12,7 @@ class SleeperTradedPickConverter
 {
     public function __construct(
         private readonly SleeperTradedPickRepository $sleeperTradedPickRepository
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperTradedPickDto $sleeperTradedPickDto): SleeperTradedPickEntity

@@ -5,24 +5,15 @@ declare(strict_types=1);
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 
 use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftSettings as SleeperDraftSettingsDto;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\DraftStatusEnum;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\DraftTypeEnum;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftSettings as SleeperDraftSettingsEntity;
-use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftSettingsRepository;
 
 class SleeperDraftSettingsConverter
 {
-    public function __construct(
-        private readonly SleeperDraftSettingsRepository $sleeperDraftSettingsRepository
-    )
-    {
-    }
-
-    public function toEntity(SleeperDraftSettingsDto $sleeperDraftSettingsDto, ?SleeperDraftSettingsEntity $sleeperDraftSettingsEntity): SleeperDraftSettingsEntity
-    {
-        if(!$sleeperDraftSettingsEntity) {
+    public function toEntity(
+        SleeperDraftSettingsDto     $sleeperDraftSettingsDto,
+        ?SleeperDraftSettingsEntity $sleeperDraftSettingsEntity
+    ): SleeperDraftSettingsEntity {
+        if (!$sleeperDraftSettingsEntity) {
             $sleeperDraftSettingsEntity = new SleeperDraftSettingsEntity();
         }
 

@@ -12,10 +12,9 @@ class SleeperPlayerProjectionConverter
 {
     public function __construct(
         private readonly SleeperPlayerProjectionRepository $sleeperPlayerProjectionRepository,
-        private readonly SleeperStatsConverter $sleeperStatsConverter,
-        private readonly SleeperPlayerConverter $sleeperPlayerConverter
-    )
-    {
+        private readonly SleeperStatsConverter             $sleeperStatsConverter,
+        private readonly SleeperPlayerConverter            $sleeperPlayerConverter
+    ) {
     }
 
     public function toEntity(SleeperPlayerProjectionDto $sleeperPlayerProjectionDto): SleeperPlayerProjectionEntity

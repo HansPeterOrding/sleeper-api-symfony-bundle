@@ -15,11 +15,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftRepository;
 class SleeperDraftConverter
 {
     public function __construct(
-        private readonly SleeperDraftRepository $sleeperDraftRepository,
+        private readonly SleeperDraftRepository        $sleeperDraftRepository,
         private readonly SleeperDraftSettingsConverter $sleeperDraftSettingsConverter,
         private readonly SleeperDraftMetadataConverter $sleeperDraftMetadataConverter
-    )
-    {
+    ) {
     }
 
     public function toEntity(SleeperDraftDto $sleeperDraftDto): SleeperDraftEntity
@@ -42,10 +41,16 @@ class SleeperDraftConverter
         $sleeperDraftEntity->setCreators($sleeperDraftDto->getCreators());
         $sleeperDraftEntity->setCreated($sleeperDraftDto->getCreated());
 
-        $sleeperDraftSettingsEntity = $this->sleeperDraftSettingsConverter->toEntity($sleeperDraftDto->getSettings(), $sleeperDraftEntity->getSettings());
+        $sleeperDraftSettingsEntity = $this->sleeperDraftSettingsConverter->toEntity(
+            $sleeperDraftDto->getSettings(),
+            $sleeperDraftEntity->getSettings()
+        );
         $sleeperDraftEntity->setSettings($sleeperDraftSettingsEntity);
 
-        $sleeperDraftMetadataEntity = $this->sleeperDraftMetadataConverter->toEntity($sleeperDraftDto->getMetadata(), $sleeperDraftEntity->getMetadata());
+        $sleeperDraftMetadataEntity = $this->sleeperDraftMetadataConverter->toEntity(
+            $sleeperDraftDto->getMetadata(),
+            $sleeperDraftEntity->getMetadata()
+        );
         $sleeperDraftEntity->setMetadata($sleeperDraftMetadataEntity);
 
         return $sleeperDraftEntity;

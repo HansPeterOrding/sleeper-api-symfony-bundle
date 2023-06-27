@@ -7,7 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperUserMetadata 
+class SleeperUserMetadata
 {
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $userMessagePn = null;

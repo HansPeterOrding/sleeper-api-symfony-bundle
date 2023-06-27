@@ -14,9 +14,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickMetadataR
 
 class SleeperDraftPickMetadataConverter
 {
-    public function toEntity(SleeperDraftPickMetadataDto $sleeperDraftPickMetadataDto, ?SleeperDraftPickMetadataEntity $sleeperDraftPickMetadataEntity): SleeperDraftPickMetadataEntity
-    {
-        if(!$sleeperDraftPickMetadataEntity) {
+    public function toEntity(
+        SleeperDraftPickMetadataDto     $sleeperDraftPickMetadataDto,
+        ?SleeperDraftPickMetadataEntity $sleeperDraftPickMetadataEntity
+    ): SleeperDraftPickMetadataEntity {
+        if (!$sleeperDraftPickMetadataEntity) {
             $sleeperDraftPickMetadataEntity = new SleeperDraftPickMetadataEntity();
         }
 

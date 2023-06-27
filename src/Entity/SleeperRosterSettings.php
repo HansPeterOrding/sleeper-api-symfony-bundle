@@ -7,7 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperRosterSettings 
+class SleeperRosterSettings
 {
     #[ORM\Column]
     private int $wins = 0;

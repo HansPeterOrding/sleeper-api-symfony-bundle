@@ -9,8 +9,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUserMetadata as Sleepe
 
 class SleeperUserMetadataConverter
 {
-    public function toEntity(SleeperUserMetadataDto $sleeperUserMetadataDto, ?SleeperUserMetadataEntity $sleeperUserMetadataEntity = null): SleeperUserMetadataEntity
-    {
+    public function toEntity(
+        SleeperUserMetadataDto     $sleeperUserMetadataDto,
+        ?SleeperUserMetadataEntity $sleeperUserMetadataEntity = null
+    ): SleeperUserMetadataEntity {
         if (!$sleeperUserMetadataEntity) {
             $sleeperUserMetadataEntity = new SleeperUserMetadataEntity();
         }

@@ -11,9 +11,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftMetadataRepos
 
 class SleeperDraftMetadataConverter
 {
-    public function toEntity(SleeperDraftMetadataDto $sleeperDraftMetadataDto, ?SleeperDraftMetadataEntity $sleeperDraftMetadataEntity): SleeperDraftMetadataEntity
-    {
-        if(!$sleeperDraftMetadataEntity) {
+    public function toEntity(
+        SleeperDraftMetadataDto     $sleeperDraftMetadataDto,
+        ?SleeperDraftMetadataEntity $sleeperDraftMetadataEntity
+    ): SleeperDraftMetadataEntity {
+        if (!$sleeperDraftMetadataEntity) {
             $sleeperDraftMetadataEntity = new SleeperDraftMetadataEntity();
         }
 
