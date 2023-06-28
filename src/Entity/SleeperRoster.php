@@ -7,6 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use HansPeterOrding\SleeperApiClient\ApiClient\Endpoints\User;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 
 #[ORM\Entity]
@@ -42,7 +43,7 @@ class SleeperRoster
     #[ORM\Column(type: 'json', nullable: true, options: ['jsonb' => true])]
     private ?array $coOwners = [];
 
-    #[ORM\OneToOne]
+    #[ORM\ManyToOne(targetEntity: SleeperUser::class)]
     #[ORM\JoinColumn(name: 'internal_owner_id', referencedColumnName: 'id')]
     private ?SleeperUser $owner = null;
 

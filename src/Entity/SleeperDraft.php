@@ -365,4 +365,54 @@ class SleeperDraft
             'draftId' => $sleeperDraftDto->getDraftId()
         ];
     }
+
+    public function getDraftPickByRoundAndDraftSlot(int $round, int $draftSlot): ?SleeperDraftPick
+    {
+        foreach($this->draftPicks as $draftPick) {
+            if($draftPick->getRound() === $round && $draftPick->getDraftSlot() === $draftSlot) {
+                return $draftPick;
+            }
+        }
+
+        return null;
+    }
+
+    public function getDraftPickByPickNumber(int $pickNumber): ?SleeperDraftPick
+    {
+        foreach($this->draftPicks as $draftPick) {
+            if($draftPick->getPickNo() === $pickNumber) {
+                return $draftPick;
+            }
+        }
+
+        return null;
+    }
+
+    public function getTradedPick(SleeperDraftPick $draftPick): ?SleeperTradedPick
+    {
+        $rosterId = $this->getSlotToRosterId()[$draftPick->getDraftSlot()];
+
+        foreach($this->tradedPicks as $tradedPick) {
+            if($tradedPick->getRound() === $draftPick->getRound()) {
+                if($tradedPick->getRosterId() === $rosterId) {
+                    return $tradedPick;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public function getRosterByRosterId(int $rosterId): ?SleeperRoster
+    {
+        if($this->getLeague()) {
+            foreach($this->getLeague()->getRosters() as $roster) {
+                if($roster->getRosterId() === $rosterId) {
+                    return $roster;
+                }
+            }
+        }
+
+        return null;
+    }
 }

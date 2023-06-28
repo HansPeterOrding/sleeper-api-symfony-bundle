@@ -33,8 +33,8 @@ class SleeperDraftPick
     #[ORM\Embedded(class: SleeperDraftPickMetadata::class, columnPrefix: 'metadata_')]
     private SleeperDraftPickMetadata $metadata;
 
-    #[ORM\Column]
-    private ?bool $isKeeper;
+    #[ORM\Column(nullable: true)]
+    private ?bool $isKeeper = null;
 
     #[ORM\Column]
     private ?int $draftSlot = null;
@@ -57,6 +57,11 @@ class SleeperDraftPick
     #[ORM\OneToOne]
     #[JoinColumn(name: 'internal_user_id')]
     private ?SleeperUser $user = null;
+
+    public function __construct()
+    {
+        $this->metadata = new SleeperDraftPickMetadata();
+    }
 
     public function getId(): ?int
     {
