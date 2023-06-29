@@ -388,12 +388,12 @@ class SleeperDraft
         return null;
     }
 
-    public function getTradedPick(SleeperDraftPick $draftPick): ?SleeperTradedPick
+    public function getTradedPick(int $round, int $draftSlot): ?SleeperTradedPick
     {
-        $rosterId = $this->getSlotToRosterId()[$draftPick->getDraftSlot()];
+        $rosterId = $this->getSlotToRosterId()[$draftSlot];
 
         foreach($this->tradedPicks as $tradedPick) {
-            if($tradedPick->getRound() === $draftPick->getRound()) {
+            if($tradedPick->getRound() === $round) {
                 if($tradedPick->getRosterId() === $rosterId) {
                     return $tradedPick;
                 }
