@@ -15,17 +15,17 @@ class SleeperTradedPickConverter
     ) {
     }
 
-    public function toEntity(SleeperTradedPickDto $sleeperTradedPickDto): SleeperTradedPickEntity
+    public function toEntity(string $leagueId, string $draftId, SleeperTradedPickDto $sleeperTradedPickDto): SleeperTradedPickEntity
     {
-        $sleeperTradedPickEntity = $this->sleeperTradedPickRepository->findByDtoOrCreateEntity($sleeperTradedPickDto);
+        $sleeperTradedPickEntity = $this->sleeperTradedPickRepository->findByDtoOrCreateEntity($leagueId, $draftId, $sleeperTradedPickDto);
 
         $sleeperTradedPickEntity->setSeason($sleeperTradedPickDto->getSeason());
         $sleeperTradedPickEntity->setRound($sleeperTradedPickDto->getRound());
         $sleeperTradedPickEntity->setRosterId($sleeperTradedPickDto->getRosterId());
         $sleeperTradedPickEntity->setPreviousOwnerId($sleeperTradedPickDto->getPreviousOwnerId());
         $sleeperTradedPickEntity->setOwnerId($sleeperTradedPickDto->getOwnerId());
-        $sleeperTradedPickEntity->setDraftId($sleeperTradedPickDto->getDraftId());
-        $sleeperTradedPickEntity->setLeagueId($sleeperTradedPickDto->getLeagueId());
+        $sleeperTradedPickEntity->setDraftId($draftId);
+        $sleeperTradedPickEntity->setLeagueId($leagueId);
 
         return $sleeperTradedPickEntity;
     }

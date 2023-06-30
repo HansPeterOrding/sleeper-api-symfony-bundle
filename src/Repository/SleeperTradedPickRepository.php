@@ -22,11 +22,11 @@ class SleeperTradedPickRepository extends ServiceEntityRepository
         parent::__construct($registry, SleeperTradedPickEntity::class);
     }
 
-    public function findByDtoOrCreateEntity(SleeperTradedPickDto $sleeperTradedPickDto): SleeperTradedPickEntity
+    public function findByDtoOrCreateEntity(string $leagueId, string $draftId, SleeperTradedPickDto $sleeperTradedPickDto): SleeperTradedPickEntity
     {
         $sleeperTradedPick = new SleeperTradedPickEntity();
         if (null !== ($existingEntity = $this->findOneBy(
-                $sleeperTradedPick->buildFindByCriteriaFromDto($sleeperTradedPickDto)
+                $sleeperTradedPick->buildFindByCriteriaFromDto($leagueId, $draftId, $sleeperTradedPickDto)
             ))) {
             $sleeperTradedPick = $existingEntity;
         }

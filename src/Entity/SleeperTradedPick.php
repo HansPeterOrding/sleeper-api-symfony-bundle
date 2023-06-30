@@ -202,10 +202,11 @@ class SleeperTradedPick
         return $this;
     }
 
-    public function buildFindByCriteriaFromDto(SleeperTradedPickDto $sleeperTradedPickDto): array
+    public function buildFindByCriteriaFromDto(string $leagueId, string $draftId, SleeperTradedPickDto $sleeperTradedPickDto): array
     {
         return [
-            'draftId' => $sleeperTradedPickDto->getDraftId(),
+            'leagueId' => $leagueId, 
+            'draftId' => $draftId,
             'season' => $sleeperTradedPickDto->getSeason(),
             'round' => $sleeperTradedPickDto->getRound(),
             'rosterId' => $sleeperTradedPickDto->getRosterId()
