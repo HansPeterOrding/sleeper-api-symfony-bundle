@@ -46,7 +46,7 @@ class SleeperDraftPick
     #[JoinColumn(name: 'internal_draft_id')]
     private ?SleeperDraft $draft = null;
 
-    #[ORM\OneToOne]
+    #[ManyToOne(targetEntity: SleeperPlayer::class, inversedBy: 'draftPicks')]
     #[JoinColumn(name: 'internal_player_id')]
     private ?SleeperPlayer $player = null;
 
@@ -54,7 +54,7 @@ class SleeperDraftPick
     #[JoinColumn(name: 'internal_roster_id')]
     private ?SleeperRoster $roster = null;
 
-    #[ORM\OneToOne]
+    #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'draftPicks')]
     #[JoinColumn(name: 'internal_user_id')]
     private ?SleeperUser $user = null;
 

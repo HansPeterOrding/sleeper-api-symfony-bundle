@@ -74,11 +74,18 @@ class SleeperUser
     #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'owner')]
     private Collection $acquiredPicks;
 
+    /**
+     * @var Collection<int, SleeperDraftPick>
+     */
+    #[ORM\OneToMany(mappedBy: 'draft', targetEntity: SleeperDraftPick::class)]
+    private Collection $draftPicks;
+
     public function __construct()
     {
         $this->metadata = new SleeperUserMetadata();
         $this->soldPicks = new ArrayCollection();
         $this->acquiredPicks = new ArrayCollection();
+        $this->draftPicks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -328,6 +335,17 @@ class SleeperUser
             $pick->setOwner($this);
         }
 
+        return $this;
+    }
+
+    public function getDraftPicks(): Collection
+    {
+        return $this->draftPicks;
+    }
+
+    public function setDraftPicks(Collection $draftPicks): SleeperUser
+    {
+        $this->draftPicks = $draftPicks;
         return $this;
     }
 

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 
@@ -112,6 +114,17 @@ class SleeperPlayer
 
     #[ORM\Column(nullable: true)]
     private ?string $injuryStatus = null;
+
+    /**
+     * @var Collection<int, SleeperDraftPick>
+     */
+    #[ORM\OneToMany(mappedBy: 'draft', targetEntity: SleeperDraftPick::class)]
+    private Collection $draftPicks;
+
+    public function __construct()
+    {
+        $this->draftPicks = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -473,6 +486,17 @@ class SleeperPlayer
     public function setInjuryStatus(?string $injuryStatus): SleeperPlayer
     {
         $this->injuryStatus = $injuryStatus;
+        return $this;
+    }
+
+    public function getDraftPicks(): Collection
+    {
+        return $this->draftPicks;
+    }
+
+    public function setDraftPicks(Collection $draftPicks): SleeperPlayer
+    {
+        $this->draftPicks = $draftPicks;
         return $this;
     }
 
