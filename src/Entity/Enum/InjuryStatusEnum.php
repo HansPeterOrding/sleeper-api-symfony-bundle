@@ -10,5 +10,7 @@ enum InjuryStatusEnum: string
     case IR = 'IR';
     case OUT = 'Out';
     case SUS = 'Sus';
+    case PUP = 'PUP';
+    case DNR = 'DNR';
     case DEFAULT = '';
 }
