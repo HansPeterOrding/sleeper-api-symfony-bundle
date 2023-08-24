@@ -52,7 +52,7 @@ class SleeperLeague
     #[ORM\Column]
     private ?string $leagueId = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $draftId = null;
 
     #[ORM\Column(nullable: true)]

@@ -118,7 +118,7 @@ class SleeperPlayer
     /**
      * @var Collection<int, SleeperDraftPick>
      */
-    #[ORM\OneToMany(mappedBy: 'draft', targetEntity: SleeperDraftPick::class)]
+    #[ORM\OneToMany(mappedBy: 'player', targetEntity: SleeperDraftPick::class)]
     private Collection $draftPicks;
 
     public function __construct()
