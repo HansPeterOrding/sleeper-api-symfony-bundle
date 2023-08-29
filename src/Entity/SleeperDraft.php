@@ -9,7 +9,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperDraft as SleeperDraftDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\DraftStatusEnum;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\DraftPositionEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\DraftTypeEnum;
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\FantasyPositionEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 
@@ -49,7 +51,7 @@ class SleeperDraft
     #[ORM\Column]
     private ?string $leagueId = null;
 
-    #[ORM\Column(type: 'bigint')]
+    #[ORM\Column(type: 'bigint', nullable: true)]
     private ?int $lastPicked = null;
 
     #[ORM\Column(type: 'bigint')]
@@ -274,6 +276,9 @@ class SleeperDraft
         $this->created = $created;
     }
 
+    /**
+     * @return SleeperDraftPick[]
+     */
     public function getDraftPicks(): Collection
     {
         return $this->draftPicks;
@@ -377,6 +382,26 @@ class SleeperDraft
         return null;
     }
 
+    public function getAuctionDraftPickByRoundAndDraftSlot(int $round, int $draftSlot, array $rosterPositions)
+    {
+        $draftPicks = clone($this->draftPicks);
+        $sortedDraftPicks = [];
+
+        foreach($rosterPositions as $rosterPosition) {
+            foreach($draftPicks as $idx => $draftPick) {
+                if($draftPick->getDraftSlot() === $draftSlot) {
+                    if(in_array($draftPick->getMetadata()->getPosition(), $this->getDraftSlotPositionToPositionMapping()[$rosterPosition])) {
+                        $sortedDraftPicks[] = $draftPick;
+                        unset($draftPicks[$idx]);
+                        continue 2;
+                    }
+                }
+            }
+        }
+
+        return $sortedDraftPicks[$round - 1];
+    }
+
     public function getDraftPickByPickNumber(int $pickNumber): ?SleeperDraftPick
     {
         foreach($this->draftPicks as $draftPick) {
@@ -414,5 +439,23 @@ class SleeperDraft
         }
 
         return null;
+    }
+
+    private function getDraftSlotPositionToPositionMapping(): array
+    {
+        return [
+            DraftPositionEnum::QB->value => [FantasyPositionEnum::QB],
+            DraftPositionEnum::RB->value => [FantasyPositionEnum::RB],
+            DraftPositionEnum::WR->value => [FantasyPositionEnum::WR],
+            DraftPositionEnum::TE->value => [FantasyPositionEnum::TE],
+            DraftPositionEnum::DL->value => [FantasyPositionEnum::DL],
+            DraftPositionEnum::LB->value => [FantasyPositionEnum::LB],
+            DraftPositionEnum::DB->value => [FantasyPositionEnum::DB],
+            DraftPositionEnum::FLEX->value => [FantasyPositionEnum::RB, FantasyPositionEnum::WR, FantasyPositionEnum::TE],
+            DraftPositionEnum::SUPER_FLEX->value => [FantasyPositionEnum::QB, FantasyPositionEnum::RB, FantasyPositionEnum::WR, FantasyPositionEnum::TE],
+            DraftPositionEnum::REC_FLEX->value => [FantasyPositionEnum::WR, FantasyPositionEnum::TE],
+            DraftPositionEnum::IDP_FLEX->value => [FantasyPositionEnum::DL, FantasyPositionEnum::LB, FantasyPositionEnum::DB],
+            DraftPositionEnum::BN->value => [FantasyPositionEnum::QB, FantasyPositionEnum::RB, FantasyPositionEnum::WR, FantasyPositionEnum::TE, FantasyPositionEnum::DL, FantasyPositionEnum::LB, FantasyPositionEnum::DB],
+        ];
     }
 }

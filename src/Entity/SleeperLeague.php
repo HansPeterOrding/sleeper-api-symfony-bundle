@@ -47,7 +47,7 @@ class SleeperLeague
     private ?string $previousLeagueId = null;
 
     #[ORM\Column]
-    private ?string $name = null;
+    public ?string $name = null;
 
     #[ORM\Column]
     private ?string $leagueId = null;

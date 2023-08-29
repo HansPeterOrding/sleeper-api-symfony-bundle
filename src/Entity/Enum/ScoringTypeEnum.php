@@ -6,7 +6,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum;
 
 enum ScoringTypeEnum: string
 {
-    case STANDARD = 'standard';
+    case STANDARD = 'std';
     case PPR = 'ppr';
     case HALF_PPR = 'half_ppr';
     case TWO_QB = '2qb';

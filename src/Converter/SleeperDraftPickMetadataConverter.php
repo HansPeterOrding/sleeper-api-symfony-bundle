@@ -33,6 +33,7 @@ class SleeperDraftPickMetadataConverter
         $sleeperDraftPickMetadataEntity->setLastName($sleeperDraftPickMetadataDto->getLastName());
         $sleeperDraftPickMetadataEntity->setInjuryStatus(InjuryStatusEnum::from($sleeperDraftPickMetadataDto->getInjuryStatus()));
         $sleeperDraftPickMetadataEntity->setFirstName($sleeperDraftPickMetadataDto->getFirstName());
+        $sleeperDraftPickMetadataEntity->setAmount($sleeperDraftPickMetadataDto->getAmount());
 
         return $sleeperDraftPickMetadataEntity;
     }

@@ -47,6 +47,9 @@ class SleeperDraftPickMetadata
     #[ORM\Column]
     private string $firstName;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $amount;
+
     public function getYearsExp(): string
     {
         return $this->yearsExp;
@@ -155,5 +158,16 @@ class SleeperDraftPickMetadata
     public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
+    }
+
+    public function getAmount(): ?string
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(?string $amount): SleeperDraftPickMetadata
+    {
+        $this->amount = $amount;
+        return $this;
     }
 }
