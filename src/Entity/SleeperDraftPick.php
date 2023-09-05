@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftPick as SleeperDraftPickDto;
 
 #[ORM\Entity]
@@ -42,20 +40,20 @@ class SleeperDraftPick
     #[ORM\Column]
     private string $draftId;
 
-    #[ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'draftPicks')]
-    #[JoinColumn(name: 'internal_draft_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'draftPicks')]
+    #[ORM\JoinColumn(name: 'internal_draft_id')]
     private ?SleeperDraft $draft = null;
 
-    #[ManyToOne(targetEntity: SleeperPlayer::class, inversedBy: 'draftPicks')]
-    #[JoinColumn(name: 'internal_player_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperPlayer::class, inversedBy: 'draftPicks')]
+    #[ORM\JoinColumn(name: 'internal_player_id')]
     private ?SleeperPlayer $player = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'draftPicks')]
-    #[JoinColumn(name: 'internal_roster_id')]
+    #[ORM\JoinColumn(name: 'internal_roster_id')]
     private ?SleeperRoster $roster = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'draftPicks')]
-    #[JoinColumn(name: 'internal_user_id')]
+    #[ORM\JoinColumn(name: 'internal_user_id')]
     private ?SleeperUser $user = null;
 
     public function __construct()

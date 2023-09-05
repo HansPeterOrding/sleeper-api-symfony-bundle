@@ -76,6 +76,12 @@ class SleeperLeague
     #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'league')]
     private Collection $tradedPicks;
 
+    /**
+     * @var Collection<int, SleeperMatchup>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperMatchup::class, mappedBy: 'league')]
+    private Collection $matchups;
+
     public function __construct()
     {
         $this->settings = new SleeperLeagueSettings();
@@ -329,6 +335,46 @@ class SleeperLeague
 
             if ($pick->getLeague() === $this) {
                 $pick->setLeague(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperMatchup>
+     */
+    public function getMatchups(): Collection
+    {
+        return $this->matchups;
+    }
+
+    /**
+     * @param Collection<int, SleeperMatchup> $matchups
+     */
+    public function setMatchups(Collection $matchups): SleeperRoster
+    {
+        $this->matchups = $matchups;
+        return $this;
+    }
+
+    public function addSleeperMatchup(SleeperMatchup $matchup): SleeperRoster
+    {
+        if (!$this->matchups->contains($matchup)) {
+            $this->matchups[] = $matchup;
+            $matchup->setLeague($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSleeperMatchup(SleeperMatchup $matchup): SleeperRoster
+    {
+        if ($this->matchups->contains($matchup)) {
+            $this->matchups->removeElement($matchup);
+
+            if ($matchup->getLeague() === $this) {
+                $matchup->setLeague(null);
             }
         }
 

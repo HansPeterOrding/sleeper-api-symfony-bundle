@@ -63,6 +63,12 @@ class SleeperRoster
     #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'roster')]
     private Collection $tradedPicks;
 
+    /**
+     * @var Collection<int, SleeperMatchup>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperMatchup::class, mappedBy: 'roster')]
+    private Collection $matchups;
+
     public function __construct()
     {
         $this->settings = new SleeperRosterSettings();
@@ -273,6 +279,43 @@ class SleeperRoster
 
             if ($pick->getRoster() === $this) {
                 $pick->setRoster(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperMatchup>
+     */
+    public function getMatchups(): Collection
+    {
+        return $this->matchups;
+    }
+
+    public function setMatchups(Collection $matchups): SleeperRoster
+    {
+        $this->matchups = $matchups;
+        return $this;
+    }
+
+    public function addMatchup(SleeperMatchup $matchup): SleeperRoster
+    {
+        if (!$this->matchups->contains($matchup)) {
+            $this->matchups[] = $matchup;
+            $matchup->setRoster($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatchup(SleeperMatchup $matchup): SleeperRoster
+    {
+        if ($this->matchups->contains($matchup)) {
+            $this->matchups->removeElement($matchup);
+
+            if ($matchup->getRoster() === $this) {
+                $matchup->setRoster(null);
             }
         }
 

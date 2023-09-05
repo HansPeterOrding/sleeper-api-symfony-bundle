@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto as Dto;
 
@@ -48,6 +50,32 @@ class SleeperMatchup
 
     #[ORM\Column(nullable: true)]
     private ?float $customPoints;
+
+    #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'matchups')]
+    #[ORM\JoinColumn(name: 'internal_league_id')]
+    private ?SleeperLeague $league = null;
+
+    #[ORM\JoinTable(name: 'matchup_starters')]
+    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
+    private Collection $sleeperStarterPlayers;
+
+    #[ORM\JoinTable(name: 'matchup_players')]
+    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
+    private Collection $sleeperPlayers;
+
+    #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'matchups')]
+    #[ORM\JoinColumn(name: 'internal_roster_id')]
+    private ?SleeperRoster $roster = null;
+
+    public function __construct()
+    {
+        $this->sleeperStarterPlayers = new ArrayCollection();
+        $this->sleeperPlayers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +198,14 @@ class SleeperMatchup
         return $this;
     }
 
+    public function getEffectivePoints(): ?float
+    {
+        if($this->customPoints) {
+            return $this->customPoints;
+        }
+        return $this->points;
+    }
+
     public function buildFindByCriteriaFromDto(string $leagueId, int $week, Dto\SleeperMatchup $sleeperMatchupDto): array
     {
         return [
@@ -177,5 +213,85 @@ class SleeperMatchup
             'week' => $week,
             'rosterId' => $sleeperMatchupDto->getRosterId()
         ];
+    }
+
+    public function getLeague(): ?SleeperLeague
+    {
+        return $this->league;
+    }
+
+    public function setLeague(?SleeperLeague $league): SleeperMatchup
+    {
+        $this->league = $league;
+        return $this;
+    }
+
+    public function getSleeperStarterPlayers(): Collection
+    {
+        return $this->sleeperStarterPlayers;
+    }
+
+    public function setSleeperStarterPlayers(Collection $sleeperStarterPlayers): SleeperMatchup
+    {
+        $this->sleeperStarterPlayers = $sleeperStarterPlayers;
+        return $this;
+    }
+
+    public function addSleeperStarterPlayer(SleeperPlayer $player): SleeperMatchup
+    {
+        if (!$this->sleeperStarterPlayers->contains($player)) {
+            $this->sleeperStarterPlayers[] = $player;
+        }
+
+        return $this;
+    }
+
+    public function removeSleeperStarterPlayer(SleeperPlayer $player): SleeperMatchup
+    {
+        if ($this->sleeperStarterPlayers->contains($player)) {
+            $this->sleeperStarterPlayers->removeElement($player);
+        }
+
+        return $this;
+    }
+
+    public function getSleeperPlayers(): Collection
+    {
+        return $this->sleeperPlayers;
+    }
+
+    public function setSleeperPlayers(Collection $sleeperPlayers): SleeperMatchup
+    {
+        $this->sleeperPlayers = $sleeperPlayers;
+        return $this;
+    }
+
+    public function addSleeperPlayer(SleeperPlayer $player): SleeperMatchup
+    {
+        if (!$this->sleeperPlayers->contains($player)) {
+            $this->sleeperPlayers[] = $player;
+        }
+
+        return $this;
+    }
+
+    public function removeSleeperPlayer(SleeperPlayer $player): SleeperMatchup
+    {
+        if ($this->sleeperPlayers->contains($player)) {
+            $this->sleeperPlayers->removeElement($player);
+        }
+
+        return $this;
+    }
+
+    public function getRoster(): ?SleeperRoster
+    {
+        return $this->roster;
+    }
+
+    public function setRoster(?SleeperRoster $roster): SleeperMatchup
+    {
+        $this->roster = $roster;
+        return $this;
     }
 }

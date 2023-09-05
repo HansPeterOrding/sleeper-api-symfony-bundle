@@ -157,4 +157,3 @@ services:
             $sleeperUserMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter'
         
-    

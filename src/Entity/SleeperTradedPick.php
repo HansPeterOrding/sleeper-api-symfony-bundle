@@ -4,59 +4,54 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTradedPick as SleeperTradedPickDto;
 
-#[Entity]
+#[ORM\Entity]
 class SleeperTradedPick
 {
-    #[Id, GeneratedValue, Column]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;
 
-    #[Column]
+    #[ORM\Column]
     private string $season;
 
-    #[Column]
+    #[ORM\Column]
     private int $round;
 
-    #[Column]
+    #[ORM\Column]
     private int $rosterId;
 
-    #[Column]
+    #[ORM\Column]
     private int $previousOwnerId;
 
-    #[Column]
+    #[ORM\Column]
     private int $ownerId;
 
-    #[Column(nullable: false)]
+    #[ORM\Column(nullable: false)]
     private ?string $draftId = null;
 
-    #[Column]
+    #[ORM\Column]
     private ?string $leagueId = null;
 
-    #[ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'tradedPicks')]
-    #[JoinColumn(name: 'internal_roster_id', referencedColumnName: 'id')]
+    #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'tradedPicks')]
+    #[ORM\JoinColumn(name: 'internal_roster_id', referencedColumnName: 'id')]
     private ?SleeperRoster $roster = null;
 
-    #[ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'soldPicks')]
-    #[JoinColumn(name: 'internal_previous_owner_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'soldPicks')]
+    #[ORM\JoinColumn(name: 'internal_previous_owner_id')]
     private ?SleeperUser $previousOwner = null;
 
-    #[ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'acquiredPicks')]
-    #[JoinColumn(name: 'internal_owner_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'acquiredPicks')]
+    #[ORM\JoinColumn(name: 'internal_owner_id')]
     private ?SleeperUser $owner = null;
 
-    #[ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'tradedPicks')]
-    #[JoinColumn(name: 'internal_draft_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'tradedPicks')]
+    #[ORM\JoinColumn(name: 'internal_draft_id')]
     private ?SleeperDraft $draft = null;
 
-    #[ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'tradedPicks')]
-    #[JoinColumn(name: 'internal_league_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'tradedPicks')]
+    #[ORM\JoinColumn(name: 'internal_league_id')]
     private ?SleeperLeague $league = null;
 
     public function getId(): int
@@ -205,7 +200,7 @@ class SleeperTradedPick
     public function buildFindByCriteriaFromDto(string $leagueId, string $draftId, SleeperTradedPickDto $sleeperTradedPickDto): array
     {
         return [
-            'leagueId' => $leagueId, 
+            'leagueId' => $leagueId,
             'draftId' => $draftId,
             'season' => $sleeperTradedPickDto->getSeason(),
             'round' => $sleeperTradedPickDto->getRound(),
