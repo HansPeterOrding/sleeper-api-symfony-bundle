@@ -64,11 +64,13 @@ class Standings
     public function initMatchupRanks(Matchup $matchup): void
     {
         $rankHome = new Rank();
+        $rankHome->setSleeperLeague($matchup->getSleeperMatchupHome()?->getLeague());
         $rankHome->setSleeperRoster($matchup->getSleeperMatchupHome()?->getRoster());
         $rankHome->setSleeperUser($matchup->getSleeperMatchupHome()?->getRoster()?->getOwner());
         $this->addRank($rankHome);
 
         $rankAway = new Rank();
+        $rankAway->setSleeperLeague($matchup->getSleeperMatchupAway()?->getLeague());
         $rankAway->setSleeperRoster($matchup->getSleeperMatchupAway()?->getRoster());
         $rankAway->setSleeperUser($matchup->getSleeperMatchupAway()?->getRoster()?->getOwner());
         $this->addRank($rankAway);
@@ -79,7 +81,7 @@ class Standings
         if (!$matchup->getSleeperMatchupHome() || !$matchup->getSleeperMatchupAway()) {
             return;
         }
-        
+
         $rankHome = $this->getRankByRosterId($matchup->getSleeperMatchupHome()->getRosterId());
         $rankAway = $this->getRankByRosterId($matchup->getSleeperMatchupAway()->getRosterId());
 

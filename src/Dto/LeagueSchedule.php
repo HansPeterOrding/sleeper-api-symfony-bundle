@@ -29,11 +29,22 @@ class LeagueSchedule
         return $this->scheduleWeeks;
     }
 
+    public function getScheduleWeekByWeek(int $week): ?ScheduleWeek
+    {
+        foreach ($this->scheduleWeeks as $scheduleWeek) {
+            if ($scheduleWeek->week === $week) {
+                return $scheduleWeek;
+            }
+        }
+
+        return null;
+    }
+
     public function getStandings(): ?Standings
     {
         return $this->standings;
     }
-    
+
     public function addScheduleWeek(ScheduleWeek $scheduleWeek)
     {
         $this->scheduleWeeks[] = $scheduleWeek;

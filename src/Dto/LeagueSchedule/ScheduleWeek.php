@@ -6,12 +6,14 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 
 class ScheduleWeek
 {
+    /**
+     * @var array<int, Matchup>
+     */
     private array $matchups;
 
     public function __construct(
-        public readonly int $week
-    )
-    {
+        public int $week
+    ) {
     }
 
     public function getMatchups(): array
@@ -25,7 +27,21 @@ class ScheduleWeek
         return $this;
     }
 
-    public function addMatchup(Matchup $matchup) {
+    public function addMatchup(Matchup $matchup)
+    {
         $this->matchups[] = $matchup;
+    }
+
+    public function getMatchupByRosterId(int $rosterId): ?Matchup
+    {
+        foreach ($this->matchups as $matchup) {
+            if ($matchup->getSleeperMatchupHome()->getRosterId() === $rosterId) {
+                return $matchup;
+            } elseif ($matchup->getSleeperMatchupAway()->getRosterId() === $rosterId) {
+                return $matchup;
+            }
+        }
+
+        return null;
     }
 }

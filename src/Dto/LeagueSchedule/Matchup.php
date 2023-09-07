@@ -33,4 +33,26 @@ class Matchup
         $this->sleeperMatchupAway = $sleeperMatchupAway;
         return $this;
     }
+
+    public function getOwnSleeperMatchupByRosterId(int $rosterId): ?SleeperMatchup
+    {
+        if ($this->sleeperMatchupHome->getRosterId() === $rosterId) {
+            return $this->sleeperMatchupHome;
+        } elseif ($this->sleeperMatchupAway->getRosterId() === $rosterId) {
+            return $this->sleeperMatchupAway;
+        }
+
+        return null;
+    }
+
+    public function getOpponentSleeperMatchupByRosterId(int $rosterId): ?SleeperMatchup
+    {
+        if ($this->sleeperMatchupHome->getRosterId() === $rosterId) {
+            return $this->sleeperMatchupAway;
+        } elseif ($this->sleeperMatchupAway->getRosterId() === $rosterId) {
+            return $this->sleeperMatchupHome;
+        }
+
+        return null;
+    }
 }

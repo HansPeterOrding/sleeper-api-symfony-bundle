@@ -321,4 +321,15 @@ class SleeperRoster
 
         return $this;
     }
+
+    public function getMatchupByWeek(int $week): ?SleeperMatchup
+    {
+        foreach ($this->matchups as $matchup) {
+            if ($matchup->getWeek() === $week) {
+                return $matchup;
+            }
+        }
+
+        return null;
+    }
 }

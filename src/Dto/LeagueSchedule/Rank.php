@@ -4,28 +4,31 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 
+use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser;
 
 class Rank
 {
-    private ?int $rank = null;
-    private ?SleeperUser $sleeperUser = null;
+    private ?SleeperLeague $sleeperLeague = null;
+    private ?SleeperUser   $sleeperUser   = null;
     private ?SleeperRoster $sleeperRoster = null;
-    private ?int $gamesWon = 0;
-    private ?int $gamesDraw = 0;
-    private ?int $gamesLost = 0;
-    private ?float $pointsFor = 0;
-    private ?float $pointsAgainst = 0;
+    private ?int           $gamesWon      = 0;
+    private ?int           $gamesDraw     = 0;
+    private ?int           $gamesLost     = 0;
+    private ?float         $pointsFor     = 0;
+    private ?float         $pointsAgainst = 0;
+    private ?int           $rankNumber    = null;
+    private ?int           $best          = null;
 
-    public function getRank(): ?int
+    public function getSleeperLeague(): ?SleeperLeague
     {
-        return $this->rank;
+        return $this->sleeperLeague;
     }
 
-    public function setRank(?int $rank): Rank
+    public function setSleeperLeague(?SleeperLeague $sleeperLeague): Rank
     {
-        $this->rank = $rank;
+        $this->sleeperLeague = $sleeperLeague;
         return $this;
     }
 
@@ -133,6 +136,28 @@ class Rank
     public function incPointsAgainst(float $inc): Rank
     {
         $this->pointsAgainst += $inc;
+        return $this;
+    }
+
+    public function getRankNumber(): ?int
+    {
+        return $this->rankNumber;
+    }
+
+    public function setRankNumber(?int $rankNumber): Rank
+    {
+        $this->rankNumber = $rankNumber;
+        return $this;
+    }
+
+    public function getBest(): ?int
+    {
+        return $this->best;
+    }
+
+    public function setBest(?int $best): Rank
+    {
+        $this->best = $best;
         return $this;
     }
 }
