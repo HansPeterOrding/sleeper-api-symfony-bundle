@@ -160,4 +160,11 @@ class Rank
         $this->best = $best;
         return $this;
     }
+
+    public function getAveragePointsFor(): float
+    {
+        $games = $this->gamesWon + $this->gamesLost + $this->gamesDraw;
+
+        return $this->pointsFor / $games;
+    }
 }
