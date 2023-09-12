@@ -87,10 +87,10 @@ class Standings
 
         if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > $matchup->getSleeperMatchupAway()->getEffectivePoints()) {
             $rankHome->incGamesWon();
-            $rankHome->incGamesLost();
+            $rankAway->incGamesLost();
         } elseif ($matchup->getSleeperMatchupAway()->getEffectivePoints() > $matchup->getSleeperMatchupHome()->getEffectivePoints()) {
             $rankHome->incGamesLost();
-            $rankHome->incGamesWon();
+            $rankAway->incGamesWon();
         } else {
             if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > 0 || $matchup->getSleeperMatchupAway()->getEffectivePoints() > 0) {
                 $rankHome->incGamesDraw();
