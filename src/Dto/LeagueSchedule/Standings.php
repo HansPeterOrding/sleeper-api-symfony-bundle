@@ -76,7 +76,7 @@ class Standings
         $this->addRank($rankAway);
     }
 
-    public function applyMatchupResult(Matchup $matchup)
+    public function applyMatchupResult(Matchup $matchup, ScheduleWeek $scheduleWeek)
     {
         if (!$matchup->getSleeperMatchupHome() || !$matchup->getSleeperMatchupAway()) {
             return;
@@ -94,6 +94,24 @@ class Standings
         } else {
             if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > 0 || $matchup->getSleeperMatchupAway()->getEffectivePoints() > 0) {
                 $rankHome->incGamesDraw();
+                $rankAway->incGamesDraw();
+            }
+        }
+
+        if($scheduleWeek->hasMedian) {
+            if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $scheduleWeek->median) {
+                $rankHome->incGamesWon();
+            } elseif($matchup->getSleeperMatchupHome()->getEffectivePoints() < $scheduleWeek->median) {
+                $rankHome->incGamesLost();
+            } elseif($matchup->getSleeperMatchupHome()->getEffectivePoints() > 0) {
+                $rankHome->incGamesDraw();
+            }
+
+            if($matchup->getSleeperMatchupAway()->getEffectivePoints() > $scheduleWeek->median) {
+                $rankAway->incGamesWon();
+            } elseif($matchup->getSleeperMatchupAway()->getEffectivePoints() < $scheduleWeek->median) {
+                $rankAway->incGamesLost();
+            } elseif($matchup->getSleeperMatchupAway()->getEffectivePoints() > 0) {
                 $rankAway->incGamesDraw();
             }
         }

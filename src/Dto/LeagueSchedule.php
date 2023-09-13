@@ -47,22 +47,27 @@ class LeagueSchedule
 
     public function addScheduleWeek(ScheduleWeek $scheduleWeek)
     {
+        if($scheduleWeek->hasMedian) {
+            $scheduleWeek->calculateMedian();
+        }
         $this->scheduleWeeks[] = $scheduleWeek;
     }
 
     public function calculateStandings(int $week): Standings
     {
         $this->standings = new Standings();
+        
 
         for ($currentWeek = 1; $currentWeek <= $week; $currentWeek++) {
+            $scheduleWeek = $this->scheduleWeeks[$currentWeek - 1]; 
             /** @var array<int, Matchup> $matchups */
-            $matchups = $this->scheduleWeeks[$currentWeek - 1]->getMatchups();
+            $matchups = $scheduleWeek->getMatchups();
             foreach ($matchups as $matchup) {
                 if ($currentWeek === 1) {
                     $this->standings->initMatchupRanks($matchup);
                 }
 
-                $this->standings->applyMatchupResult($matchup);
+                $this->standings->applyMatchupResult($matchup, $scheduleWeek);
             }
         }
 

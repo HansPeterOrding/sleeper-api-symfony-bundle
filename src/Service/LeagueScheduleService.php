@@ -30,7 +30,7 @@ class LeagueScheduleService
 
     public function buildScheduleWeek(int $week): ScheduleWeek
     {
-        $scheduleWeek = new ScheduleWeek($week);
+        $scheduleWeek = new ScheduleWeek($week, boolval($this->sleeperLeague->getSettings()->getLeagueAverageMatch()));
 
         $numTeams = $this->sleeperLeague->getSettings()->getNumTeams();
         $matchupCount = $numTeams / 2;

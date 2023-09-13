@@ -11,8 +11,11 @@ class ScheduleWeek
      */
     private array $matchups;
 
+    public ?float $median = null;
+
     public function __construct(
-        public int $week
+        public int $week,
+        public bool $hasMedian = false
     ) {
     }
 
@@ -43,5 +46,21 @@ class ScheduleWeek
         }
 
         return null;
+    }
+
+    public function calculateMedian(): ScheduleWeek
+    {
+        $fullPoints = [];
+        $games = 0;
+
+        foreach($this->matchups as $matchup) {
+            $fullPoints[] = $matchup->getSleeperMatchupHome()->getEffectivePoints();
+            $fullPoints[] = $matchup->getSleeperMatchupAway()->getEffectivePoints();
+            $games++;
+        }
+
+        $this->median = ($fullPoints[$games] + $fullPoints[$games-1]) / 2;
+
+        return $this;
     }
 }
