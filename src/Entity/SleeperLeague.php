@@ -352,13 +352,13 @@ class SleeperLeague
     /**
      * @param Collection<int, SleeperMatchup> $matchups
      */
-    public function setMatchups(Collection $matchups): SleeperRoster
+    public function setMatchups(Collection $matchups): SleeperLeague
     {
         $this->matchups = $matchups;
         return $this;
     }
 
-    public function addSleeperMatchup(SleeperMatchup $matchup): SleeperRoster
+    public function addSleeperMatchup(SleeperMatchup $matchup): SleeperLeague
     {
         if (!$this->matchups->contains($matchup)) {
             $this->matchups[] = $matchup;
@@ -368,7 +368,7 @@ class SleeperLeague
         return $this;
     }
 
-    public function removeSleeperMatchup(SleeperMatchup $matchup): SleeperRoster
+    public function removeSleeperMatchup(SleeperMatchup $matchup): SleeperLeague
     {
         if ($this->matchups->contains($matchup)) {
             $this->matchups->removeElement($matchup);
