@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster;
-
 class Standings
 {
     /**
@@ -47,6 +45,11 @@ class Standings
 
             return -1 * ($b->getPointsAgainst() <=> $a->getPointsAgainst());
         });
+
+        foreach ($this->ranks as $key => $rank) {
+            $rank->setRankNumber($key + 1);
+            $this->ranks[$key] = $rank;
+        }
 
         return $this;
     }
@@ -98,20 +101,20 @@ class Standings
             }
         }
 
-        if($scheduleWeek->hasMedian) {
-            if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $scheduleWeek->median) {
+        if ($scheduleWeek->hasMedian) {
+            if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > $scheduleWeek->median) {
                 $rankHome->incGamesWon();
-            } elseif($matchup->getSleeperMatchupHome()->getEffectivePoints() < $scheduleWeek->median) {
+            } elseif ($matchup->getSleeperMatchupHome()->getEffectivePoints() < $scheduleWeek->median) {
                 $rankHome->incGamesLost();
-            } elseif($matchup->getSleeperMatchupHome()->getEffectivePoints() > 0) {
+            } elseif ($matchup->getSleeperMatchupHome()->getEffectivePoints() > 0) {
                 $rankHome->incGamesDraw();
             }
 
-            if($matchup->getSleeperMatchupAway()->getEffectivePoints() > $scheduleWeek->median) {
+            if ($matchup->getSleeperMatchupAway()->getEffectivePoints() > $scheduleWeek->median) {
                 $rankAway->incGamesWon();
-            } elseif($matchup->getSleeperMatchupAway()->getEffectivePoints() < $scheduleWeek->median) {
+            } elseif ($matchup->getSleeperMatchupAway()->getEffectivePoints() < $scheduleWeek->median) {
                 $rankAway->incGamesLost();
-            } elseif($matchup->getSleeperMatchupAway()->getEffectivePoints() > 0) {
+            } elseif ($matchup->getSleeperMatchupAway()->getEffectivePoints() > 0) {
                 $rankAway->incGamesDraw();
             }
         }

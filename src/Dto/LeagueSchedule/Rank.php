@@ -161,9 +161,12 @@ class Rank
         return $this;
     }
 
-    public function getAveragePointsFor(): float
+    public function getAveragePointsFor(bool $leagueHasMedian = false): float
     {
         $games = $this->gamesWon + $this->gamesLost + $this->gamesDraw;
+        if($leagueHasMedian) {
+            $games /= 2;
+        }
 
         return $this->pointsFor / $games;
     }
