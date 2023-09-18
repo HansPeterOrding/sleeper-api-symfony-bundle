@@ -58,6 +58,7 @@ class ScheduleWeek
             $fullPoints[] = $matchup->getSleeperMatchupAway()->getEffectivePoints();
             $games++;
         }
+        sort($fullPoints);
 
         $this->median = ($fullPoints[$games] + $fullPoints[$games-1]) / 2;
 
