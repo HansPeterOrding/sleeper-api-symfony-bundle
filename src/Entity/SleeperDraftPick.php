@@ -16,7 +16,7 @@ class SleeperDraftPick
     #[ORM\Column]
     private ?int $round = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $rosterId = null;
 
     #[ORM\Column]

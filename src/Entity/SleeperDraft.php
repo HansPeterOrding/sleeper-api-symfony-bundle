@@ -27,7 +27,7 @@ class SleeperDraft
     #[ORM\Column]
     private DraftStatusEnum $status;
 
-    #[ORM\Column(type: 'bigint')]
+    #[ORM\Column(type: 'bigint', nullable: true)]
     private ?int $startTime;
 
     #[ORM\Column]
@@ -48,7 +48,7 @@ class SleeperDraft
     #[ORM\Embedded(class: SleeperDraftMetadata::class, columnPrefix: 'metadata_')]
     private SleeperDraftMetadata $metadata;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $leagueId = null;
 
     #[ORM\Column(type: 'bigint', nullable: true)]
@@ -78,8 +78,8 @@ class SleeperDraft
     #[ORM\OneToMany(mappedBy: 'draft', targetEntity: SleeperDraftPick::class)]
     private Collection $draftPicks;
 
-    #[ORM\OneToOne(targetEntity: SleeperLeague::class, inversedBy: 'draft')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'drafts')]
+    #[ORM\JoinColumn(name: 'internal_league_id', nullable: true)]
     private ?SleeperLeague $league = null;
 
     /**

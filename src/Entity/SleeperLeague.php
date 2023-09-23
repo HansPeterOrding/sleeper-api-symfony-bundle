@@ -61,8 +61,8 @@ class SleeperLeague
     /**
      * @var Collection<int, SleeperDraft>
      */
-    #[ORM\OneToOne(targetEntity: SleeperDraft::class, mappedBy: 'league')]
-    private ?SleeperDraft $draft = null;
+    #[ORM\OneToMany(targetEntity: SleeperDraft::class, mappedBy: 'league')]
+    private Collection $drafts;
 
     /**
      * @var Collection<int, SleeperRoster>
@@ -86,7 +86,10 @@ class SleeperLeague
     {
         $this->settings = new SleeperLeagueSettings();
         $this->scoringSettings = new SleeperLeagueScoringSettings();
+        $this->drafts = new ArrayCollection();
+        $this->rosters = new ArrayCollection();
         $this->tradedPicks = new ArrayCollection();
+        $this->matchups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,14 +253,44 @@ class SleeperLeague
         ];
     }
 
-    public function getDraft(): ?SleeperDraft
+    /**
+     * @return Collection<int, SleeperDraft>
+     */
+    public function getDrafts(): Collection
     {
-        return $this->draft;
+        return $this->drafts;
     }
 
-    public function setDraft(?SleeperDraft $draft): SleeperLeague
+    /**
+     * @param Collection<int, SleeperDraft> $drafts
+     * @return $this
+     */
+    public function setDrafts(Collection $drafts): SleeperLeague
     {
-        $this->draft = $draft;
+        $this->drafts = $drafts;
+        return $this;
+    }
+
+    public function addDraft(SleeperDraft $draft): SleeperLeague
+    {
+        if (!$this->drafts->contains($roster)) {
+            $this->drafts[] = $draft;
+            $draft->setLeague($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDraft(SleeperDraft $draft): SleeperLeague
+    {
+        if ($this->drafts->contains($draft)) {
+            $this->drafts->removeElement($draft);
+
+            if ($draft->getLeague() === $this) {
+                $draft->setLeague(null);
+            }
+        }
+
         return $this;
     }
 

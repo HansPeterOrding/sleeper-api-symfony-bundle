@@ -55,7 +55,6 @@ class LeagueSchedule
     {
         $this->standings = new Standings();
 
-
         for ($currentWeek = 1; $currentWeek <= $week; $currentWeek++) {
             $this->applyWeek($currentWeek);
         }
