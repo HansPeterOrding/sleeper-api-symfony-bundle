@@ -54,11 +54,18 @@ class ScheduleWeek
         $games = 0;
 
         foreach($this->matchups as $matchup) {
-            $fullPoints[] = $matchup->getSleeperMatchupHome()->getEffectivePoints();
-            $fullPoints[] = $matchup->getSleeperMatchupAway()->getEffectivePoints();
+            if($matchup->getSleeperMatchupHome()) {
+                $fullPoints[] = $matchup->getSleeperMatchupHome()->getEffectivePoints();
+            } else {
+                $fullPoints[] = 0;
+            }
+            if($matchup->getSleeperMatchupAway()) {
+                $fullPoints[] = $matchup->getSleeperMatchupAway()->getEffectivePoints();
+            } else {
+                $fullPoints[] = 0;
+            }
             $games++;
         }
-        sort($fullPoints);
 
         $this->median = ($fullPoints[$games] + $fullPoints[$games-1]) / 2;
 

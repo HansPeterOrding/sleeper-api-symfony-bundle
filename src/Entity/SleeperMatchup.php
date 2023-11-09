@@ -61,6 +61,9 @@ class SleeperMatchup
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
     private Collection $sleeperStarterPlayers;
 
+    /**
+     * @var array<int, SleeperPlayer>
+     */
     #[ORM\JoinTable(name: 'matchup_players')]
     #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
@@ -255,6 +258,15 @@ class SleeperMatchup
         return $this;
     }
 
+    public function getSleeperStarterPlayerById(string $id): ?SleeperPlayer
+    {
+        foreach($this->sleeperStarterPlayers as $sleeperPlayer) {
+            if($sleeperPlayer->getPlayerId() === $id) {
+                return $sleeperPlayer;
+            }
+        }
+    }
+
     public function getSleeperPlayers(): Collection
     {
         return $this->sleeperPlayers;
@@ -282,6 +294,15 @@ class SleeperMatchup
         }
 
         return $this;
+    }
+
+    public function getSleeperPlayerById(string $id): ?SleeperPlayer
+    {
+        foreach($this->sleeperPlayers as $sleeperPlayer) {
+            if($sleeperPlayer->getPlayerId() === $id) {
+                return $sleeperPlayer;
+            }
+        }
     }
 
     public function getRoster(): ?SleeperRoster
