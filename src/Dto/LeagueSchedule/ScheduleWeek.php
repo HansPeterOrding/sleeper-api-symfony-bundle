@@ -71,4 +71,28 @@ class ScheduleWeek
 
         return $this;
     }
+
+    public function getHighestScorer()
+    {
+        $highScore = 0;
+        $sleeperMatchup = null;
+
+        foreach($this->matchups as $matchup) {
+            if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $matchup->getSleeperMatchupAway()->getEffectivePoints()) {
+                if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $highScore) {
+                    $highScore = $matchup->getSleeperMatchupHome()->getEffectivePoints();
+                    $sleeperMatchup = $matchup->getSleeperMatchupHome();
+                    continue;
+                }
+            } else {
+                if($matchup->getSleeperMatchupAway()->getEffectivePoints() > $highScore) {
+                    $highScore = $matchup->getSleeperMatchupAway()->getEffectivePoints();
+                    $sleeperMatchup = $matchup->getSleeperMatchupAway();
+                    continue;
+                }
+            }
+        }
+
+        return $sleeperMatchup;
+    }
 }

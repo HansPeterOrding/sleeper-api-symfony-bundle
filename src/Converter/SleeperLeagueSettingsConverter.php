@@ -36,6 +36,7 @@ class SleeperLeagueSettingsConverter
         $sleeperLeagueSettingsEntity->setReserveAllowDoubtful($sleeperLeagueSettingsDto->getReserveAllowDoubtful());
         $sleeperLeagueSettingsEntity->setPlayoffWeekStart($sleeperLeagueSettingsDto->getPlayoffWeekStart());
         $sleeperLeagueSettingsEntity->setPlayoffType($sleeperLeagueSettingsDto->getPlayoffType());
+        $sleeperLeagueSettingsEntity->setPlayoffRoundType($sleeperLeagueSettingsDto->getPlayoffRoundType());
         $sleeperLeagueSettingsEntity->setPlayoffTeams($sleeperLeagueSettingsDto->getPlayoffTeams());
         $sleeperLeagueSettingsEntity->setPickTrading($sleeperLeagueSettingsDto->getPickTrading());
         $sleeperLeagueSettingsEntity->setOffseasonAdds($sleeperLeagueSettingsDto->getOffseasonAdds());

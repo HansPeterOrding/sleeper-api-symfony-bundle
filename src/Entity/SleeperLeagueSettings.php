@@ -67,6 +67,9 @@ class SleeperLeagueSettings
     private ?int $playoffType = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $playoffRoundType = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $playoffTeams = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
@@ -311,6 +314,17 @@ class SleeperLeagueSettings
     public function setPlayoffType(?int $playoffType): SleeperLeagueSettings
     {
         $this->playoffType = $playoffType;
+        return $this;
+    }
+
+    public function getPlayoffRoundType(): ?int
+    {
+        return $this->playoffRoundType;
+    }
+
+    public function setPlayoffRoundType(?int $playoffRoundType): SleeperLeagueSettings
+    {
+        $this->playoffRoundType = $playoffRoundType;
         return $this;
     }
 
