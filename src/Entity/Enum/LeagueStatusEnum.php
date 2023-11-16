@@ -9,5 +9,6 @@ enum LeagueStatusEnum: string
     case PRE_DRAFT = 'pre_draft';
     case DRAFTING = 'drafting';
     case IN_SEASON = 'in_season';
+    case POST_SEASON = 'post_season';
     case COMPLETE = 'complete';
 }
