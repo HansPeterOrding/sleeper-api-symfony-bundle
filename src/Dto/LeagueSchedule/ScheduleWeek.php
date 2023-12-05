@@ -67,6 +67,8 @@ class ScheduleWeek
             $games++;
         }
 
+        sort($fullPoints);
+
         $this->median = ($fullPoints[$games] + $fullPoints[$games-1]) / 2;
 
         return $this;
