@@ -82,6 +82,9 @@ class SleeperLeague
     #[ORM\OneToMany(targetEntity: SleeperMatchup::class, mappedBy: 'league')]
     private Collection $matchups;
 
+    #[ORM\OneToMany(targetEntity: SleeperPlayoffMatchup::class, mappedBy: 'league')]
+    private Collection $playoffMatchups;
+
     public function __construct()
     {
         $this->settings = new SleeperLeagueSettings();
@@ -375,6 +378,46 @@ class SleeperLeague
 
             if ($matchup->getLeague() === $this) {
                 $matchup->setLeague(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperPlayoffMatchup>
+     */
+    public function getPlayoffMatchups(): Collection
+    {
+        return $this->playoffMatchups;
+    }
+
+    /**
+     * @param Collection<int, SleeperPlayoffMatchup> $playoffMatchups
+     */
+    public function setPlayoffMatchups(Collection $playoffMatchups): SleeperLeague
+    {
+        $this->playoffMatchups = $playoffMatchups;
+        return $this;
+    }
+
+    public function addSleeperPlayoffMatchup(SleeperPlayoffMatchup $playoffMatchup): SleeperLeague
+    {
+        if (!$this->playoffMatchups->contains($playoffMatchup)) {
+            $this->playoffMatchups[] = $playoffMatchup;
+            $playoffMatchup->setLeague($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSleeperPlayoffMatchup(SleeperPlayoffMatchup $playoffMatchup): SleeperLeague
+    {
+        if ($this->playoffMatchups->contains($playoffMatchup)) {
+            $this->playoffMatchups->removeElement($playoffMatchup);
+
+            if ($playoffMatchup->getLeague() === $this) {
+                $playoffMatchup->setLeague(null);
             }
         }
 

@@ -52,6 +52,26 @@ class SleeperPlayoffMatchup
     #[ORM\Column(nullable: true)]
     private ?int $p = null;
 
+    #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'playoffMatchups')]
+    #[ORM\JoinColumn(name: 'internal_league_id')]
+    private ?SleeperLeague $league = null;
+
+    #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'playoffMatchupsHome')]
+    #[ORM\JoinColumn(name: 'internal_roster_id_t1')]
+    private ?SleeperRoster $rosterTeam1 = null;
+
+    #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'playoffMatchupsAway')]
+    #[ORM\JoinColumn(name: 'internal_roster_id_t2')]
+    private ?SleeperRoster $rosterTeam2 = null;
+
+    #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
+    #[ORM\JoinColumn(name: 'internal_matchup_id_t1')]
+    private ?SleeperMatchup $matchupTeam1 = null;
+
+    #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
+    #[ORM\JoinColumn(name: 'internal_matchup_id_t2')]
+    private ?SleeperMatchup $matchupTeam2 = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -181,6 +201,61 @@ class SleeperPlayoffMatchup
     public function setP(?int $p): SleeperPlayoffMatchup
     {
         $this->p = $p;
+        return $this;
+    }
+
+    public function getLeague(): ?SleeperLeague
+    {
+        return $this->league;
+    }
+
+    public function setLeague(?SleeperLeague $league): SleeperPlayoffMatchup
+    {
+        $this->league = $league;
+        return $this;
+    }
+
+    public function getRosterTeam1(): ?SleeperRoster
+    {
+        return $this->rosterTeam1;
+    }
+
+    public function setRosterTeam1(?SleeperRoster $roster): SleeperPlayoffMatchup
+    {
+        $this->rosterTeam1 = $roster;
+        return $this;
+    }
+
+    public function getRosterTeam2(): ?SleeperRoster
+    {
+        return $this->rosterTeam2;
+    }
+
+    public function setRosterTeam2(?SleeperRoster $roster): SleeperPlayoffMatchup
+    {
+        $this->rosterTeam2 = $roster;
+        return $this;
+    }
+
+    public function getMatchupTeam1(): ?SleeperMatchup
+    {
+        return $this->matchupTeam1;
+    }
+
+    public function setMatchupTeam1(?SleeperMatchup $matchupTeam1): SleeperPlayoffMatchup
+    {
+        $this->matchupTeam1 = $matchupTeam1;
+        return $this;
+    }
+
+    public function getMatchupTeam2(): ?SleeperMatchup
+    {
+        return $this->matchupTeam2;
+    }
+
+    public function setMatchupTeam2(?SleeperMatchup $matchupTeam2): SleeperPlayoffMatchup
+    {
+        $this->matchupTeam2 = $matchupTeam2;
         return $this;
     }
 
