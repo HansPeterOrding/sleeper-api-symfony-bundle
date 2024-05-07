@@ -69,6 +69,12 @@ class SleeperRoster
     #[ORM\OneToMany(targetEntity: SleeperMatchup::class, mappedBy: 'roster')]
     private Collection $matchups;
 
+    #[ORM\OneToMany(targetEntity: SleeperPlayoffMatchup::class, mappedBy: 'rosterTeam1')]
+    private Collection $playoffMatchupsHome;
+
+    #[ORM\OneToMany(targetEntity: SleeperPlayoffMatchup::class, mappedBy: 'rosterTeam2')]
+    private Collection $playoffMatchupsAway;
+
     public function __construct()
     {
         $this->settings = new SleeperRosterSettings();
@@ -331,5 +337,79 @@ class SleeperRoster
         }
 
         return null;
+    }
+
+    /**
+     * @return Collection<int, SleeperPlayoffMatchup>
+     */
+    public function getPlayoffMatchupsHome(): Collection
+    {
+        return $this->playoffMatchupsHome;
+    }
+
+    public function setPlayoffMatchupsHome(Collection $playoffMatchups): SleeperRoster
+    {
+        $this->playoffMatchupsHome = $playoffMatchups;
+        return $this;
+    }
+
+    public function addPlayoffMatchupHome(SleeperPlayoffMatchup $playoffMatchup): SleeperRoster
+    {
+        if (!$this->playoffMatchupsHome->contains($playoffMatchup)) {
+            $this->playoffMatchupsHome[] = $playoffMatchup;
+            $playoffMatchup->setRosterTeam1($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayoffMatchupHome(SleeperPlayoffMatchup $playoffMatchup): SleeperRoster
+    {
+        if ($this->playoffMatchupsHome->contains($playoffMatchup)) {
+            $this->playoffMatchupsHome->removeElement($playoffMatchup);
+
+            if ($playoffMatchup->getRosterTeam1() === $this) {
+                $playoffMatchup->setRosterTeam1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperPlayoffMatchup>
+     */
+    public function getPlayoffMatchupsAway(): Collection
+    {
+        return $this->playoffMatchupsAway;
+    }
+
+    public function setPlayoffMatchupsv(Collection $playoffMatchups): SleeperRoster
+    {
+        $this->playoffMatchupsAway = $playoffMatchups;
+        return $this;
+    }
+
+    public function addPlayoffMatchupAway(SleeperPlayoffMatchup $playoffMatchup): SleeperRoster
+    {
+        if (!$this->playoffMatchupsAway->contains($playoffMatchup)) {
+            $this->playoffMatchupsAway[] = $playoffMatchup;
+            $playoffMatchup->setRosterTeam2($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayoffMatchupAway(SleeperPlayoffMatchup $playoffMatchup): SleeperRoster
+    {
+        if ($this->playoffMatchupsAway->contains($playoffMatchup)) {
+            $this->playoffMatchupsAway->removeElement($playoffMatchup);
+
+            if ($playoffMatchup->getRosterTeam2() === $this) {
+                $playoffMatchup->setRosterTeam2(null);
+            }
+        }
+
+        return $this;
     }
 }
