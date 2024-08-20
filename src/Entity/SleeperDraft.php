@@ -27,7 +27,7 @@ class SleeperDraft
     #[ORM\Column]
     private DraftStatusEnum $status;
 
-    #[ORM\Column(type: 'bigint')]
+    #[ORM\Column(type: 'bigint', nullable: true)]
     private ?int $startTime;
 
     #[ORM\Column]
@@ -48,7 +48,7 @@ class SleeperDraft
     #[ORM\Embedded(class: SleeperDraftMetadata::class, columnPrefix: 'metadata_')]
     private SleeperDraftMetadata $metadata;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $leagueId = null;
 
     #[ORM\Column(type: 'bigint', nullable: true)]
@@ -60,7 +60,7 @@ class SleeperDraft
     #[ORM\Column]
     private ?string $lastMessageId = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?array $draftOrder = null;
 
     #[ORM\Column]
