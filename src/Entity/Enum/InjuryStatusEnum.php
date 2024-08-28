@@ -7,6 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum;
 enum InjuryStatusEnum: string
 {
     case QUESTIONABLE = 'Questionable';
+    case DOUBTFUL = 'Doubtful';
     case IR = 'IR';
     case OUT = 'Out';
     case SUS = 'Sus';
