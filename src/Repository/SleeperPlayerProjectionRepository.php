@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayerProjection as Sl
  * @method SleeperPlayerProjectionEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperPlayerProjectionEntity[] findAll()
  */
-class SleeperPlayerProjectionRepository extends ServiceEntityRepository
-{
+class SleeperPlayerProjectionRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperPlayerProjectionEntity::class);

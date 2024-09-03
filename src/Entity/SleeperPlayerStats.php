@@ -10,8 +10,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerStats as SleeperPlayerStat
 
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'sasb_player_stats_unique', columns: ['season', 'week', 'player_id'])]
-class SleeperPlayerStats
-{
+class SleeperPlayerStats {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

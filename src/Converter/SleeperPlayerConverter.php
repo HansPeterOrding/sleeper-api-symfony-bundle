@@ -8,11 +8,11 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayer as SleeperPlayerEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository;
 
-class SleeperPlayerConverter
-{
+class SleeperPlayerConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperPlayerRepository $sleeperPlayerRepository
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperPlayerDto $sleeperPlayerDto): SleeperPlayerEntity

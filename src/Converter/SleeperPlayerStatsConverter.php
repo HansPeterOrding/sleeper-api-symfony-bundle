@@ -8,13 +8,13 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerStats as SleeperPlayerStat
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayerStats as SleeperPlayerStatsEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerStatsRepository;
 
-class SleeperPlayerStatsConverter
-{
+class SleeperPlayerStatsConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperPlayerStatsRepository $sleeperPlayerStatsRepository,
         private readonly SleeperStatsConverter        $sleeperStatsConverter,
         private readonly SleeperPlayerConverter       $sleeperPlayerConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperPlayerStatsDto $sleeperPlayerStatsDto): SleeperPlayerStatsEntity

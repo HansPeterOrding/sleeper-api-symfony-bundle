@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperRosterSettings as SleeperRosterSettingsDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRosterSettings as SleeperRosterSettingsEntity;
 
-class SleeperRosterSettingsConverter
-{
+class SleeperRosterSettingsConverter implements ConverterInterface {
     public function toEntity(
         SleeperRosterSettingsDto     $sleeperRosterSettingsDto,
         ?SleeperRosterSettingsEntity $sleeperRosterSettingsEntity = null
-    ): SleeperRosterSettingsEntity {
+    ): SleeperRosterSettingsEntity
+    {
         if (!$sleeperRosterSettingsEntity) {
             $sleeperRosterSettingsEntity = new SleeperRosterSettingsEntity();
         }

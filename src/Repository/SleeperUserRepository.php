@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser as SleeperUserEnt
  * @method SleeperUserEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperUserEntity[] findAll()
  */
-class SleeperUserRepository extends ServiceEntityRepository
-{
+class SleeperUserRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperUserEntity::class);

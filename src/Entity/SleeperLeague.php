@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\LeagueStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 
 #[ORM\Entity]
-class SleeperLeague
-{
+class SleeperLeague {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -75,6 +74,12 @@ class SleeperLeague
      */
     #[ORM\OneToMany(targetEntity: SleeperTradedPick::class, mappedBy: 'league')]
     private Collection $tradedPicks;
+
+    /**
+     * @var Collection<int, SleeperTransaction>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTransaction::class, mappedBy: 'league')]
+    private Collection $transactions;
 
     /**
      * @var Collection<int, SleeperMatchup>
@@ -338,6 +343,46 @@ class SleeperLeague
 
             if ($pick->getLeague() === $this) {
                 $pick->setLeague(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SleeperTransaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * @param Collection<int, SleeperTransaction> $transactions
+     */
+    public function setTransactions(Collection $transactions): SleeperLeague
+    {
+        $this->transactions = $transactions;
+        return $this;
+    }
+
+    public function addTransaction(SleeperTransaction $transaction): SleeperLeague
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setLeague($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(SleeperTransaction $transaction): SleeperLeague
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+
+            if ($transaction->getLeague() === $this) {
+                $transaction->setLeague(null);
             }
         }
 

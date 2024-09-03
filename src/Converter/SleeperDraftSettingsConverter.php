@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftSettings as SleeperDraftSettingsDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftSettings as SleeperDraftSettingsEntity;
 
-class SleeperDraftSettingsConverter
-{
+class SleeperDraftSettingsConverter implements ConverterInterface {
     public function toEntity(
         SleeperDraftSettingsDto     $sleeperDraftSettingsDto,
         ?SleeperDraftSettingsEntity $sleeperDraftSettingsEntity
-    ): SleeperDraftSettingsEntity {
+    ): SleeperDraftSettingsEntity
+    {
         if (!$sleeperDraftSettingsEntity) {
             $sleeperDraftSettingsEntity = new SleeperDraftSettingsEntity();
         }

@@ -6,8 +6,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup;
 
-class PlayoffMatchup
-{
+class PlayoffMatchup {
     private ?SleeperPlayoffMatchup $sleeperPlayoffMatchup = null;
 
     public function getSleeperPlayoffMatchup(): ?SleeperPlayoffMatchup

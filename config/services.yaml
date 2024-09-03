@@ -62,6 +62,9 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTradedPickRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTradedPickRepository'
     
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTransactionRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_transaction: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTransactionRepository'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository'
 
@@ -95,6 +98,15 @@ services:
     
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionMetadataConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionMetadataConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionSettingsConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionSettingsConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionWaiverBudgetConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_waiver_budget: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionWaiverBudgetConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserMetadataConverter'
@@ -149,7 +161,15 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTradedPickConverter:
         arguments:
             $sleeperTradedPickRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_traded_pick'
-    hpo_sleeper_api_symfony_bundle.converter.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperDraftConverter'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTradedPickConverter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverter:
+        arguments:
+            $sleeperTransactionRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_transaction'
+            $sleeperTransactionWaiverBudgetConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_waiver_budget'
+            $sleeperTransactionSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_settings'
+            $sleeperTransactionMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction_metadata'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter:
         arguments:
@@ -157,3 +177,52 @@ services:
             $sleeperUserMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_user_metadata'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter'
         
+    # Importer
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperLeagueImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_league'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_league: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperLeagueImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_user'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter'
+            
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_roster'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter'
+            
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperDraftImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_draft'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_draft: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperDraftImporter'
+            
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperDraftPickImporter:
+        arguments:
+            $sleeperPlayerRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player'
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_draft_pick'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_draft_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperDraftPickImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperMatchupImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_matchup'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperMatchupImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayoffMatchupImporter:
+        arguments:
+            $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
+            $sleeperMatchupRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_matchup'
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_playoff_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayoffMatchupImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_traded_pick'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_traded_pick: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~

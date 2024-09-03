@@ -16,8 +16,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup as Slee
  * @method SleeperPlayoffMatchup[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperPlayoffMatchup[] findAll()
  */
-class SleeperPlayoffMatchupRepository extends ServiceEntityRepository
-{
+class SleeperPlayoffMatchupRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperPlayoffMatchupEntity::class);

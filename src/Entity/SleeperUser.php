@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperUser as SleeperUserDto;
 
 #[ORM\Entity]
-class SleeperUser
-{
+class SleeperUser {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -79,6 +78,12 @@ class SleeperUser
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: SleeperDraftPick::class)]
     private Collection $draftPicks;
+
+    /**
+     * @var Collection<int, SleeperTransaction>
+     */
+    #[ORM\OneToMany(targetEntity: SleeperTransaction::class, mappedBy: 'creatorUser')]
+    private Collection $transactions;
 
     public function __construct()
     {
@@ -305,6 +310,46 @@ class SleeperUser
 
             if ($pick->getPreviousOwner() === $this) {
                 $pick->setPreviousOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**+
+     * @return Collection<int, SleeperTransaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * @param Collection<int, SleeperTransaction> $transactions
+     */
+    public function setTransactions(Collection $transactions): SleeperUser
+    {
+        $this->transactions = $transactions;
+        return $this;
+    }
+
+    public function addTransaction(SleeperTransaction $transaction): SleeperUser
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setCreatorUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(SleeperTransaction $transaction): SleeperUser
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+
+            if ($transaction->getCreatorUser() === $this) {
+                $transaction->setCreatorUser(null);
             }
         }
 

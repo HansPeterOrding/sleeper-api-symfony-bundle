@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster as SleeperRoste
  * @method SleeperRosterEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperRosterEntity[] findAll()
  */
-class SleeperRosterRepository extends ServiceEntityRepository
-{
+class SleeperRosterRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperRosterEntity::class);

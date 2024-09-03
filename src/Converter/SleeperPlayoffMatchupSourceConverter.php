@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayoffMatchupSource as SleeperPlayoffMatchupSourceDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchupSource as SleeperPlayoffMatchupSourceEntity;
 
-class SleeperPlayoffMatchupSourceConverter
-{
+class SleeperPlayoffMatchupSourceConverter implements ConverterInterface {
     public function toEntity(
         ?SleeperPlayoffMatchupSourceDto    $sleeperPlayoffMatchupSourceDto = null,
         ?SleeperPlayoffMatchupSourceEntity $sleeperPlayoffMatchupSourceEntity = null
-    ): ?SleeperPlayoffMatchupSourceEntity {
+    ): ?SleeperPlayoffMatchupSourceEntity
+    {
         if (null === $sleeperPlayoffMatchupSourceDto) {
             return null;
         }

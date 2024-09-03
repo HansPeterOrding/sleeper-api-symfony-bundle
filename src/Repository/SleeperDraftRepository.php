@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraft as SleeperDraftE
  * @method SleeperDraftEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperDraftEntity[] findAll()
  */
-class SleeperDraftRepository extends ServiceEntityRepository
-{
+class SleeperDraftRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperDraftEntity::class);

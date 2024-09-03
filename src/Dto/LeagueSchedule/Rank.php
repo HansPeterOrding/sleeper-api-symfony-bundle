@@ -8,18 +8,17 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser;
 
-class Rank
-{
+class Rank {
     private ?SleeperLeague $sleeperLeague = null;
-    private ?SleeperUser   $sleeperUser   = null;
+    private ?SleeperUser $sleeperUser = null;
     private ?SleeperRoster $sleeperRoster = null;
-    private ?int           $gamesWon      = 0;
-    private ?int           $gamesDraw     = 0;
-    private ?int           $gamesLost     = 0;
-    private ?float         $pointsFor     = 0;
-    private ?float         $pointsAgainst = 0;
-    private ?int           $rankNumber    = null;
-    private ?int           $best          = null;
+    private ?int $gamesWon = 0;
+    private ?int $gamesDraw = 0;
+    private ?int $gamesLost = 0;
+    private ?float $pointsFor = 0;
+    private ?float $pointsAgainst = 0;
+    private ?int $rankNumber = null;
+    private ?int $best = null;
 
     public function getSleeperLeague(): ?SleeperLeague
     {
@@ -164,7 +163,7 @@ class Rank
     public function getAveragePointsFor(bool $leagueHasMedian = false): float
     {
         $games = $this->gamesWon + $this->gamesLost + $this->gamesDraw;
-        if($leagueHasMedian) {
+        if ($leagueHasMedian) {
             $games /= 2;
         }
 

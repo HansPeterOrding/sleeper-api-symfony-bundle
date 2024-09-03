@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTradedPick as SleeperT
  * @method SleeperTradedPickEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperTradedPickEntity[] findAll()
  */
-class SleeperTradedPickRepository extends ServiceEntityRepository
-{
+class SleeperTradedPickRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperTradedPickEntity::class);

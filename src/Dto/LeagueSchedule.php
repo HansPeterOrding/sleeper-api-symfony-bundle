@@ -8,8 +8,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule\ScheduleWeek;
 use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule\Standings;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 
-class LeagueSchedule
-{
+class LeagueSchedule {
     /**
      * @var array<int, ScheduleWeek>
      */
@@ -19,7 +18,8 @@ class LeagueSchedule
 
     public function __construct(
         public SleeperLeague $sleeperLeague
-    ) {
+    )
+    {
     }
 
     public function getScheduleWeeks(): array

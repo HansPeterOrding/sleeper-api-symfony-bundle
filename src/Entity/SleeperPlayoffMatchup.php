@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
     name: 'sasb_sleeper_playoff_matchup_unique',
     columns: ['league_id', 'branch', 'm']
 )]
-class SleeperPlayoffMatchup
-{
+class SleeperPlayoffMatchup {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

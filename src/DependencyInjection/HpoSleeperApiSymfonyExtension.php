@@ -9,8 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class HpoSleeperApiSymfonyExtension extends Extension
-{
+class HpoSleeperApiSymfonyExtension extends Extension {
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(

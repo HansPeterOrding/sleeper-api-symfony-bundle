@@ -8,12 +8,12 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperRoster as SleeperRosterEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 
-class SleeperRosterConverter
-{
+class SleeperRosterConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperRosterRepository        $sleeperRosterRepository,
         private readonly SleeperRosterSettingsConverter $sleeperRosterSettingsConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperRosterDto $sleeperRosterDto): SleeperRosterEntity

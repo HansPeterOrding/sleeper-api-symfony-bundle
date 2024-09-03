@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayerStats as Sleeper
  * @method SleeperPlayerStatsEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperPlayerStatsEntity[] findAll()
  */
-class SleeperPlayerStatsRepository extends ServiceEntityRepository
-{
+class SleeperPlayerStatsRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperPlayerStatsEntity::class);

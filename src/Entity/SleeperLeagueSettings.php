@@ -7,8 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperLeagueSettings
-{
+class SleeperLeagueSettings {
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $wasAutoArchived = null;
 
