@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 
-use HansPeterOrding\SleeperApiClient\Dto\SleeperMatchup as SleeperMatchupDto;
+use HansPeterOrding\SleeperApiClient\Dto\SleeperTransaction as SleeperTransactionDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperMatchup as SleeperMatchupEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository;
 
-class SleeperMatchupConverter implements ConverterInterface
+class SleeperTransactionConverter implements ConverterInterface
 {
     public function __construct(
-        private readonly SleeperMatchupRepository $sleeperMatchupRepository
+//        private readonly SleeperMatchupRepository $sleeperMatchupRepository
     ) {
     }
 
-    public function toEntity(string $leagueId, int $week, SleeperMatchupDto $sleeperMatchupDto): SleeperMatchupEntity
+    public function toEntity(SleeperTransactionDto $sleeperMatchupDto)
     {
         $sleeperMatchupEntity = $this->sleeperMatchupRepository->findByDtoOrCreateEntity($leagueId, $week, $sleeperMatchupDto);
 

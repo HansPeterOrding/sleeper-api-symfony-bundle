@@ -9,7 +9,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperUserMetadata;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser as SleeperUserEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository;
 
-class SleeperUserConverter
+class SleeperUserConverter implements ConverterInterface
 {
     public function __construct(
         private readonly SleeperUserRepository        $sleeperUserRepository,

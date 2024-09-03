@@ -8,7 +8,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperTradedPick as SleeperTradedPickD
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTradedPick as SleeperTradedPickEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTradedPickRepository;
 
-class SleeperTradedPickConverter
+class SleeperTradedPickConverter implements ConverterInterface
 {
     public function __construct(
         private readonly SleeperTradedPickRepository $sleeperTradedPickRepository

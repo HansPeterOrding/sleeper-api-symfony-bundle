@@ -8,7 +8,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayoffMatchup as SleeperPlayoff
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup as SleeperPlayoffMatchupEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository;
 
-class SleeperPlayoffMatchupConverter
+class SleeperPlayoffMatchupConverter implements ConverterInterface
 {
     public function __construct(
         private readonly SleeperPlayoffMatchupRepository      $sleeperPlayoffMatchupRepository,

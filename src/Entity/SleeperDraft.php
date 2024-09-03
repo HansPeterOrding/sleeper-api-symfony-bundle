@@ -60,7 +60,7 @@ class SleeperDraft
     #[ORM\Column]
     private ?string $lastMessageId = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?array $draftOrder = null;
 
     #[ORM\Column]
