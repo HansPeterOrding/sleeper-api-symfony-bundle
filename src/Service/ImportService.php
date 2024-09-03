@@ -12,6 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperMatchupImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayoffMatchupImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter;
+use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter;
 
 class ImportService
@@ -47,6 +48,7 @@ class ImportService
         private readonly SleeperMatchupImporter $sleeperMatchupImporter,
         private readonly SleeperPlayoffMatchupImporter $sleeperPlayoffMatchupImporter,
         private readonly SleeperTradedPickImporter $sleeperTradedPickImporter,
+        private readonly SleeperTransactionImporter $sleeperTransactionImporter
     )
     {
     }
@@ -91,7 +93,7 @@ class ImportService
         }
 
         if(in_array(self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS, $importEntities)) {
-
+            $sleeperTransactions = $this->sleeperTransactionImporter->importTransactions($sleeperLeague);
         }
     }
 }
