@@ -6,7 +6,6 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftMetadata as SleeperDraftMetadataDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftMetadata as SleeperDraftMetadataEntity;
 
 /**
@@ -15,8 +14,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftMetadata as Sleep
  * @method SleeperDraftMetadataEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperDraftMetadataEntity[] findAll()
  */
-class SleeperDraftMetadataRepository extends ServiceEntityRepository
-{
+class SleeperDraftMetadataRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperDraftMetadataEntity::class);

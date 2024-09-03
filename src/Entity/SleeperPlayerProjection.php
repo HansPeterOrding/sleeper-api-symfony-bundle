@@ -11,8 +11,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjection as SleeperPlaye
 
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'sasb_player_projection_unique', columns: ['season', 'week', 'player_id'])]
-class SleeperPlayerProjection
-{
+class SleeperPlayerProjection {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

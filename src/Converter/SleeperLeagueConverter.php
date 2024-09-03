@@ -10,13 +10,13 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague as SleeperLeagueEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository;
 
-class SleeperLeagueConverter implements ConverterInterface
-{
+class SleeperLeagueConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperLeagueRepository               $sleeperLeagueRepository,
         private readonly SleeperLeagueSettingsConverter        $sleeperLeagueSettingsConverter,
         private readonly SleeperLeagueScoringSettingsConverter $sleeperLeagueScoringSettingsConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperLeagueDto $sleeperLeagueDto): SleeperLeagueEntity

@@ -19,13 +19,13 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository;
 /**
  * @property SleeperDraftPickConverter $converter
  */
-class SleeperDraftPickImporter extends AbstractImporter
-{
+class SleeperDraftPickImporter extends AbstractImporter {
     public function __construct(
         private readonly SleeperPlayerRepository $sleeperPlayerRepository,
-        ConverterInterface $converter,
-        EntityManagerInterface $entityManager
-    ) {
+        ConverterInterface                       $converter,
+        EntityManagerInterface                   $entityManager
+    )
+    {
         parent::__construct($converter, $entityManager);
     }
 
@@ -38,7 +38,7 @@ class SleeperDraftPickImporter extends AbstractImporter
 
         $entities = [];
 
-        foreach($sleeperDraftPicks as $sleeperDraftPick) {
+        foreach ($sleeperDraftPicks as $sleeperDraftPick) {
             $entity = $this->converter->toEntity($sleeperDraftPick);
             $entity->setDraft($sleeperDraft);
 
@@ -46,7 +46,7 @@ class SleeperDraftPickImporter extends AbstractImporter
                 'playerId' => $entity->getPlayer()
             ]);
 
-            if($sleeperPlayer) {
+            if ($sleeperPlayer) {
                 $entity->setPlayer($sleeperPlayer);
             }
 

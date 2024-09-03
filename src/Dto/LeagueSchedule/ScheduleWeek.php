@@ -6,8 +6,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperMatchup;
 
-class ScheduleWeek
-{
+class ScheduleWeek {
     /**
      * @var array<int, Matchup>
      */
@@ -26,9 +25,10 @@ class ScheduleWeek
     public ?float $median = null;
 
     public function __construct(
-        public int $week,
+        public int  $week,
         public bool $hasMedian = false
-    ) {
+    )
+    {
     }
 
     public function getMatchups(): array
@@ -62,20 +62,20 @@ class ScheduleWeek
 
     public function getOwnSleeperMatchupByRosterId(int $rosterId): ?SleeperMatchup
     {
-        if(null !== ($matchup = $this->getMatchupByRosterId($rosterId))) {
+        if (null !== ($matchup = $this->getMatchupByRosterId($rosterId))) {
             return $matchup;
         }
 
-        foreach($this->playoffMatchups as $playoffMatchup) {
-            if($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1()->getRosterId() === $rosterId) {
+        foreach ($this->playoffMatchups as $playoffMatchup) {
+            if ($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1()->getRosterId() === $rosterId) {
                 return $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1();
-            } elseif($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2()->getRosterId() === $rosterId) {
+            } elseif ($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2()->getRosterId() === $rosterId) {
                 return $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2();
             }
         }
 
-        foreach($this->byeWeekMatchups as $byeWeekMatchup) {
-            if($byeWeekMatchup->getSleeperMatchup()->getRosterId() === $rosterId) {
+        foreach ($this->byeWeekMatchups as $byeWeekMatchup) {
+            if ($byeWeekMatchup->getSleeperMatchup()->getRosterId() === $rosterId) {
                 return $byeWeekMatchup->getSleeperMatchup();
             }
         }
@@ -115,21 +115,22 @@ class ScheduleWeek
         $this->byeWeekMatchups[] = $byeWeekMatchup;
     }
 
-    public function hasMatchup(SleeperMatchup $sleeperMatchup) {
-        foreach($this->getMatchups() as $matchup) {
-            if($matchup->getSleeperMatchupHome()->getId() === $sleeperMatchup->getId()) {
+    public function hasMatchup(SleeperMatchup $sleeperMatchup)
+    {
+        foreach ($this->getMatchups() as $matchup) {
+            if ($matchup->getSleeperMatchupHome()->getId() === $sleeperMatchup->getId()) {
                 return true;
             }
-            if($matchup->getSleeperMatchupAway()->getId() === $sleeperMatchup->getId()) {
+            if ($matchup->getSleeperMatchupAway()->getId() === $sleeperMatchup->getId()) {
                 return true;
             }
         }
 
-        foreach($this->getPlayoffMatchups() as $playoffMatchup) {
-            if($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1()->getId() === $sleeperMatchup->getId()) {
+        foreach ($this->getPlayoffMatchups() as $playoffMatchup) {
+            if ($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam1()->getId() === $sleeperMatchup->getId()) {
                 return true;
             }
-            if($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2()->getId() === $sleeperMatchup->getId()) {
+            if ($playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2() && $playoffMatchup->getSleeperPlayoffMatchup()->getMatchupTeam2()->getId() === $sleeperMatchup->getId()) {
                 return true;
             }
         }
@@ -142,13 +143,13 @@ class ScheduleWeek
         $fullPoints = [];
         $games = 0;
 
-        foreach($this->matchups as $matchup) {
-            if($matchup->getSleeperMatchupHome()) {
+        foreach ($this->matchups as $matchup) {
+            if ($matchup->getSleeperMatchupHome()) {
                 $fullPoints[] = $matchup->getSleeperMatchupHome()->getEffectivePoints();
             } else {
                 $fullPoints[] = 0;
             }
-            if($matchup->getSleeperMatchupAway()) {
+            if ($matchup->getSleeperMatchupAway()) {
                 $fullPoints[] = $matchup->getSleeperMatchupAway()->getEffectivePoints();
             } else {
                 $fullPoints[] = 0;
@@ -158,7 +159,7 @@ class ScheduleWeek
 
         sort($fullPoints);
 
-        $this->median = ($fullPoints[$games] + $fullPoints[$games-1]) / 2;
+        $this->median = ($fullPoints[$games] + $fullPoints[$games - 1]) / 2;
 
         return $this;
     }
@@ -168,15 +169,15 @@ class ScheduleWeek
         $highScore = 0;
         $sleeperMatchup = null;
 
-        foreach($this->matchups as $matchup) {
-            if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $matchup->getSleeperMatchupAway()->getEffectivePoints()) {
-                if($matchup->getSleeperMatchupHome()->getEffectivePoints() > $highScore) {
+        foreach ($this->matchups as $matchup) {
+            if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > $matchup->getSleeperMatchupAway()->getEffectivePoints()) {
+                if ($matchup->getSleeperMatchupHome()->getEffectivePoints() > $highScore) {
                     $highScore = $matchup->getSleeperMatchupHome()->getEffectivePoints();
                     $sleeperMatchup = $matchup->getSleeperMatchupHome();
                     continue;
                 }
             } else {
-                if($matchup->getSleeperMatchupAway()->getEffectivePoints() > $highScore) {
+                if ($matchup->getSleeperMatchupAway()->getEffectivePoints() > $highScore) {
                     $highScore = $matchup->getSleeperMatchupAway()->getEffectivePoints();
                     $sleeperMatchup = $matchup->getSleeperMatchupAway();
                     continue;

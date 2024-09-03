@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperUserMetadata as SleeperUserMetadataDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUserMetadata as SleeperUserMetadataEntity;
 
-class SleeperUserMetadataConverter
-{
+class SleeperUserMetadataConverter {
     public function toEntity(
         SleeperUserMetadataDto     $sleeperUserMetadataDto,
         ?SleeperUserMetadataEntity $sleeperUserMetadataEntity = null
-    ): SleeperUserMetadataEntity {
+    ): SleeperUserMetadataEntity
+    {
         if (!$sleeperUserMetadataEntity) {
             $sleeperUserMetadataEntity = new SleeperUserMetadataEntity();
         }

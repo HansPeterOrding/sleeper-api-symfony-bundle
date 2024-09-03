@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperLeagueScoringSettings as SleeperLeagueScoringSettingsDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeagueScoringSettings as SleeperLeagueScoringSettingsEntity;
 
-class SleeperLeagueScoringSettingsConverter
-{
+class SleeperLeagueScoringSettingsConverter implements ConverterInterface {
     public function toEntity(
         SleeperLeagueScoringSettingsDto     $sleeperLeagueScoringSettingsDto,
         ?SleeperLeagueScoringSettingsEntity $sleeperLeagueScoringSettingsEntity = null
-    ): SleeperLeagueScoringSettingsEntity {
+    ): SleeperLeagueScoringSettingsEntity
+    {
         if (!$sleeperLeagueScoringSettingsEntity) {
             $sleeperLeagueScoringSettingsEntity = new SleeperLeagueScoringSettingsEntity();
         }

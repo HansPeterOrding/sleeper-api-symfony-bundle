@@ -7,8 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Util;
 use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule\Rank;
 
-class ScheduleUtils
-{
+class ScheduleUtils {
     /**
      * @param array<int, LeagueSchedule> $schedules
      * @return array<int, LeagueSchedule\Rank>

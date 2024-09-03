@@ -14,8 +14,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeagueSettings;
  * @method SleeperLeagueSettings[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperLeagueSettings[] findAll()
  */
-class SleeperLeagueSettingsRepository extends ServiceEntityRepository
-{
+class SleeperLeagueSettingsRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperLeagueSettings::class);

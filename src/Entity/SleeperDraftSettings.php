@@ -8,8 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperLeague as SleeperLeagueDto;
 
 #[ORM\Embeddable]
-class SleeperDraftSettings
-{
+class SleeperDraftSettings {
     #[ORM\Column(nullable: true)]
     private ?int $teams = null;
 

@@ -9,12 +9,11 @@ use HansPeterOrding\SleeperApiClient\ApiClient\SleeperApiClient;
 use HansPeterOrding\SleeperApiClient\ApiClient\SleeperApiClientFactory;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\ConverterInterface;
 
-abstract class AbstractImporter
-{
+abstract class AbstractImporter {
     protected SleeperApiClient $sleeperApiClient;
 
     public function __construct(
-        protected readonly ConverterInterface $converter,
+        protected readonly ConverterInterface     $converter,
         protected readonly EntityManagerInterface $entityManager
     )
     {

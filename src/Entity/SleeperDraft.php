@@ -16,8 +16,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 
 #[ORM\Entity]
-class SleeperDraft
-{
+class SleeperDraft {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;
 
@@ -373,8 +372,8 @@ class SleeperDraft
 
     public function getDraftPickByRoundAndDraftSlot(int $round, int $draftSlot): ?SleeperDraftPick
     {
-        foreach($this->draftPicks as $draftPick) {
-            if($draftPick->getRound() === $round && $draftPick->getDraftSlot() === $draftSlot) {
+        foreach ($this->draftPicks as $draftPick) {
+            if ($draftPick->getRound() === $round && $draftPick->getDraftSlot() === $draftSlot) {
                 return $draftPick;
             }
         }
@@ -387,10 +386,10 @@ class SleeperDraft
         $draftPicks = clone($this->draftPicks);
         $sortedDraftPicks = [];
 
-        foreach($rosterPositions as $rosterPosition) {
-            foreach($draftPicks as $idx => $draftPick) {
-                if($draftPick->getDraftSlot() === $draftSlot) {
-                    if(in_array($draftPick->getMetadata()->getPosition(), $this->getDraftSlotPositionToPositionMapping()[$rosterPosition])) {
+        foreach ($rosterPositions as $rosterPosition) {
+            foreach ($draftPicks as $idx => $draftPick) {
+                if ($draftPick->getDraftSlot() === $draftSlot) {
+                    if (in_array($draftPick->getMetadata()->getPosition(), $this->getDraftSlotPositionToPositionMapping()[$rosterPosition])) {
                         $sortedDraftPicks[] = $draftPick;
                         unset($draftPicks[$idx]);
                         continue 2;
@@ -404,8 +403,8 @@ class SleeperDraft
 
     public function getDraftPickByPickNumber(int $pickNumber): ?SleeperDraftPick
     {
-        foreach($this->draftPicks as $draftPick) {
-            if($draftPick->getPickNo() === $pickNumber) {
+        foreach ($this->draftPicks as $draftPick) {
+            if ($draftPick->getPickNo() === $pickNumber) {
                 return $draftPick;
             }
         }
@@ -417,9 +416,9 @@ class SleeperDraft
     {
         $rosterId = $this->getSlotToRosterId()[$draftSlot];
 
-        foreach($this->tradedPicks as $tradedPick) {
-            if($tradedPick->getRound() === $round) {
-                if($tradedPick->getRosterId() === $rosterId) {
+        foreach ($this->tradedPicks as $tradedPick) {
+            if ($tradedPick->getRound() === $round) {
+                if ($tradedPick->getRosterId() === $rosterId) {
                     return $tradedPick;
                 }
             }
@@ -430,9 +429,9 @@ class SleeperDraft
 
     public function getRosterByRosterId(int $rosterId): ?SleeperRoster
     {
-        if($this->getLeague()) {
-            foreach($this->getLeague()->getRosters() as $roster) {
-                if($roster->getRosterId() === $rosterId) {
+        if ($this->getLeague()) {
+            foreach ($this->getLeague()->getRosters() as $roster) {
+                if ($roster->getRosterId() === $rosterId) {
                     return $roster;
                 }
             }

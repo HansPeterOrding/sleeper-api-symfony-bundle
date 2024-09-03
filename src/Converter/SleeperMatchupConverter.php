@@ -8,11 +8,11 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperMatchup as SleeperMatchupDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperMatchup as SleeperMatchupEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository;
 
-class SleeperMatchupConverter implements ConverterInterface
-{
+class SleeperMatchupConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperMatchupRepository $sleeperMatchupRepository
-    ) {
+    )
+    {
     }
 
     public function toEntity(string $leagueId, int $week, SleeperMatchupDto $sleeperMatchupDto): SleeperMatchupEntity

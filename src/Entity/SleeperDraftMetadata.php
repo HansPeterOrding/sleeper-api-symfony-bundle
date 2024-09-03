@@ -8,8 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\ScoringTypeEnum;
 
 #[ORM\Embeddable]
-class SleeperDraftMetadata
-{
+class SleeperDraftMetadata {
     #[ORM\Column]
     private ScoringTypeEnum $scoringType;
 

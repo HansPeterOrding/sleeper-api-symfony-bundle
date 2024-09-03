@@ -16,8 +16,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransaction as Sleeper
  * @method SleeperTransactionEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperTransactionEntity[] findAll()
  */
-class SleeperTransactionRepository extends ServiceEntityRepository
-{
+class SleeperTransactionRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperTransactionEntity::class);

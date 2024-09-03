@@ -13,13 +13,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Exception\ImportException;
 /**
  * @property SleeperLeagueConverter $converter
  */
-class SleeperLeagueImporter extends AbstractImporter
-{
+class SleeperLeagueImporter extends AbstractImporter {
     public function import(string $sleeperLeagueId): SleeperLeague
     {
         $sleeperLeague = $this->sleeperApiClient->league()->get($sleeperLeagueId);
 
-        if(!$sleeperLeague) {
+        if (!$sleeperLeague) {
             throw new ImportException(sprintf('League with sleeperLeagueId %s not found', $sleeperLeagueId));
         }
 

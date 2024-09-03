@@ -12,13 +12,13 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraft as SleeperDraftEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftRepository;
 
-class SleeperDraftConverter implements ConverterInterface
-{
+class SleeperDraftConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperDraftRepository        $sleeperDraftRepository,
         private readonly SleeperDraftSettingsConverter $sleeperDraftSettingsConverter,
         private readonly SleeperDraftMetadataConverter $sleeperDraftMetadataConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperDraftDto $sleeperDraftDto): SleeperDraftEntity

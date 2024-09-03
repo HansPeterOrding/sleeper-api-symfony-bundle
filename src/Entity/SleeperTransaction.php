@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionTypeEnum;
 
 #[ORM\Entity]
-class SleeperTransaction
-{
+class SleeperTransaction {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;
 

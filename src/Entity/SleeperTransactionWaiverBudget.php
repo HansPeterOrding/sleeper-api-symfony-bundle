@@ -8,8 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\ScoringTypeEnum;
 
 #[ORM\Embeddable]
-class SleeperTransactionWaiverBudget
-{
+class SleeperTransactionWaiverBudget {
     #[ORM\Column(nullable: true)]
     private ?int $sender = null;
 

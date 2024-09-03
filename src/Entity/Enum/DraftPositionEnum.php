@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum;
 
-enum DraftPositionEnum: string
-{
+enum DraftPositionEnum: string {
     case QB = 'QB';
     case RB = 'RB';
     case WR = 'WR';

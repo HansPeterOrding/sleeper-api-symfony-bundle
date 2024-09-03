@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperStats as SleeperStatsDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperStats as SleeperStatsEntity;
 
-class SleeperStatsConverter
-{
+class SleeperStatsConverter implements ConverterInterface {
     public function toEntity(
         SleeperStatsDto     $sleeperStatsDto,
         ?SleeperStatsEntity $sleeperStatsEntity = null
-    ): SleeperStatsEntity {
+    ): SleeperStatsEntity
+    {
         if (!$sleeperStatsEntity) {
             $sleeperStatsEntity = new SleeperStatsEntity();
         }

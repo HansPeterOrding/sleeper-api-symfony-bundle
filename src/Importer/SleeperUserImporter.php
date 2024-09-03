@@ -6,21 +6,21 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Importer;
 
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperUserConverter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser;
+use HansPeterOrding\SleeperApiSymfonyBundle\Exception\ImportException;
 
 /**
  * @property SleeperUserConverter $converter
  */
-class SleeperUserImporter extends AbstractImporter
-{
+class SleeperUserImporter extends AbstractImporter {
     public function import(string $sleeperUserId): SleeperUser
     {
-        $sleeperUser = $this->sleeperApiClient->users->get($sleeperUserId);
+        $sleeperUser = $this->sleeperApiClient->user()->get($sleeperUserId);
 
-        if(!$sleeperDraft) {
-            throw new ImportException(sprintf('Draft with sleeperDraftId %s not found', $sleeperDraftId));
+        if (!$sleeperUser) {
+            throw new ImportException(sprintf('Draft with sleeperDraftId %s not found', $sleeperUserId));
         }
 
-        $entity = $this->converter->toEntity($sleeperLeague);
+        $entity = $this->converter->toEntity($sleeperUser);
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
@@ -36,7 +36,7 @@ class SleeperUserImporter extends AbstractImporter
 
         $entities = [];
 
-        foreach($sleeperUsers as $sleeperUser) {
+        foreach ($sleeperUsers as $sleeperUser) {
             $entity = $this->converter->toEntity($sleeperUser);
             $this->entityManager->persist($entity);
             $this->entityManager->flush();

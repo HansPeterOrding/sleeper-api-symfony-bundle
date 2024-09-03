@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTransactionSettings as SleeperTransactionSettingsDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransactionSettings as SleeperTransactionSettingsEntity;
 
-class SleeperTransactionSettingsConverter
-{
+class SleeperTransactionSettingsConverter {
     public function toEntity(
         SleeperTransactionSettingsDto     $sleeperTransactionSettingsDto,
         ?SleeperTransactionSettingsEntity $sleeperTransactionSettingsEntity
-    ): SleeperTransactionSettingsEntity {
+    ): SleeperTransactionSettingsEntity
+    {
         if (!$sleeperTransactionSettingsEntity) {
             $sleeperTransactionSettingsEntity = new SleeperTransactionSettingsEntity();
         }

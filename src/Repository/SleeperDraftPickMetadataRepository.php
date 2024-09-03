@@ -6,7 +6,6 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftPickMetadata as SleeperDraftPickMetadataDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPickMetadata as SleeperDraftPickMetadataEntity;
 
 /**
@@ -15,8 +14,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPickMetadata as S
  * @method SleeperDraftPickMetadataEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperDraftPickMetadataEntity[] findAll()
  */
-class SleeperDraftPickMetadataRepository extends ServiceEntityRepository
-{
+class SleeperDraftPickMetadataRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperDraftPickMetadataEntity::class);

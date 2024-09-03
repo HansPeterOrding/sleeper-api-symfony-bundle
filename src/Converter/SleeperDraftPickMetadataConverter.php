@@ -12,12 +12,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPickMetadata as SleeperDraftPickMetadataEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickMetadataRepository;
 
-class SleeperDraftPickMetadataConverter
-{
+class SleeperDraftPickMetadataConverter implements ConverterInterface {
     public function toEntity(
         SleeperDraftPickMetadataDto     $sleeperDraftPickMetadataDto,
         ?SleeperDraftPickMetadataEntity $sleeperDraftPickMetadataEntity
-    ): SleeperDraftPickMetadataEntity {
+    ): SleeperDraftPickMetadataEntity
+    {
         if (!$sleeperDraftPickMetadataEntity) {
             $sleeperDraftPickMetadataEntity = new SleeperDraftPickMetadataEntity();
         }

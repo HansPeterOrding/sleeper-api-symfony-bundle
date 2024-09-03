@@ -8,19 +8,20 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayoffMatchup as SleeperPlayoff
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup as SleeperPlayoffMatchupEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository;
 
-class SleeperPlayoffMatchupConverter implements ConverterInterface
-{
+class SleeperPlayoffMatchupConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperPlayoffMatchupRepository      $sleeperPlayoffMatchupRepository,
         private readonly SleeperPlayoffMatchupSourceConverter $sleeperPlayoffMatchupSourceConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(
         string                   $leagueId,
         string                   $branch,
         SleeperPlayoffMatchupDto $sleeperPlayoffMatchupDto
-    ): SleeperPlayoffMatchupEntity {
+    ): SleeperPlayoffMatchupEntity
+    {
         $sleeperPlayoffMatchupEntity = $this->sleeperPlayoffMatchupRepository->findByDtoOrCreateEntity($leagueId, $branch, $sleeperPlayoffMatchupDto);
 
         $sleeperPlayoffMatchupEntity->setLeagueId($leagueId);

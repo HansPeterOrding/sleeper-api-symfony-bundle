@@ -7,49 +7,48 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperLeagueScoringSettings
-{
+class SleeperLeagueScoringSettings {
     // Passing
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passYd     = null;
+    private ?float $passYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passTd     = null;
+    private ?float $passTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passFd     = null;
+    private ?float $passFd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $pass2pt    = null;
+    private ?float $pass2pt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passInt    = null;
+    private ?float $passInt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passIntTd  = null;
+    private ?float $passIntTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passCmp    = null;
+    private ?float $passCmp = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passInc    = null;
+    private ?float $passInc = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passAtt    = null;
+    private ?float $passAtt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passSack   = null;
+    private ?float $passSack = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $passCmp40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passTd40p  = null;
+    private ?float $passTd40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $passTd50p  = null;
+    private ?float $passTd50p = null;
 
     // Rushing
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rushYd    = null;
+    private ?float $rushYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rushTd    = null;
+    private ?float $rushTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rushFd    = null;
+    private ?float $rushFd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rush2pt   = null;
+    private ?float $rush2pt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rushAtt   = null;
+    private ?float $rushAtt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rush40p   = null;
+    private ?float $rush40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $rushTd40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -57,31 +56,31 @@ class SleeperLeagueScoringSettings
 
     // Receiving
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec        = null;
+    private ?float $rec = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $recYd      = null;
+    private ?float $recYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $recTd      = null;
+    private ?float $recTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $recFd      = null;
+    private ?float $recFd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec2pt     = null;
+    private ?float $rec2pt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec04      = null;
+    private ?float $rec04 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec59      = null;
+    private ?float $rec59 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec1019    = null;
+    private ?float $rec1019 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec2029    = null;
+    private ?float $rec2029 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec3039    = null;
+    private ?float $rec3039 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $rec40p     = null;
+    private ?float $rec40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $recTd40p   = null;
+    private ?float $recTd40p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $recTd50p   = null;
+    private ?float $recTd50p = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $bonusRecRb = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -91,59 +90,59 @@ class SleeperLeagueScoringSettings
 
     // Kicking
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm          = null;
+    private ?float $fgm = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm019       = null;
+    private ?float $fgm019 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm2029      = null;
+    private ?float $fgm2029 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm3039      = null;
+    private ?float $fgm3039 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm4049      = null;
+    private ?float $fgm4049 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgm50p       = null;
+    private ?float $fgm50p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmYds       = null;
+    private ?float $fgmYds = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fgmYdsOver30 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $xpm          = null;
+    private ?float $xpm = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss       = null;
+    private ?float $fgmiss = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss019    = null;
+    private ?float $fgmiss019 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss2029   = null;
+    private ?float $fgmiss2029 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss3039   = null;
+    private ?float $fgmiss3039 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss4049   = null;
+    private ?float $fgmiss4049 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgmiss50p    = null;
+    private ?float $fgmiss50p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $xpmiss       = null;
+    private ?float $xpmiss = null;
 
     // Team defense
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defTd          = null;
+    private ?float $defTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow0      = null;
+    private ?float $ptsAllow0 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow16     = null;
+    private ?float $ptsAllow16 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow713    = null;
+    private ?float $ptsAllow713 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow1420   = null;
+    private ?float $ptsAllow1420 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow2127   = null;
+    private ?float $ptsAllow2127 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow2834   = null;
+    private ?float $ptsAllow2834 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow35p    = null;
+    private ?float $ptsAllow35p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ptsAllow       = null;
+    private ?float $ptsAllow = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ydsAllow0100   = null;
+    private ?float $ydsAllow0100 = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $ydsAllow100199 = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -159,157 +158,157 @@ class SleeperLeagueScoringSettings
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $ydsAllow500549 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ydsAllow550p   = null;
+    private ?float $ydsAllow550p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ydsAllow       = null;
+    private ?float $ydsAllow = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def3andOut     = null;
+    private ?float $def3andOut = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def4andStop    = null;
+    private ?float $def4andStop = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $qbHit          = null;
+    private ?float $qbHit = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $sack           = null;
+    private ?float $sack = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $sackYd         = null;
+    private ?float $sackYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $int            = null;
+    private ?float $int = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $intRetYd       = null;
+    private ?float $intRetYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fumRec         = null;
+    private ?float $fumRec = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fumRetYd       = null;
+    private ?float $fumRetYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $tklLoss        = null;
+    private ?float $tklLoss = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $tklAst         = null;
+    private ?float $tklAst = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $tklSolo        = null;
+    private ?float $tklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $tkl            = null;
+    private ?float $tkl = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $safe           = null;
+    private ?float $safe = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $ff             = null;
+    private ?float $ff = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $blkKick        = null;
+    private ?float $blkKick = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $defForcedPunts = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defPassDef     = null;
+    private ?float $defPassDef = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def2pt         = null;
+    private ?float $def2pt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fgRetYd        = null;
+    private ?float $fgRetYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $blkKickRetYd   = null;
+    private ?float $blkKickRetYd = null;
 
     // Special Teams Defense
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defStTd      = null;
+    private ?float $defStTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defStFf      = null;
+    private ?float $defStFf = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defStFumRec  = null;
+    private ?float $defStFumRec = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $defStTklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defPrYd      = null;
+    private ?float $defPrYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defKrYd      = null;
+    private ?float $defKrYd = null;
 
     // Special Teams Player
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $stTd      = null;
+    private ?float $stTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $stFf      = null;
+    private ?float $stFf = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $stFumRec  = null;
+    private ?float $stFumRec = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $stTklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $prYd      = null;
+    private ?float $prYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $krYd      = null;
+    private ?float $krYd = null;
 
     // Misc
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fum      = null;
+    private ?float $fum = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $fumLost  = null;
+    private ?float $fumLost = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fumRecTd = null;
 
     // Bonus
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusRushYd100    = null;
+    private ?float $bonusRushYd100 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusRushYd200    = null;
+    private ?float $bonusRushYd200 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusRecYd100     = null;
+    private ?float $bonusRecYd100 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusRecYd200     = null;
+    private ?float $bonusRecYd200 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusPassYd300    = null;
+    private ?float $bonusPassYd300 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusPassYd400    = null;
+    private ?float $bonusPassYd400 = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $bonusRushRecYd100 = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $bonusRushRecYd200 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusPassCmp25    = null;
+    private ?float $bonusPassCmp25 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusRushAtt20    = null;
+    private ?float $bonusRushAtt20 = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusFdRb         = null;
+    private ?float $bonusFdRb = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusFdWr         = null;
+    private ?float $bonusFdWr = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusFdTe         = null;
+    private ?float $bonusFdTe = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusFdQb         = null;
+    private ?float $bonusFdQb = null;
 
     // IDP
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpDefTd         = null;
+    private ?float $idpDefTd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpSack          = null;
+    private ?float $idpSack = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpSackYd        = null;
+    private ?float $idpSackYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpQbHit         = null;
+    private ?float $idpQbHit = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpTkl           = null;
+    private ?float $idpTkl = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpTklLoss       = null;
+    private ?float $idpTklLoss = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpBlkKick       = null;
+    private ?float $idpBlkKick = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpInt           = null;
+    private ?float $idpInt = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpIntRetYd      = null;
+    private ?float $idpIntRetYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpFumRec        = null;
+    private ?float $idpFumRec = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpFumRetYd      = null;
+    private ?float $idpFumRetYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpFf            = null;
+    private ?float $idpFf = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpSafe          = null;
+    private ?float $idpSafe = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpTklAst        = null;
+    private ?float $idpTklAst = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpTklSolo       = null;
+    private ?float $idpTklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpPassDef       = null;
+    private ?float $idpPassDef = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusTkl10p      = null;
+    private ?float $bonusTkl10p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $bonusSack2p      = null;
+    private ?float $bonusSack2p = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $idpPassDef3p     = null;
+    private ?float $idpPassDef3p = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $bonusDefIntTd50p = null;
     #[ORM\Column(type: 'float', nullable: true)]

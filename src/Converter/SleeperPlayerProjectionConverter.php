@@ -8,13 +8,13 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjection as SleeperPlaye
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayerProjection as SleeperPlayerProjectionEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionRepository;
 
-class SleeperPlayerProjectionConverter
-{
+class SleeperPlayerProjectionConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperPlayerProjectionRepository $sleeperPlayerProjectionRepository,
         private readonly SleeperStatsConverter             $sleeperStatsConverter,
         private readonly SleeperPlayerConverter            $sleeperPlayerConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperPlayerProjectionDto $sleeperPlayerProjectionDto): SleeperPlayerProjectionEntity

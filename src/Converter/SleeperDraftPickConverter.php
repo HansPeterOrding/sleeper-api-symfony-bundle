@@ -8,12 +8,12 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftPick as SleeperDraftPickDto
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPick as SleeperDraftPickEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftPickRepository;
 
-class SleeperDraftPickConverter implements ConverterInterface
-{
+class SleeperDraftPickConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperDraftPickRepository        $sleeperDraftPickRepository,
         private readonly SleeperDraftPickMetadataConverter $sleeperDraftPickMetadataConverter
-    ) {
+    )
+    {
     }
 
     public function toEntity(SleeperDraftPickDto $sleeperDraftPickDto): SleeperDraftPickEntity

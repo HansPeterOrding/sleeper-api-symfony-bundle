@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum;
 
-enum ScoringTypeEnum: string
-{
+enum ScoringTypeEnum: string {
     case STANDARD = 'std';
     case PPR = 'ppr';
     case HALF_PPR = 'half_ppr';

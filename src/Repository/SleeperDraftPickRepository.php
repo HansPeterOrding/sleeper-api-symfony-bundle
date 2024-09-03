@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPick as SleeperDr
  * @method SleeperDraftPickEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperDraftPickEntity[] findAll()
  */
-class SleeperDraftPickRepository extends ServiceEntityRepository
-{
+class SleeperDraftPickRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperDraftPickEntity::class);

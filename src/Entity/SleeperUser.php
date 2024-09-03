@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperUser as SleeperUserDto;
 
 #[ORM\Entity]
-class SleeperUser
-{
+class SleeperUser {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

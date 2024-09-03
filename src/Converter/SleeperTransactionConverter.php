@@ -11,14 +11,14 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransaction as Sleeper
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperTransactionRepository;
 
-class SleeperTransactionConverter implements ConverterInterface
-{
+class SleeperTransactionConverter implements ConverterInterface {
     public function __construct(
-        private readonly SleeperTransactionRepository $sleeperTransactionRepository,
+        private readonly SleeperTransactionRepository            $sleeperTransactionRepository,
         private readonly SleeperTransactionWaiverBudgetConverter $sleeperTransactionWaiverBudgetConverter,
-        private readonly SleeperTransactionSettingsConverter $sleeperTransactionSettingsConverter,
-        private readonly SleeperTransactionMetadataConverter $sleeperTransactionMetadataConverter
-    ) {
+        private readonly SleeperTransactionSettingsConverter     $sleeperTransactionSettingsConverter,
+        private readonly SleeperTransactionMetadataConverter     $sleeperTransactionMetadataConverter
+    )
+    {
     }
 
     public function toEntity(SleeperTransactionDto $sleeperTransactionDto): SleeperTransactionEntity
@@ -50,7 +50,7 @@ class SleeperTransactionConverter implements ConverterInterface
         );
         $sleeperTransactionEntity->setSettings($sleeperTransactionSettingsEntity);
 
-        if($sleeperTransactionDto->getMetadata()) {
+        if ($sleeperTransactionDto->getMetadata()) {
             $sleeperTransactionMetadataEntity = $this->sleeperTransactionMetadataConverter->toEntity(
                 $sleeperTransactionDto->getMetadata(),
                 $sleeperTransactionEntity->getMetadata()

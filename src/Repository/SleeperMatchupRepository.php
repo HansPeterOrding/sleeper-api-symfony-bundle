@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperMatchup as SleeperMatc
  * @method SleeperMatchupEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperMatchupEntity[] findAll()
  */
-class SleeperMatchupRepository extends ServiceEntityRepository
-{
+class SleeperMatchupRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperMatchupEntity::class);

@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\PlayerStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 
 #[ORM\Embeddable]
-class SleeperDraftPickMetadata
-{
+class SleeperDraftPickMetadata {
     #[ORM\Column]
     private string $yearsExp;
 

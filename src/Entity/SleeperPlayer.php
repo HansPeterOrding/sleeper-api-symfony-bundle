@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'sasb_player_unique', columns: ['player_id'])]
-class SleeperPlayer
-{
+class SleeperPlayer {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

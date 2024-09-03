@@ -7,8 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperTransactionSettings
-{
+class SleeperTransactionSettings {
     #[ORM\Column(nullable: true)]
     private ?int $waiverBid = null;
 

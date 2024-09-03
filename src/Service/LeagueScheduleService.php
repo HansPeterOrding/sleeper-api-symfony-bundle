@@ -10,11 +10,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule\ScheduleWeek;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup;
 
-class LeagueScheduleService
-{
+class LeagueScheduleService {
     public function __construct(
         private readonly SleeperLeague $sleeperLeague
-    ) {
+    )
+    {
     }
 
     public function buildLeagueSchedule(int $weeks = 18): LeagueSchedule
@@ -33,7 +33,7 @@ class LeagueScheduleService
     {
         $scheduleWeek = new ScheduleWeek($week, boolval($this->sleeperLeague->getSettings()->getLeagueAverageMatch()));
 
-        if($week < $this->sleeperLeague->getSettings()->getPlayoffWeekStart()) {
+        if ($week < $this->sleeperLeague->getSettings()->getPlayoffWeekStart()) {
             $numTeams = $this->sleeperLeague->getSettings()->getNumTeams();
             $matchupCount = $numTeams / 2;
             for ($matchupId = 1; $matchupId <= $matchupCount; $matchupId++) {
@@ -42,17 +42,17 @@ class LeagueScheduleService
                 );
             }
         } else {
-            foreach($this->sleeperLeague->getPlayoffMatchups() as $playoffMatchup) {
-                if($playoffMatchup->getR() === $this->sleeperLeague->getSettings()->getPlayoffWeekStart() - $week + 1) {
+            foreach ($this->sleeperLeague->getPlayoffMatchups() as $playoffMatchup) {
+                if ($playoffMatchup->getR() === $this->sleeperLeague->getSettings()->getPlayoffWeekStart() - $week + 1) {
                     $scheduleWeek->addPlayoffMatchup(
                         $this->buildPlayoffMatchup($playoffMatchup)
                     );
                 }
             }
 
-            foreach($this->sleeperLeague->getMatchups() as $matchup) {
-                if($matchup->getWeek() === $week) {
-                    if(!$scheduleWeek->hasMatchup($matchup)) {
+            foreach ($this->sleeperLeague->getMatchups() as $matchup) {
+                if ($matchup->getWeek() === $week) {
+                    if (!$scheduleWeek->hasMatchup($matchup)) {
                         $byeWeekMatchup = new LeagueSchedule\ByeWeekMatchup();
                         $byeWeekMatchup->setSleeperMatchup($matchup);
                         $scheduleWeek->addByeWeekMatchup($byeWeekMatchup);

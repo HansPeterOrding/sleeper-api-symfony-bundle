@@ -12,8 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperUser;
 /**
  * @property SleeperRosterConverter $converter
  */
-class SleeperRosterImporter extends AbstractImporter
-{
+class SleeperRosterImporter extends AbstractImporter {
     /**
      * @param SleeperUser[] $sleeperUsers
      *
@@ -25,10 +24,10 @@ class SleeperRosterImporter extends AbstractImporter
 
         $entities = [];
 
-        foreach($sleeperRosters as $sleeperRoster) {
+        foreach ($sleeperRosters as $sleeperRoster) {
             $entity = $this->converter->toEntity($sleeperRoster);
 
-            if(array_key_exists($entity->getOwnerId(), $sleeperUsers)) {
+            if (array_key_exists($entity->getOwnerId(), $sleeperUsers)) {
                 $entity->setOwner($sleeperUsers[$entity->getOwnerId()]);
             }
 

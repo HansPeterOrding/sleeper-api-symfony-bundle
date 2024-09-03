@@ -9,12 +9,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\ScoringTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftMetadata as SleeperDraftMetadataEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperDraftMetadataRepository;
 
-class SleeperDraftMetadataConverter
-{
+class SleeperDraftMetadataConverter {
     public function toEntity(
         SleeperDraftMetadataDto     $sleeperDraftMetadataDto,
         ?SleeperDraftMetadataEntity $sleeperDraftMetadataEntity
-    ): SleeperDraftMetadataEntity {
+    ): SleeperDraftMetadataEntity
+    {
         if (!$sleeperDraftMetadataEntity) {
             $sleeperDraftMetadataEntity = new SleeperDraftMetadataEntity();
         }

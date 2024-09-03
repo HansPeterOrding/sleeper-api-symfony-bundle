@@ -7,8 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
-class SleeperTransactionMetadata
-{
+class SleeperTransactionMetadata {
     #[ORM\Column(nullable: true)]
     private ?string $notes = null;
 

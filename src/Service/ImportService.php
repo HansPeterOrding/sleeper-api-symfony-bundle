@@ -15,8 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter;
 
-class ImportService
-{
+class ImportService {
     public const IMPORT_ENTITY_LEAGUE = 'import_entity_league';
     public const IMPORT_ENTITY_LEAGUE_DRAFT = 'import_entity_league_draft';
     public const IMPORT_ENTITY_LEAGUE_USERS = 'import_entity_league_users';
@@ -40,20 +39,20 @@ class ImportService
     ];
 
     public function __construct(
-        private readonly SleeperLeagueImporter $sleeperLeagueImporter,
-        private readonly SleeperUserImporter $sleeperUserImporter,
-        private readonly SleeperRosterImporter $sleeperRosterImporter,
-        private readonly SleeperDraftImporter $sleeperDraftImporter,
-        private readonly SleeperDraftPickImporter $sleeperDraftPickImporter,
-        private readonly SleeperMatchupImporter $sleeperMatchupImporter,
+        private readonly SleeperLeagueImporter         $sleeperLeagueImporter,
+        private readonly SleeperUserImporter           $sleeperUserImporter,
+        private readonly SleeperRosterImporter         $sleeperRosterImporter,
+        private readonly SleeperDraftImporter          $sleeperDraftImporter,
+        private readonly SleeperDraftPickImporter      $sleeperDraftPickImporter,
+        private readonly SleeperMatchupImporter        $sleeperMatchupImporter,
         private readonly SleeperPlayoffMatchupImporter $sleeperPlayoffMatchupImporter,
-        private readonly SleeperTradedPickImporter $sleeperTradedPickImporter,
-        private readonly SleeperTransactionImporter $sleeperTransactionImporter
+        private readonly SleeperTradedPickImporter     $sleeperTradedPickImporter,
+        private readonly SleeperTransactionImporter    $sleeperTransactionImporter
     )
     {
     }
 
-    public function importSleeperLeague(string $sleeperLeagueId, array $importEntities = ImportService::COMPLETE_IMPORT_LEAGUE_ENTITIES)
+    public function importSleeperLeague(string $sleeperLeagueId, array $importEntities = ImportService::COMPLETE_IMPORT_LEAGUE_ENTITIES): void
     {
         $sleeperUsers = [];
         $sleeperRosters = [];
@@ -61,38 +60,38 @@ class ImportService
 
         $sleeperLeague = $this->sleeperLeagueImporter->import($sleeperLeagueId);
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_USERS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_USERS, $importEntities)) {
             $sleeperUsers = $this->sleeperUserImporter->importLeagueUsers($sleeperLeagueId);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_ROSTERS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_ROSTERS, $importEntities)) {
             $sleeperRosters = $this->sleeperRosterImporter->importLeagueRosters($sleeperLeagueId, $sleeperUsers, $sleeperLeague);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
             $sleeperDraft = $this->sleeperDraftImporter->import($sleeperLeague->getDraftId(), $sleeperLeague);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT_PICKS, $importEntities)) {
-            if(!in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT_PICKS, $importEntities)) {
+            if (!in_array(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
                 throw new ImportConfigurationException('Invalid configuration for import: Draft picks can only imported when draft is also imported. Please add ImportService::IMPORT_ENTITY_LEAGUE_DRAFT to defined $importEntities.');
             }
             $sleeperDraftPicks = $this->sleeperDraftPickImporter->importDraftPicks($sleeperDraft);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_MATCHUPS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_MATCHUPS, $importEntities)) {
             $this->sleeperMatchupImporter->importMatchups($sleeperLeague, $sleeperRosters);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_PLAYOFF_MATCHUPS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_PLAYOFF_MATCHUPS, $importEntities)) {
             $sleeperPlayoffMatchups = $this->sleeperPlayoffMatchupImporter->importPlayoffMatchups($sleeperLeague);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_TRADED_PICKS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_TRADED_PICKS, $importEntities)) {
             $sleeperTradedPicks = $this->sleeperTradedPickImporter->importTradedPicks($sleeperLeague, $sleeperDraft);
         }
 
-        if(in_array(self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS, $importEntities)) {
+        if (in_array(self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS, $importEntities)) {
             $sleeperTransactions = $this->sleeperTransactionImporter->importTransactions($sleeperLeague);
         }
     }

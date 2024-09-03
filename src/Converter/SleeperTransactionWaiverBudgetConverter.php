@@ -7,12 +7,12 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Converter;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTransactionWaiverBudget as SleeperTransactionWaiverBudgetDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransactionWaiverBudget as SleeperTransactionWaiverBudgetEntity;
 
-class SleeperTransactionWaiverBudgetConverter
-{
+class SleeperTransactionWaiverBudgetConverter {
     public function toEntity(
         SleeperTransactionWaiverBudgetDto     $sleeperTransactionWaiverBudgetDto,
         ?SleeperTransactionWaiverBudgetEntity $sleeperTransactionWaiverBudgetEntity
-    ): SleeperTransactionWaiverBudgetEntity {
+    ): SleeperTransactionWaiverBudgetEntity
+    {
         if (!$sleeperTransactionWaiverBudgetEntity) {
             $sleeperTransactionWaiverBudgetEntity = new SleeperTransactionWaiverBudgetEntity();
         }

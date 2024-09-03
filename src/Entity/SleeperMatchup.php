@@ -14,8 +14,7 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
     name: 'sasb_sleeper_matchup_unique',
     columns: ['league_id', 'week', 'roster_id']
 )]
-class SleeperMatchup
-{
+class SleeperMatchup {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -203,7 +202,7 @@ class SleeperMatchup
 
     public function getEffectivePoints(): ?float
     {
-        if($this->customPoints) {
+        if ($this->customPoints) {
             return $this->customPoints;
         }
         return $this->points;
@@ -260,8 +259,8 @@ class SleeperMatchup
 
     public function getSleeperStarterPlayerById(string $id): ?SleeperPlayer
     {
-        foreach($this->sleeperStarterPlayers as $sleeperPlayer) {
-            if($sleeperPlayer->getPlayerId() === $id) {
+        foreach ($this->sleeperStarterPlayers as $sleeperPlayer) {
+            if ($sleeperPlayer->getPlayerId() === $id) {
                 return $sleeperPlayer;
             }
         }
@@ -298,8 +297,8 @@ class SleeperMatchup
 
     public function getSleeperPlayerById(string $id): ?SleeperPlayer
     {
-        foreach($this->sleeperPlayers as $sleeperPlayer) {
-            if($sleeperPlayer->getPlayerId() === $id) {
+        foreach ($this->sleeperPlayers as $sleeperPlayer) {
+            if ($sleeperPlayer->getPlayerId() === $id) {
                 return $sleeperPlayer;
             }
         }

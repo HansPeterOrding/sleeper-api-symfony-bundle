@@ -6,10 +6,9 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Exception;
 
 use RuntimeException;
 
-class ImportException extends RuntimeException
-{
+class ImportException extends RuntimeException {
     public function __construct(string $message = "Unknow error on importing")
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message);
     }
 }
