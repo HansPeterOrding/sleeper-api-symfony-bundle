@@ -226,3 +226,7 @@ services:
             $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction'
     
     HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupHandler: ~
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionHandler: ~

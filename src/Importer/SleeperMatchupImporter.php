@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Importer;
 
-use App\Message\SleeperSync\SyncSleeperMatchup;
 use Doctrine\ORM\EntityManagerInterface;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\ConverterInterface;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPick;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
+use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperMatchup;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**

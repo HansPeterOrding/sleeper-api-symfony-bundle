@@ -9,9 +9,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Converter\ConverterInterface;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransaction;
+use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransaction;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @property SleeperTransactionConverter $converter
@@ -20,6 +22,7 @@ class SleeperTransactionImporter extends AbstractImporter {
     public function __construct(
         ConverterInterface                       $converter,
         EntityManagerInterface                   $entityManager,
+        private readonly MessageBusInterface $messageBus,
         private readonly SleeperUserRepository   $sleeperUserRepository,
         private readonly SleeperRosterRepository $sleeperRosterRepository,
         private readonly SleeperPlayerRepository $sleeperPlayerRepository
@@ -31,85 +34,22 @@ class SleeperTransactionImporter extends AbstractImporter {
     /**
      * @return SleeperTransaction[]
      */
-    public function importTransactions(SleeperLeague $sleeperLeague): array
+    public function importTransactions(SleeperLeague $sleeperLeague): void
     {
-        $entities = [];
-
         for ($i = 1; $i <= 18; $i++) {
-            $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), 1);
+            $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $i);
 
             foreach ($sleeperTransactions as $sleeperTransaction) {
-                $entity = $this->converter->toEntity(
-                    $sleeperTransaction,
+                $message = new SyncSleeperTransaction(
+                    $sleeperLeague->getLeagueId(),
+                    $sleeperTransaction
                 );
+                $this->messageBus->dispatch($message);
 
-                $entity->setLeague($sleeperLeague);
-
-                if ($entity->getCreator()) {
-                    $creatorUser = $this->sleeperUserRepository->findOneBy([
-                        'userId' => $entity->getCreator()
-                    ]);
-                    if ($creatorUser) {
-                        $entity->setCreatorUser($creatorUser);
-                    }
-                }
-
-                if ($entity->getRosterIds()) {
-                    foreach ($entity->getRosterIds() as $rosterId) {
-                        $sleeperRosterEntity = $this->sleeperRosterRepository->findOneBy(
-                            [
-                                'leagueId' => $sleeperLeague->getLeagueId(),
-                                'rosterId' => $rosterId
-                            ]
-                        );
-                        if ($sleeperRosterEntity) {
-                            $entity->addRoster($sleeperRosterEntity);
-                        }
-                    }
-                }
-
-                if ($entity->getDrops()) {
-                    foreach ($entity->getDrops() as $playerId => $rosterId) {
-                        $playerEntity = $this->sleeperPlayerRepository->findOneBy([
-                            'playerId' => $playerId
-                        ]);
-                        if ($playerEntity) {
-                            $entity->addDroppedPlayer($playerEntity);
-                        }
-                    }
-                }
-
-                if ($entity->getAdds()) {
-                    foreach ($entity->getAdds() as $playerId => $rosterId) {
-                        $playerEntity = $this->sleeperPlayerRepository->findOneBy([
-                            'playerId' => $playerId
-                        ]);
-                        if ($playerEntity) {
-                            $entity->addAddedPlayer($playerEntity);
-                        }
-                    }
-                }
-
-                if ($entity->getConsenterIds()) {
-                    foreach ($entity->getConsenterIds() as $rosterId) {
-                        $sleeperRosterEntity = $this->sleeperRosterRepository->findOneBy([
-                            'leagueId' => $sleeperLeague->getLeagueId(),
-                            'rosterId' => $rosterId
-                        ]);
-
-                        if ($sleeperRosterEntity) {
-                            $entity->addConsenterRoster($sleeperRosterEntity);
-                        }
-                    }
-                }
-
-                $this->entityManager->persist($entity);
-                $this->entityManager->flush();
-
-                $entities[] = $entity;
+                $message = null;
             }
-        }
 
-        return $entities;
+            $sleeperTransactions = null;
+        }
     }
 }
