@@ -43,7 +43,7 @@ class SleeperDraftPickImporter extends AbstractImporter {
             $entity->setDraft($sleeperDraft);
 
             $sleeperPlayer = $this->sleeperPlayerRepository->findOneBy([
-                'playerId' => $entity->getPlayer()
+                'playerId' => $entity->getPlayerId()
             ]);
 
             if ($sleeperPlayer) {
