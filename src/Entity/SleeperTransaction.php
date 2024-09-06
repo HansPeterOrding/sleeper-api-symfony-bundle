@@ -366,6 +366,17 @@ class SleeperTransaction {
         return $this;
     }
 
+    public function getDroppedPlayerById(string $playerId): ?SleeperPlayer
+    {
+        foreach($this->droppedPlayers as $droppedPlayer) {
+            if ($droppedPlayer->getPlayerId() === $playerId) {
+                return $droppedPlayer;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @return Collection<int, SleeperPlayer>
      */
@@ -381,6 +392,17 @@ class SleeperTransaction {
         }
 
         return $this;
+    }
+
+    public function getAddedPlayerById(string $playerId): ?SleeperPlayer
+    {
+        foreach($this->addedPlayers as $addedPlayer) {
+            if ($addedPlayer->getPlayerId() === $playerId) {
+                return $addedPlayer;
+            }
+        }
+
+        return null;
     }
 
     public function removeAddedPlayer(SleeperPlayer $addedPlayer): static
