@@ -12,5 +12,6 @@ enum InjuryStatusEnum: string {
     case SUS = 'Sus';
     case PUP = 'PUP';
     case DNR = 'DNR';
+    case NA = 'NA';
     case DEFAULT = '';
 }

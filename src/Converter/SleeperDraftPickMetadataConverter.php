@@ -24,7 +24,9 @@ class SleeperDraftPickMetadataConverter implements ConverterInterface {
 
         $sleeperDraftPickMetadataEntity->setYearsExp($sleeperDraftPickMetadataDto->getYearsExp());
         $sleeperDraftPickMetadataEntity->setTeam($sleeperDraftPickMetadataDto->getTeam());
-        $sleeperDraftPickMetadataEntity->setStatus(PlayerStatusEnum::from($sleeperDraftPickMetadataDto->getStatus()));
+        if($sleeperDraftPickMetadataDto->getStatus() !== "") {
+            $sleeperDraftPickMetadataEntity->setStatus(PlayerStatusEnum::from($sleeperDraftPickMetadataDto->getStatus()));
+        }
         $sleeperDraftPickMetadataEntity->setSport(SportEnum::from($sleeperDraftPickMetadataDto->getSport()));
         $sleeperDraftPickMetadataEntity->setPosition(FantasyPositionEnum::from($sleeperDraftPickMetadataDto->getPosition()));
         $sleeperDraftPickMetadataEntity->setPlayerId($sleeperDraftPickMetadataDto->getPlayerId());

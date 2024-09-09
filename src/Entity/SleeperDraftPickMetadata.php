@@ -19,8 +19,8 @@ class SleeperDraftPickMetadata {
     #[ORM\Column]
     private string $team;
 
-    #[ORM\Column]
-    private PlayerStatusEnum $status;
+    #[ORM\Column(nullable: true)]
+    private ?PlayerStatusEnum $status = null;
 
     #[ORM\Column]
     private SportEnum $sport;
@@ -69,12 +69,12 @@ class SleeperDraftPickMetadata {
         $this->team = $team;
     }
 
-    public function getStatus(): PlayerStatusEnum
+    public function getStatus(): ?PlayerStatusEnum
     {
         return $this->status;
     }
 
-    public function setStatus(PlayerStatusEnum $status): void
+    public function setStatus(?PlayerStatusEnum $status): void
     {
         $this->status = $status;
     }
