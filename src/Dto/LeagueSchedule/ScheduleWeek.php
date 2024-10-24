@@ -159,7 +159,9 @@ class ScheduleWeek {
 
         sort($fullPoints);
 
-        $this->median = ($fullPoints[$games] + $fullPoints[$games - 1]) / 2;
+        if(array_key_exists($games, $fullPoints) && array_key_exists($games - 1, $fullPoints)) {
+            $this->median = ($fullPoints[$games] + $fullPoints[$games - 1]) / 2;
+        }
 
         return $this;
     }
