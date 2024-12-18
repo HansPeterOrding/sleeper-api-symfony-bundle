@@ -12,6 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPick;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayoffMatchup;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperMatchupRepository;
+use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayoffMatchupRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 
 /**
@@ -21,6 +22,7 @@ class SleeperPlayoffMatchupImporter extends AbstractImporter {
     public function __construct(
         private readonly SleeperRosterRepository  $sleeperRosterRepository,
         private readonly SleeperMatchupRepository $sleeperMatchupRepository,
+        private readonly SleeperPlayoffMatchupRepository $sleeperPlayoffMatchupRepository,
         ConverterInterface                        $converter,
         EntityManagerInterface                    $entityManager
     )
@@ -33,6 +35,13 @@ class SleeperPlayoffMatchupImporter extends AbstractImporter {
      */
     public function importPlayoffMatchups(SleeperLeague $sleeperLeague): array
     {
+        $existingMatchups = $this->sleeperPlayoffMatchupRepository->findBy(['league' => $sleeperLeague]);
+
+        foreach($existingMatchups as $existingMatchup) {
+            $this->entityManager->remove($existingMatchup);
+        }
+        $this->entityManager->flush();
+
         foreach ([AbstractEndpoint::BRANCH_WINNERS, AbstractEndpoint::BRANCH_LOSERS] as $branch) {
             $sleeperPlayoffMatchups = $this->sleeperApiClient->league()->listPlayoffMatchups($sleeperLeague->getLeagueId(), $branch);
 

@@ -213,6 +213,7 @@ services:
         arguments:
             $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
             $sleeperMatchupRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_matchup'
+            $sleeperPlayoffMatchupRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_playoff_matchup'
             $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup'
     hpo_sleeper_api_symfony_bundle.importer.sleeper_playoff_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayoffMatchupImporter'
     
