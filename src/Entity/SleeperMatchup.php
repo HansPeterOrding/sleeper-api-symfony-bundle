@@ -202,7 +202,7 @@ class SleeperMatchup {
 
     public function getEffectivePoints(): ?float
     {
-        if ($this->customPoints) {
+        if ($this->customPoints !== null) {
             return $this->customPoints;
         }
         return $this->points;

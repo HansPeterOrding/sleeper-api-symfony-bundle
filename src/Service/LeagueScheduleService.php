@@ -43,7 +43,7 @@ class LeagueScheduleService {
             }
         } else {
             foreach ($this->sleeperLeague->getPlayoffMatchups() as $playoffMatchup) {
-                if ($playoffMatchup->getR() === $this->sleeperLeague->getSettings()->getPlayoffWeekStart() - $week + 1) {
+                if ($playoffMatchup->getR() === $week - $this->sleeperLeague->getSettings()->getPlayoffWeekStart() + 1) {
                     $scheduleWeek->addPlayoffMatchup(
                         $this->buildPlayoffMatchup($playoffMatchup)
                     );
