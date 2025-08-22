@@ -11,7 +11,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperNflStateRepository
 
 class SleeperNflStateConverter implements ConverterInterface {
     public function __construct(
-        private readonly SleeperNflStateRepository        $sleeperNflStateRepository,
+        private readonly SleeperNflStateRepository $sleeperNflStateRepository,
     )
     {
     }

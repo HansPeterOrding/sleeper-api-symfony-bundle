@@ -13,8 +13,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperNflState as SleeperNfl
  * @method SleeperNflStateEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperNflStateEntity[] findAll()
  */
-class SleeperNflStateRepository extends ServiceEntityRepository
-{
+class SleeperNflStateRepository extends ServiceEntityRepository {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperNflStateEntity::class);
