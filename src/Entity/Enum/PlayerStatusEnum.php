@@ -7,4 +7,5 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum;
 enum PlayerStatusEnum: string {
     case ACTIVE = 'Active';
     case INACTIVE = 'Inactive';
+    case INJURED_RESERVE = 'Injured Reserve';
 }
