@@ -8,6 +8,19 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule;
 use HansPeterOrding\SleeperApiSymfonyBundle\Dto\LeagueSchedule\Rank;
 
 class ScheduleUtils {
+    const ORDER_GAMES_WON = 'gamesWon';
+    const ORDER_GAMES_DRAW = 'gamesDraw';
+    const ORDER_GAMES_LOST = 'gamesLost';
+    const ORDER_POINTS_FOR = 'pointFor';
+    const ORDER_POINTS_AGAINST = 'pointsAgainst';
+
+    public static array $defaultCriteriaOrder = [
+        self::ORDER_GAMES_WON,
+        self::ORDER_GAMES_DRAW,
+        self::ORDER_POINTS_FOR,
+        self::ORDER_POINTS_AGAINST,
+    ];
+
     /**
      * @param array<int, LeagueSchedule> $schedules
      * @return array<int, LeagueSchedule\Rank>
@@ -28,22 +41,46 @@ class ScheduleUtils {
      * @param array<int, Rank> $ranks
      * @return array<int, Rank>
      */
-    public static function sortRanks(array $ranks): array
+    public function sortRanks(array $ranks, ?array $criteriaOrder = null): array
     {
-        usort($ranks, function (Rank $a, Rank $b) {
-            if ($a->getGamesWon() !== $b->getGamesWon()) {
-                return -1 * ($a->getGamesWon() <=> $b->getGamesWon());
-            }
+        if(!$criteriaOrder) {
+            $criteriaOrder = static::$defaultCriteriaOrder;
+        }
 
-            if ($a->getGamesDraw() !== $b->getGamesDraw()) {
-                return -1 * ($a->getGamesDraw() <=> $b->getGamesDraw());
-            }
+        usort($ranks, function (Rank $a, Rank $b) use ($criteriaOrder) {
+            foreach($criteriaOrder as $criteria) {
+                switch($criteria) {
+                    case self::ORDER_POINTS_FOR:
+                        if ($a->getPointsFor() !== $b->getPointsFor()) {
+                            return -1 * ($a->getPointsFor() <=> $b->getPointsFor());
+                        }
+                        break;
+                    case self::ORDER_POINTS_AGAINST:
+                        if ($a->getPointsAgainst() !== $b->getPointsAgainst()) {
+                            return -1 * ($a->getPointsAgainst() <=> $b->getPointsAgainst());
+                        }
+                        break;
+                    case self::ORDER_GAMES_WON:
+                        if ($a->getGamesWon() !== $b->getGamesWon()) {
+                            return -1 * ($a->getGamesWon() <=> $b->getGamesWon());
+                        }
+                        break;
+                    case self::ORDER_GAMES_DRAW:
+                        if ($a->getGamesDraw() !== $b->getGamesDraw()) {
+                            return -1 * ($a->getGamesDraw() <=> $b->getGamesDraw());
+                        }
+                        break;
+                    case self::ORDER_GAMES_LOST:
+                        if ($a->getGamesLost() !== $b->getGamesLost()) {
+                            return $a->getGamesLost() <=> $b->getGamesLost();
+                        }
+                        break;
 
-            if ($a->getPointsFor() !== $b->getPointsFor()) {
-                return -1 * ($a->getPointsFor() <=> $b->getPointsFor());
+                    default:
+                        return 0;
+                }
             }
-
-            return -1 * ($b->getPointsAgainst() <=> $a->getPointsAgainst());
+            return 0;
         });
 
         return $ranks;
