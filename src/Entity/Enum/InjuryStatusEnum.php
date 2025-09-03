@@ -8,6 +8,7 @@ enum InjuryStatusEnum: string {
     case QUESTIONABLE = 'Questionable';
     case DOUBTFUL = 'Doubtful';
     case IR = 'IR';
+    case COV = 'COV';
     case OUT = 'Out';
     case SUS = 'Sus';
     case PUP = 'PUP';
