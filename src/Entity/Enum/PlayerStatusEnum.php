@@ -9,5 +9,7 @@ enum PlayerStatusEnum: string {
     case INACTIVE = 'Inactive';
     case INJURED_RESERVE = 'Injured Reserve';
     case NON_FOOTBALL_INJURY = 'Non Football Injury';
+    case PHYSICALLY_UNABLE_TO_PERFORM = 'Physically Unable to Perform';
+    case SUSPENDED = 'Suspended';
     case RESERVE_COVID19 = 'Reserve/COVID-19';
 }
