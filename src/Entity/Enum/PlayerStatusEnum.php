@@ -12,4 +12,6 @@ enum PlayerStatusEnum: string {
     case PHYSICALLY_UNABLE_TO_PERFORM = 'Physically Unable to Perform';
     case SUSPENDED = 'Suspended';
     case RESERVE_COVID19 = 'Reserve/COVID-19';
+    case PRACTICE_SQUAD = 'Practice Squad';
+    case DID_NOT_REPORT = 'Did Not Report';
 }

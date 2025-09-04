@@ -34,10 +34,10 @@ class SleeperTransactionImporter extends AbstractImporter {
     /**
      * @return SleeperTransaction[]
      */
-    public function importTransactions(SleeperLeague $sleeperLeague): void
+    public function importTransactions(SleeperLeague $sleeperLeague, array $weeks): void
     {
-        for ($i = 1; $i <= 18; $i++) {
-            $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $i);
+        foreach ($weeks as $week) {
+            $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $week);
 
             foreach ($sleeperTransactions as $sleeperTransaction) {
                 $message = new SyncSleeperTransaction(
