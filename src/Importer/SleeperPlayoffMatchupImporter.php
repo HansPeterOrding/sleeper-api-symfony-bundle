@@ -47,27 +47,29 @@ class SleeperPlayoffMatchupImporter extends AbstractImporter {
 
             $entities = [];
 
-            foreach ($sleeperPlayoffMatchups as $sleeperPlayoffMatchup) {
-                $entity = $this->converter->toEntity(
-                    $sleeperLeague->getLeagueId(),
-                    $branch,
-                    $sleeperPlayoffMatchup
-                );
+            if($sleeperPlayoffMatchups) {
+                foreach ($sleeperPlayoffMatchups as $sleeperPlayoffMatchup) {
+                    $entity = $this->converter->toEntity(
+                        $sleeperLeague->getLeagueId(),
+                        $branch,
+                        $sleeperPlayoffMatchup
+                    );
 
-                $entity->setLeague($sleeperLeague);
+                    $entity->setLeague($sleeperLeague);
 
-                if ($entity->getT1()) {
-                    $this->applyTeam(1, $entity, $sleeperLeague);
+                    if ($entity->getT1()) {
+                        $this->applyTeam(1, $entity, $sleeperLeague);
+                    }
+
+                    if ($entity->getT2()) {
+                        $this->applyTeam(2, $entity, $sleeperLeague);
+                    }
+
+                    $this->entityManager->persist($entity);
+                    $this->entityManager->flush();
+
+                    $entities[] = $entity;
                 }
-
-                if ($entity->getT2()) {
-                    $this->applyTeam(2, $entity, $sleeperLeague);
-                }
-
-                $this->entityManager->persist($entity);
-                $this->entityManager->flush();
-
-                $entities[] = $entity;
             }
         }
 

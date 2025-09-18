@@ -28,9 +28,9 @@ class SleeperMatchupImporter extends AbstractImporter {
     /**
      * @return SleeperDraftPick[]
      */
-    public function importMatchups(SleeperLeague $sleeperLeague, array $sleeperRosters): void
+    public function importMatchups(SleeperLeague $sleeperLeague, array $sleeperRosters, array $weeks): void
     {
-        for ($week = 1; $week <= 18; $week++) {
+        foreach ($weeks as $week) {
             $sleeperMatchups = $this->sleeperApiClient->league()->listMatchups($sleeperLeague->getLeagueId(), $week);
 
             foreach ($sleeperMatchups as $sleeperMatchup) {
