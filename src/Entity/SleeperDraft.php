@@ -427,6 +427,23 @@ class SleeperDraft {
         return null;
     }
 
+    public function getOwnerByDraftSlot(int $draftSlot): ?SleeperUser
+    {
+        foreach($this->draftOrder as $ownerId => $claimedDraftSlot) {
+            if($claimedDraftSlot === $draftSlot) {
+                break;
+            }
+        }
+
+        foreach($this->getLeague()->getRosters() as $roster) {
+            if($roster->getOwner()->getUserId() === (string)$ownerId) {
+                return $roster->getOwner();
+            }
+        }
+
+        return null;
+    }
+
     public function getRosterByRosterId(int $rosterId): ?SleeperRoster
     {
         if ($this->getLeague()) {
