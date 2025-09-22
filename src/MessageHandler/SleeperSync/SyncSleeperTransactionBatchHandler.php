@@ -6,7 +6,6 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync;
 
 use Doctrine\ORM\EntityManagerInterface;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverter;
-use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransaction;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransactionBatch;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository;
@@ -15,7 +14,6 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 #[AsMessageHandler]
 class SyncSleeperTransactionBatchHandler {
@@ -38,7 +36,7 @@ class SyncSleeperTransactionBatchHandler {
                 'leagueId' => $message->leagueId
             ]);
 
-            foreach($message->transactions as $transaction) {
+            foreach ($message->transactions as $transaction) {
                 $entity = $this->sleeperTransactionConverter->toEntity(
                     $transaction,
                 );

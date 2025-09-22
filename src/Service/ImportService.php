@@ -14,7 +14,6 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 class ImportService {
     public const IMPORT_ENTITY_LEAGUE = 'import_entity_league';
@@ -58,7 +57,7 @@ class ImportService {
 
     public function importSleeperLeague(string $sleeperLeagueId, ?array $importEntities = null): void
     {
-        if(!$importEntities) {
+        if (!$importEntities) {
             $importEntities = $this->getDefaultImportEntities();
         }
 

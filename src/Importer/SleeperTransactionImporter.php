@@ -35,7 +35,7 @@ class SleeperTransactionImporter extends AbstractImporter {
     /**
      * @return SleeperTransaction[]
      */
-    public function importTransactions(SleeperLeague $sleeperLeague, array $weeks): void
+    public function importTransactions(SleeperLeague $sleeperLeague, array $weeks): array
     {
         foreach ($weeks as $week) {
             $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $week);
@@ -52,15 +52,20 @@ class SleeperTransactionImporter extends AbstractImporter {
 
             $sleeperTransactions = null;
         }
+
+        return $sleeperTransactions;
     }
 
     /**
      * @return SleeperTransaction[]
      */
-    public function importTransactionBatch(SleeperLeague $sleeperLeague, array $weeks): void
+    public function importTransactionBatch(SleeperLeague $sleeperLeague, array $weeks): array
     {
+        $collectedTransactions = [];
+
         foreach ($weeks as $week) {
             $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $week);
+            $collectedTransactions = array_merge($collectedTransactions, $sleeperTransactions);
 
             $message = new SyncSleeperTransactionBatch(
                 $sleeperLeague->getLeagueId(),
@@ -68,5 +73,7 @@ class SleeperTransactionImporter extends AbstractImporter {
             );
             $this->messageBus->dispatch($message);
         }
+
+        return $collectedTransactions;
     }
 }

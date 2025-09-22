@@ -7,11 +7,11 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperMatchup;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTransaction;
 
-class SyncSleeperTransaction
-{
+class SyncSleeperTransaction {
     public function __construct(
-        public readonly string $leagueId,
+        public readonly string             $leagueId,
         public readonly SleeperTransaction $transaction
-    ) {
+    )
+    {
     }
 }
