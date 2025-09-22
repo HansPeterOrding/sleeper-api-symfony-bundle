@@ -453,7 +453,8 @@ class SleeperTransaction {
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAtValue(): void
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTime();
     }
