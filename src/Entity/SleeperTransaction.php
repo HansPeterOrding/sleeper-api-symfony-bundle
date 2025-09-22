@@ -12,6 +12,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionTypeEnum;
 
 #[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
 class SleeperTransaction {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;
@@ -101,6 +102,9 @@ class SleeperTransaction {
     #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id')]
     private Collection $consenterRosters;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $updatedAt = null;
 
     public function __construct()
     {
@@ -434,5 +438,23 @@ class SleeperTransaction {
         $this->consenterRosters->removeElement($consenterRoster);
 
         return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTime $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

@@ -41,6 +41,11 @@ class SyncSleeperTransactionBatchHandler {
                     $transaction,
                 );
 
+                $timestampSec = $entity->getStatusUpdated()/1000;
+                if($entity->getUpdatedAt() > \DateTime::createFromFormat('U.u', (string)$timestampSec)) {
+                    continue;
+                }
+
                 $entity->setLeague($sleeperLeagueEntity);
 
                 if ($entity->getCreator()) {
