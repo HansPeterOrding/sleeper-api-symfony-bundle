@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransactionBatch;
@@ -42,7 +43,7 @@ class SyncSleeperTransactionBatchHandler {
                 );
 
                 $timestampSec = $entity->getStatusUpdated()/1000;
-                if($entity->getUpdatedAt() > \DateTime::createFromFormat('U.u', (string)$timestampSec)) {
+                if($entity->getUpdatedAt() && $entity->getUpdatedAt() > DateTime::createFromFormat('U.u', (string)$timestampSec)) {
                     continue;
                 }
 
