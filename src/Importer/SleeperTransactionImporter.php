@@ -10,6 +10,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTransactionConverte
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperTransaction;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransaction;
+use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperTransactionBatch;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperUserRepository;
@@ -22,7 +23,7 @@ class SleeperTransactionImporter extends AbstractImporter {
     public function __construct(
         ConverterInterface                       $converter,
         EntityManagerInterface                   $entityManager,
-        private readonly MessageBusInterface $messageBus,
+        private readonly MessageBusInterface     $messageBus,
         private readonly SleeperUserRepository   $sleeperUserRepository,
         private readonly SleeperRosterRepository $sleeperRosterRepository,
         private readonly SleeperPlayerRepository $sleeperPlayerRepository
@@ -50,6 +51,22 @@ class SleeperTransactionImporter extends AbstractImporter {
             }
 
             $sleeperTransactions = null;
+        }
+    }
+
+    /**
+     * @return SleeperTransaction[]
+     */
+    public function importTransactionBatch(SleeperLeague $sleeperLeague, array $weeks): void
+    {
+        foreach ($weeks as $week) {
+            $sleeperTransactions = $this->sleeperApiClient->league()->listTransactions($sleeperLeague->getLeagueId(), $week);
+
+            $message = new SyncSleeperTransactionBatch(
+                $sleeperLeague->getLeagueId(),
+                $sleeperTransactions
+            );
+            $this->messageBus->dispatch($message);
         }
     }
 }

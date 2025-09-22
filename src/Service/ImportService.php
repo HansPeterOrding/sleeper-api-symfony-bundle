@@ -14,6 +14,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ImportService {
     public const IMPORT_ENTITY_LEAGUE = 'import_entity_league';
@@ -99,7 +100,7 @@ class ImportService {
         }
 
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS, $importEntities)) {
-            $sleeperTransactions = $this->sleeperTransactionImporter->importTransactions($sleeperLeague, $importEntities[self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS]);
+            $sleeperTransactions = $this->sleeperTransactionImporter->importTransactionBatch($sleeperLeague, $importEntities[self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS]);
         }
     }
 }

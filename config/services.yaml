@@ -233,7 +233,7 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter:
         arguments:
             $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_transaction'
-    
+                
     HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter:
         arguments:
             $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_user'
@@ -244,3 +244,5 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupHandler: ~
     
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionHandler: ~
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionBatchHandler: ~
