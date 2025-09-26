@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTradedPick as SleeperTradedPickDto;
 
 #[ORM\Entity]
+#[ORM\Index(columns: ['league_id'])]
+#[ORM\Index(columns: ['draft_id'])]
+#[ORM\Index(columns: ['season'])]
 class SleeperTradedPick {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;

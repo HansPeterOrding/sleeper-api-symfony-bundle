@@ -12,6 +12,8 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\LeagueStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 
 #[ORM\Entity]
+#[ORM\Index(columns: ['league_id'])]
+#[ORM\Index(columns: ['season'])]
 class SleeperLeague {
     #[ORM\Id]
     #[ORM\GeneratedValue]

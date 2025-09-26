@@ -13,6 +13,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionTypeEnum;
 
 #[ORM\Entity]
 #[ORM\HasLifecycleCallbacks]
+#[ORM\Index(columns: ['transaction_id'])]
 class SleeperTransaction {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
     private int $id;

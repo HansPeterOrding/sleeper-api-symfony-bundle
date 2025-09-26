@@ -14,6 +14,7 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
     name: 'sasb_sleeper_matchup_unique',
     columns: ['league_id', 'week', 'roster_id']
 )]
+#[ORM\Index(columns: ['league_id'])]
 class SleeperMatchup {
     #[ORM\Id]
     #[ORM\GeneratedValue]
