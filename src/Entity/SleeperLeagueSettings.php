@@ -107,6 +107,9 @@ class SleeperLeagueSettings {
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $benchLock = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $bestBall = null;
+
     public function getWasAutoArchived(): ?int
     {
         return $this->wasAutoArchived;
@@ -467,6 +470,17 @@ class SleeperLeagueSettings {
     public function setBenchLock(?int $benchLock): SleeperLeagueSettings
     {
         $this->benchLock = $benchLock;
+        return $this;
+    }
+
+    public function getBestBall(): ?int
+    {
+        return $this->bestBall;
+    }
+
+    public function setBestBall(?int $bestBall): SleeperLeagueSettings
+    {
+        $this->bestBall = $bestBall;
         return $this;
     }
 }

@@ -50,6 +50,7 @@ class SleeperLeagueSettingsConverter implements ConverterInterface {
         $sleeperLeagueSettingsEntity->setDailyWaiversHour($sleeperLeagueSettingsDto->getDailyWaiversHour());
         $sleeperLeagueSettingsEntity->setDailyWaivers($sleeperLeagueSettingsDto->getDailyWaivers());
         $sleeperLeagueSettingsEntity->setBenchLock($sleeperLeagueSettingsDto->getBenchLock());
+        $sleeperLeagueSettingsEntity->setBestBall($sleeperLeagueSettingsDto->getBestBall());
 
         return $sleeperLeagueSettingsEntity;
     }
