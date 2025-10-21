@@ -33,7 +33,7 @@ class LeagueScheduleService {
     {
         $scheduleWeek = new ScheduleWeek($week, boolval($this->sleeperLeague->getSettings()->getLeagueAverageMatch()));
 
-        if ($week < $this->sleeperLeague->getSettings()->getPlayoffWeekStart()) {
+        if ($this->sleeperLeague->getSettings()->getPlayoffWeekStart() === 0 or $week < $this->sleeperLeague->getSettings()->getPlayoffWeekStart()) {
             $numTeams = $this->sleeperLeague->getSettings()->getNumTeams();
             $matchupCount = $numTeams / 2;
             for ($matchupId = 1; $matchupId <= $matchupCount; $matchupId++) {

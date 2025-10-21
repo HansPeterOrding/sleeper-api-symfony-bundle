@@ -10,6 +10,7 @@ enum FantasyPositionEnum: string {
     case WR = 'WR';
     case TE = 'TE';
     case K = 'K';
+    case P = 'P';
     case DEF = 'DEF';
     case DL = 'DL';
     case LB = 'LB';
