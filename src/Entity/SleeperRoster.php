@@ -13,6 +13,7 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 #[ORM\Entity]
 #[ORM\UniqueConstraint(name: 'sasb_sleeper_roster_unique', columns: ['league_id', 'roster_id'])]
 #[ORM\Index(columns: ['league_id'])]
+#[ORM\Index(columns: ['internal_owner_id', 'internal_league_id'])]
 class SleeperRoster {
     #[ORM\Id]
     #[ORM\GeneratedValue]
