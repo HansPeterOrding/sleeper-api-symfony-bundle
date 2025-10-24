@@ -1,6 +1,6 @@
 # mapping from bundle name to table prefix
 parameters:
-    table_prefix: sasb_
+    sasb_table_prefix: sasb_
         
 services:
     _defaults:
@@ -12,7 +12,7 @@ services:
         
     HansPeterOrding\SleeperApiSymfonyBundle\DoctrineExtensions\TablePrefixEventListener:
         arguments:
-            $prefix: '%table_prefix%'
+            $prefix: '%sasb_table_prefix%'
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata, method: loadClassMetadata }
                 
