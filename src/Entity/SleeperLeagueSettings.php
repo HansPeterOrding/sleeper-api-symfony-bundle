@@ -110,6 +110,66 @@ class SleeperLeagueSettings {
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $bestBall = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $disableAdds = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $divisions = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $capacityOverride = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $waiverBidMin = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $reserveAllowNa = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $playoffSeedType = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $vetoVotesNeeded = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $subStartTimeEligibility = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $dailyWaiversDays = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $subLockIfStarterActive = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $commissionerDirectInvite = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $vetoAutoPoll = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $reserveAllowDnr = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $vetoShowVotes = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $faabSuggestions = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $disableTrades = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $maxSubs = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $dailyWaiversBase = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $reserveAllowCov = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $dailyWaiversLastRan = null;
+
     public function getWasAutoArchived(): ?int
     {
         return $this->wasAutoArchived;
@@ -482,5 +542,205 @@ class SleeperLeagueSettings {
     {
         $this->bestBall = $bestBall;
         return $this;
+    }
+
+    public function getDisableAdds(): ?int
+    {
+        return $this->disableAdds;
+    }
+
+    public function setDisableAdds(?int $disableAdds): void
+    {
+        $this->disableAdds = $disableAdds;
+    }
+
+    public function getDivisions(): ?int
+    {
+        return $this->divisions;
+    }
+
+    public function setDivisions(?int $divisions): void
+    {
+        $this->divisions = $divisions;
+    }
+
+    public function getCapacityOverride(): ?int
+    {
+        return $this->capacityOverride;
+    }
+
+    public function setCapacityOverride(?int $capacityOverride): void
+    {
+        $this->capacityOverride = $capacityOverride;
+    }
+
+    public function getWaiverBidMin(): ?int
+    {
+        return $this->waiverBidMin;
+    }
+
+    public function setWaiverBidMin(?int $waiverBidMin): void
+    {
+        $this->waiverBidMin = $waiverBidMin;
+    }
+
+    public function getReserveAllowNa(): ?int
+    {
+        return $this->reserveAllowNa;
+    }
+
+    public function setReserveAllowNa(?int $reserveAllowNa): void
+    {
+        $this->reserveAllowNa = $reserveAllowNa;
+    }
+
+    public function getPlayoffSeedType(): ?int
+    {
+        return $this->playoffSeedType;
+    }
+
+    public function setPlayoffSeedType(?int $playoffSeedType): void
+    {
+        $this->playoffSeedType = $playoffSeedType;
+    }
+
+    public function getVetoVotesNeeded(): ?int
+    {
+        return $this->vetoVotesNeeded;
+    }
+
+    public function setVetoVotesNeeded(?int $vetoVotesNeeded): void
+    {
+        $this->vetoVotesNeeded = $vetoVotesNeeded;
+    }
+
+    public function getSubStartTimeEligibility(): ?int
+    {
+        return $this->subStartTimeEligibility;
+    }
+
+    public function setSubStartTimeEligibility(?int $subStartTimeEligibility): void
+    {
+        $this->subStartTimeEligibility = $subStartTimeEligibility;
+    }
+
+    public function getDailyWaiversDays(): ?int
+    {
+        return $this->dailyWaiversDays;
+    }
+
+    public function setDailyWaiversDays(?int $dailyWaiversDays): void
+    {
+        $this->dailyWaiversDays = $dailyWaiversDays;
+    }
+
+    public function getSubLockIfStarterActive(): ?int
+    {
+        return $this->subLockIfStarterActive;
+    }
+
+    public function setSubLockIfStarterActive(?int $subLockIfStarterActive): void
+    {
+        $this->subLockIfStarterActive = $subLockIfStarterActive;
+    }
+
+    public function getCommissionerDirectInvite(): ?int
+    {
+        return $this->commissionerDirectInvite;
+    }
+
+    public function setCommissionerDirectInvite(?int $commissionerDirectInvite): void
+    {
+        $this->commissionerDirectInvite = $commissionerDirectInvite;
+    }
+
+    public function getVetoAutoPoll(): ?int
+    {
+        return $this->vetoAutoPoll;
+    }
+
+    public function setVetoAutoPoll(?int $vetoAutoPoll): void
+    {
+        $this->vetoAutoPoll = $vetoAutoPoll;
+    }
+
+    public function getReserveAllowDnr(): ?int
+    {
+        return $this->reserveAllowDnr;
+    }
+
+    public function setReserveAllowDnr(?int $reserveAllowDnr): void
+    {
+        $this->reserveAllowDnr = $reserveAllowDnr;
+    }
+
+    public function getVetoShowVotes(): ?int
+    {
+        return $this->vetoShowVotes;
+    }
+
+    public function setVetoShowVotes(?int $vetoShowVotes): void
+    {
+        $this->vetoShowVotes = $vetoShowVotes;
+    }
+
+    public function getFaabSuggestions(): ?int
+    {
+        return $this->faabSuggestions;
+    }
+
+    public function setFaabSuggestions(?int $faabSuggestions): void
+    {
+        $this->faabSuggestions = $faabSuggestions;
+    }
+
+    public function getDisableTrades(): ?int
+    {
+        return $this->disableTrades;
+    }
+
+    public function setDisableTrades(?int $disableTrades): void
+    {
+        $this->disableTrades = $disableTrades;
+    }
+
+    public function getMaxSubs(): ?int
+    {
+        return $this->maxSubs;
+    }
+
+    public function setMaxSubs(?int $maxSubs): void
+    {
+        $this->maxSubs = $maxSubs;
+    }
+
+    public function getDailyWaiversBase(): ?int
+    {
+        return $this->dailyWaiversBase;
+    }
+
+    public function setDailyWaiversBase(?int $dailyWaiversBase): void
+    {
+        $this->dailyWaiversBase = $dailyWaiversBase;
+    }
+
+    public function getReserveAllowCov(): ?int
+    {
+        return $this->reserveAllowCov;
+    }
+
+    public function setReserveAllowCov(?int $reserveAllowCov): void
+    {
+        $this->reserveAllowCov = $reserveAllowCov;
+    }
+
+    public function getDailyWaiversLastRan(): ?int
+    {
+        return $this->dailyWaiversLastRan;
+    }
+
+    public function setDailyWaiversLastRan(?int $dailyWaiversLastRan): void
+    {
+        $this->dailyWaiversLastRan = $dailyWaiversLastRan;
     }
 }

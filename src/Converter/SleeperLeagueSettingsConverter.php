@@ -51,6 +51,26 @@ class SleeperLeagueSettingsConverter implements ConverterInterface {
         $sleeperLeagueSettingsEntity->setDailyWaivers($sleeperLeagueSettingsDto->getDailyWaivers());
         $sleeperLeagueSettingsEntity->setBenchLock($sleeperLeagueSettingsDto->getBenchLock());
         $sleeperLeagueSettingsEntity->setBestBall($sleeperLeagueSettingsDto->getBestBall());
+        $sleeperLeagueSettingsEntity->setDisableAdds($sleeperLeagueSettingsDto->getDisableAdds());
+        $sleeperLeagueSettingsEntity->setDivisions($sleeperLeagueSettingsDto->getDivisions());
+        $sleeperLeagueSettingsEntity->setCapacityOverride($sleeperLeagueSettingsDto->getCapacityOverride());
+        $sleeperLeagueSettingsEntity->setWaiverBidMin($sleeperLeagueSettingsDto->getWaiverBidMin());
+        $sleeperLeagueSettingsEntity->setReserveAllowNa($sleeperLeagueSettingsDto->getReserveAllowNa());
+        $sleeperLeagueSettingsEntity->setPlayoffSeedType($sleeperLeagueSettingsDto->getPlayoffSeedType());
+        $sleeperLeagueSettingsEntity->setVetoVotesNeeded($sleeperLeagueSettingsDto->getVetoVotesNeeded());
+        $sleeperLeagueSettingsEntity->setSubStartTimeEligibility($sleeperLeagueSettingsDto->getSubStartTimeEligibility());
+        $sleeperLeagueSettingsEntity->setDailyWaiversDays($sleeperLeagueSettingsDto->getDailyWaiversDays());
+        $sleeperLeagueSettingsEntity->setSubLockIfStarterActive($sleeperLeagueSettingsDto->getSubLockIfStarterActive());
+        $sleeperLeagueSettingsEntity->setCommissionerDirectInvite($sleeperLeagueSettingsDto->getCommissionerDirectInvite());
+        $sleeperLeagueSettingsEntity->setVetoAutoPoll($sleeperLeagueSettingsDto->getVetoAutoPoll());
+        $sleeperLeagueSettingsEntity->setReserveAllowDnr($sleeperLeagueSettingsDto->getReserveAllowDnr());
+        $sleeperLeagueSettingsEntity->setVetoShowVotes($sleeperLeagueSettingsDto->getVetoShowVotes());
+        $sleeperLeagueSettingsEntity->setFaabSuggestions($sleeperLeagueSettingsDto->getFaabSuggestions());
+        $sleeperLeagueSettingsEntity->setDisableTrades($sleeperLeagueSettingsDto->getDisableTrades());
+        $sleeperLeagueSettingsEntity->setMaxSubs($sleeperLeagueSettingsDto->getMaxSubs());
+        $sleeperLeagueSettingsEntity->setDailyWaiversBase($sleeperLeagueSettingsDto->getDailyWaiversBase());
+        $sleeperLeagueSettingsEntity->setReserveAllowCov($sleeperLeagueSettingsDto->getReserveAllowCov());
+        $sleeperLeagueSettingsEntity->setDailyWaiversLastRan($sleeperLeagueSettingsDto->getDailyWaiversLastRan());
 
         return $sleeperLeagueSettingsEntity;
     }

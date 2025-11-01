@@ -15,6 +15,7 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
     columns: ['league_id', 'week', 'roster_id']
 )]
 #[ORM\Index(columns: ['league_id'])]
+#[ORM\Index(columns: ['internal_league_id', 'week'])]
 class SleeperMatchup {
     #[ORM\Id]
     #[ORM\GeneratedValue]
