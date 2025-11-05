@@ -50,9 +50,9 @@ class ScheduleWeek {
     public function getMatchupByRosterId(int $rosterId): ?Matchup
     {
         foreach ($this->matchups as $matchup) {
-            if ($matchup->getSleeperMatchupHome()->getRosterId() === $rosterId) {
+            if ($matchup->getSleeperMatchupHome()?->getRosterId() === $rosterId) {
                 return $matchup;
-            } elseif ($matchup->getSleeperMatchupAway()->getRosterId() === $rosterId) {
+            } elseif ($matchup->getSleeperMatchupAway()?->getRosterId() === $rosterId) {
                 return $matchup;
             }
         }

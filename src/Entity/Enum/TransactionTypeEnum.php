@@ -9,4 +9,5 @@ enum TransactionTypeEnum: string {
     case FREE_AGENT = 'free_agent';
     case TRADE = 'trade';
     case COMMISSIONER = 'commissioner';
+    case CHOPPED = 'chopped';
 }
