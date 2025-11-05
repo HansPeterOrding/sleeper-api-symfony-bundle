@@ -10,12 +10,14 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperMatchupConverter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperDraftPick;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperMatchup;
+use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperMatchupBatch;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @property SleeperMatchupConverter $converter
  */
-class SleeperMatchupImporter extends AbstractImporter {
+class SleeperMatchupImporter extends AbstractImporter
+{
     public function __construct(
         ConverterInterface                   $converter,
         EntityManagerInterface               $entityManager,
@@ -42,5 +44,21 @@ class SleeperMatchupImporter extends AbstractImporter {
                 $this->messageBus->dispatch($message);
             }
         }
+    }
+
+    public function importBulkMatchups(SleeperLeague $sleeperLeague, array $sleeperRosters, array $weeks): void
+    {
+        $sleeperMatchups = [];
+
+        foreach ($weeks as $week) {
+            $sleeperMatchups[$week] = $this->sleeperApiClient->league()->listMatchups($sleeperLeague->getLeagueId(), $week);
+        }
+
+        $bulkMessage = new SyncSleeperMatchupBatch(
+            $sleeperLeague->getLeagueId(),
+            $sleeperMatchups
+        );
+
+        $this->messageBus->dispatch($bulkMessage);
     }
 }

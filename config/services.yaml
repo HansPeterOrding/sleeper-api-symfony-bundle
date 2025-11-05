@@ -240,9 +240,7 @@ services:
     hpo_sleeper_api_symfony_bundle.importer.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter'
     
     HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~
-    
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupHandler: ~
-    
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupBatchHandler: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionHandler: ~
-    
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionBatchHandler: ~

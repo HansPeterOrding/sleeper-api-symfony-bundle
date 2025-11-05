@@ -87,7 +87,8 @@ class ImportService {
         }
 
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_MATCHUPS, $importEntities)) {
-            $this->sleeperMatchupImporter->importMatchups($sleeperLeague, $sleeperRosters, $importEntities[self::IMPORT_ENTITY_LEAGUE_MATCHUPS]);
+            $this->sleeperMatchupImporter->importBulkMatchups($sleeperLeague, $sleeperRosters, $importEntities[self::IMPORT_ENTITY_LEAGUE_MATCHUPS]);
+            #$this->sleeperMatchupImporter->importMatchups($sleeperLeague, $sleeperRosters, $importEntities[self::IMPORT_ENTITY_LEAGUE_MATCHUPS]);
         }
 
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_PLAYOFF_MATCHUPS, $importEntities)) {
