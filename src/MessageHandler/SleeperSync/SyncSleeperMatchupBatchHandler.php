@@ -185,6 +185,17 @@ INSERT INTO public.sasb_sleeper_matchup
    starters_points, players_points, starters, roster_id,
    players, matchup_id, points, custom_points)
 VALUES $valuesSql
+ON CONFLICT (league_id, week, roster_id)
+DO UPDATE SET
+  internal_league_id = EXCLUDED.internal_league_id,
+  internal_roster_id = EXCLUDED.internal_roster_id,
+  starters_points    = EXCLUDED.starters_points,
+  players_points     = EXCLUDED.players_points,
+  starters           = EXCLUDED.starters,
+  players            = EXCLUDED.players,
+  matchup_id         = EXCLUDED.matchup_id,
+  points             = EXCLUDED.points,
+  custom_points      = EXCLUDED.custom_points
 SQL;
 
         $params = [];

@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto as Dto;
 
 #[ORM\Entity]
+#[ORM\UniqueConstraint(
+    name: 'sasb_sleeper_matchup_unique',
+    columns: ['league_id', 'week', 'roster_id']
+)]
 #[ORM\Index(columns: ['league_id'])]
 #[ORM\Index(columns: ['internal_league_id', 'week'])]
 class SleeperMatchup {
