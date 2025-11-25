@@ -102,6 +102,10 @@ class SleeperLeagueScoringSettings {
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fgm50p = null;
     #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $fgm5059 = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $fgm60p = null;
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fgmYds = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fgmYdsOver30 = null;
@@ -119,6 +123,10 @@ class SleeperLeagueScoringSettings {
     private ?float $fgmiss4049 = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $fgmiss50p = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $fgmiss5059 = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $fgmiss60p = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $xpmiss = null;
 
@@ -214,9 +222,13 @@ class SleeperLeagueScoringSettings {
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $defStTklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $defKrYd = null;
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $defPrYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $defKrYd = null;
+    private ?float $defKrTd = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $defPrTd = null;
 
     // Special Teams Player
     #[ORM\Column(type: 'float', nullable: true)]
@@ -228,9 +240,13 @@ class SleeperLeagueScoringSettings {
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $stTklSolo = null;
     #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $krYd = null;
+    #[ORM\Column(type: 'float', nullable: true)]
     private ?float $prYd = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $krYd = null;
+    private ?float $prTd = null;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $krTd = null;
 
     // Misc
     #[ORM\Column(type: 'float', nullable: true)]
@@ -787,6 +803,28 @@ class SleeperLeagueScoringSettings {
         return $this;
     }
 
+    public function getFgm5059(): ?float
+    {
+        return $this->fgm5059;
+    }
+
+    public function setFgm5059(?float $fgm5059): SleeperLeagueScoringSettings
+    {
+        $this->fgm5059 = $fgm5059;
+        return $this;
+    }
+
+    public function getFgm60p(): ?float
+    {
+        return $this->fgm60p;
+    }
+
+    public function setFgm60p(?float $fgm60p): SleeperLeagueScoringSettings
+    {
+        $this->fgm60p = $fgm60p;
+        return $this;
+    }
+
     public function getFgmYds(): ?float
     {
         return $this->fgmYds;
@@ -883,6 +921,28 @@ class SleeperLeagueScoringSettings {
     public function setFgmiss50p(?float $fgmiss50p): SleeperLeagueScoringSettings
     {
         $this->fgmiss50p = $fgmiss50p;
+        return $this;
+    }
+
+    public function getFgmiss5059(): ?float
+    {
+        return $this->fgmiss5059;
+    }
+
+    public function setFgmiss5059(?float $fgmiss5059): SleeperLeagueScoringSettings
+    {
+        $this->fgmiss5059 = $fgmiss5059;
+        return $this;
+    }
+
+    public function getFgmiss60p(): ?float
+    {
+        return $this->fgmiss60p;
+    }
+
+    public function setFgmiss60p(?float $fgmiss60p): SleeperLeagueScoringSettings
+    {
+        $this->fgmiss60p = $fgmiss60p;
         return $this;
     }
 
@@ -1403,6 +1463,28 @@ class SleeperLeagueScoringSettings {
         return $this;
     }
 
+    public function getDefKrTd(): ?float
+    {
+        return $this->defKrTd;
+    }
+
+    public function setDefKrTd(?float $defKrTd): SleeperLeagueScoringSettings
+    {
+        $this->defKrTd = $defKrTd;
+        return $this;
+    }
+
+    public function getDefPrTd(): ?float
+    {
+        return $this->defPrTd;
+    }
+
+    public function setDefPrTd(?float $defPrTd): SleeperLeagueScoringSettings
+    {
+        $this->defPrTd = $defPrTd;
+        return $this;
+    }
+
     public function getStTd(): ?float
     {
         return $this->stTd;
@@ -1447,6 +1529,17 @@ class SleeperLeagueScoringSettings {
         return $this;
     }
 
+    public function getKrYd(): ?float
+    {
+        return $this->krYd;
+    }
+
+    public function setKrYd(?float $krYd): SleeperLeagueScoringSettings
+    {
+        $this->krYd = $krYd;
+        return $this;
+    }
+
     public function getPrYd(): ?float
     {
         return $this->prYd;
@@ -1458,14 +1551,25 @@ class SleeperLeagueScoringSettings {
         return $this;
     }
 
-    public function getKrYd(): ?float
+    public function getPrTd(): ?float
     {
-        return $this->krYd;
+        return $this->prTd;
     }
 
-    public function setKrYd(?float $krYd): SleeperLeagueScoringSettings
+    public function setPrTd(?float $prTd): SleeperLeagueScoringSettings
     {
-        $this->krYd = $krYd;
+        $this->prTd = $prTd;
+        return $this;
+    }
+
+    public function getKrTd(): ?float
+    {
+        return $this->krTd;
+    }
+
+    public function setKrTd(?float $krTd): SleeperLeagueScoringSettings
+    {
+        $this->krTd = $krTd;
         return $this;
     }
 

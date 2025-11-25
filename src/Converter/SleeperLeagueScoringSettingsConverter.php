@@ -67,6 +67,8 @@ class SleeperLeagueScoringSettingsConverter implements ConverterInterface {
         $sleeperLeagueScoringSettingsEntity->setFgm3039($sleeperLeagueScoringSettingsDto->getFgm3039());
         $sleeperLeagueScoringSettingsEntity->setFgm4049($sleeperLeagueScoringSettingsDto->getFgm4049());
         $sleeperLeagueScoringSettingsEntity->setFgm50p($sleeperLeagueScoringSettingsDto->getFgm50p());
+        $sleeperLeagueScoringSettingsEntity->setFgm5059($sleeperLeagueScoringSettingsDto->getFgm5059());
+        $sleeperLeagueScoringSettingsEntity->setFgm60p($sleeperLeagueScoringSettingsDto->getFgm60p());
         $sleeperLeagueScoringSettingsEntity->setFgmYds($sleeperLeagueScoringSettingsDto->getFgmYds());
         $sleeperLeagueScoringSettingsEntity->setFgmYdsOver30($sleeperLeagueScoringSettingsDto->getFgmYdsOver30());
         $sleeperLeagueScoringSettingsEntity->setXpm($sleeperLeagueScoringSettingsDto->getXpm());
@@ -76,6 +78,8 @@ class SleeperLeagueScoringSettingsConverter implements ConverterInterface {
         $sleeperLeagueScoringSettingsEntity->setFgmiss3039($sleeperLeagueScoringSettingsDto->getFgmiss3039());
         $sleeperLeagueScoringSettingsEntity->setFgmiss4049($sleeperLeagueScoringSettingsDto->getFgmiss4049());
         $sleeperLeagueScoringSettingsEntity->setFgmiss50p($sleeperLeagueScoringSettingsDto->getFgmiss50p());
+        $sleeperLeagueScoringSettingsEntity->setFgmiss5059($sleeperLeagueScoringSettingsDto->getFgmiss5059());
+        $sleeperLeagueScoringSettingsEntity->setFgmiss60p($sleeperLeagueScoringSettingsDto->getFgmiss60p());
         $sleeperLeagueScoringSettingsEntity->setXpmiss($sleeperLeagueScoringSettingsDto->getXpmiss());
 
         // Team defense
@@ -125,16 +129,20 @@ class SleeperLeagueScoringSettingsConverter implements ConverterInterface {
         $sleeperLeagueScoringSettingsEntity->setDefStFf($sleeperLeagueScoringSettingsDto->getDefStFf());
         $sleeperLeagueScoringSettingsEntity->setDefStFumRec($sleeperLeagueScoringSettingsDto->getDefStFumRec());
         $sleeperLeagueScoringSettingsEntity->setDefStTklSolo($sleeperLeagueScoringSettingsDto->getDefStTklSolo());
-        $sleeperLeagueScoringSettingsEntity->setDefPrYd($sleeperLeagueScoringSettingsDto->getDefPrYd());
         $sleeperLeagueScoringSettingsEntity->setDefKrYd($sleeperLeagueScoringSettingsDto->getDefKrYd());
+        $sleeperLeagueScoringSettingsEntity->setDefPrYd($sleeperLeagueScoringSettingsDto->getDefPrYd());
+        $sleeperLeagueScoringSettingsEntity->setKrTd($sleeperLeagueScoringSettingsDto->getKrTd());
+        $sleeperLeagueScoringSettingsEntity->setPrTd($sleeperLeagueScoringSettingsDto->getPrTd());
 
         // Special Teams Player
         $sleeperLeagueScoringSettingsEntity->setStTd($sleeperLeagueScoringSettingsDto->getStTd());
         $sleeperLeagueScoringSettingsEntity->setStFf($sleeperLeagueScoringSettingsDto->getStFf());
         $sleeperLeagueScoringSettingsEntity->setStFumRec($sleeperLeagueScoringSettingsDto->getStFumRec());
         $sleeperLeagueScoringSettingsEntity->setStTklSolo($sleeperLeagueScoringSettingsDto->getStTklSolo());
-        $sleeperLeagueScoringSettingsEntity->setPrYd($sleeperLeagueScoringSettingsDto->getPrYd());
         $sleeperLeagueScoringSettingsEntity->setKrYd($sleeperLeagueScoringSettingsDto->getKrYd());
+        $sleeperLeagueScoringSettingsEntity->setPrYd($sleeperLeagueScoringSettingsDto->getPrYd());
+        $sleeperLeagueScoringSettingsEntity->setKrTd($sleeperLeagueScoringSettingsDto->getKrTd());
+        $sleeperLeagueScoringSettingsEntity->setPrTd($sleeperLeagueScoringSettingsDto->getPrTd());
 
         // Misc
         $sleeperLeagueScoringSettingsEntity->setFum($sleeperLeagueScoringSettingsDto->getFum());
