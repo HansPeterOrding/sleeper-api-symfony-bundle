@@ -49,8 +49,8 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperNflStateRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_nfl_state: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperNflStateRepository'
     
-    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionRepository: ~
-    hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionRepository'
+    HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionsRepository: ~
+    hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projections: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionsRepository'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository: ~
     hpo_sleeper_api_symfony_bundle.repository.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerRepository'
@@ -97,7 +97,7 @@ services:
     
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_player: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerConverter'
-    
+        
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupSourceConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_playoff_matchup_source: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayoffMatchupSourceConverter'
         
@@ -140,12 +140,12 @@ services:
             $sleeperLeagueScoringSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_league_scoring_settings'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_league: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperLeagueConverter'
         
-    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter:
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionsConverter:
         arguments:
-            $sleeperPlayerProjectionRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projection'
+            $sleeperPlayerProjectionsRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_player_projections'
             $sleeperStatsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_stats'
             $sleeperPlayerConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player'
-    hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projection: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionConverter'
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projections: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerProjectionsConverter'
         
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperPlayerStatsConverter:
         arguments:
@@ -207,6 +207,16 @@ services:
             $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_matchup'
     hpo_sleeper_api_symfony_bundle.importer.sleeper_matchup: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperMatchupImporter'
     
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayerProjectionsImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player_projections'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_player_projections: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayerProjectionsImporter'
+    
+    HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayerStatsImporter:
+        arguments:
+            $converter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_player_stats'
+    hpo_sleeper_api_symfony_bundle.importer.sleeper_player_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayerStatsImporter'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperPlayoffMatchupImporter:
         arguments:
             $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
@@ -242,5 +252,7 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupHandler: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupBatchHandler: ~
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerProjectionsBatchHandler: ~
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerStatsBatchHandler: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionHandler: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionBatchHandler: ~

@@ -7,11 +7,11 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Entity;
 use DateTime;
 use Doctrine\DBAL\Schema\UniqueConstraint;
 use Doctrine\ORM\Mapping as ORM;
-use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjection as SleeperPlayerProjectionDto;
+use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjections as SleeperPlayerProjectionsDto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(name: 'sasb_player_projection_unique', columns: ['season', 'week', 'player_id'])]
-class SleeperPlayerProjection {
+#[ORM\UniqueConstraint(name: 'sasb_player_projections_unique', columns: ['season', 'week', 'player_id'])]
+class SleeperPlayerProjections {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -68,7 +68,7 @@ class SleeperPlayerProjection {
         return $this->week;
     }
 
-    public function setWeek(?int $week): SleeperPlayerProjection
+    public function setWeek(?int $week): SleeperPlayerProjections
     {
         $this->week = $week;
         return $this;
@@ -79,7 +79,7 @@ class SleeperPlayerProjection {
         return $this->team;
     }
 
-    public function setTeam(?string $team): SleeperPlayerProjection
+    public function setTeam(?string $team): SleeperPlayerProjections
     {
         $this->team = $team;
         return $this;
@@ -90,7 +90,7 @@ class SleeperPlayerProjection {
         return $this->stats;
     }
 
-    public function setStats(SleeperStats $stats): SleeperPlayerProjection
+    public function setStats(SleeperStats $stats): SleeperPlayerProjections
     {
         $this->stats = $stats;
         return $this;
@@ -101,7 +101,7 @@ class SleeperPlayerProjection {
         return $this->sport;
     }
 
-    public function setSport(string $sport): SleeperPlayerProjection
+    public function setSport(string $sport): SleeperPlayerProjections
     {
         $this->sport = $sport;
         return $this;
@@ -112,7 +112,7 @@ class SleeperPlayerProjection {
         return $this->seasonType;
     }
 
-    public function setSeasonType(string $seasonType): SleeperPlayerProjection
+    public function setSeasonType(string $seasonType): SleeperPlayerProjections
     {
         $this->seasonType = $seasonType;
         return $this;
@@ -123,7 +123,7 @@ class SleeperPlayerProjection {
         return $this->season;
     }
 
-    public function setSeason(string $season): SleeperPlayerProjection
+    public function setSeason(string $season): SleeperPlayerProjections
     {
         $this->season = $season;
         return $this;
@@ -134,7 +134,7 @@ class SleeperPlayerProjection {
         return $this->playerId;
     }
 
-    public function setPlayerId(string $playerId): SleeperPlayerProjection
+    public function setPlayerId(string $playerId): SleeperPlayerProjections
     {
         $this->playerId = $playerId;
         return $this;
@@ -145,7 +145,7 @@ class SleeperPlayerProjection {
         return $this->player;
     }
 
-    public function setPlayer(SleeperPlayer $player): SleeperPlayerProjection
+    public function setPlayer(SleeperPlayer $player): SleeperPlayerProjections
     {
         $this->player = $player;
         return $this;
@@ -156,7 +156,7 @@ class SleeperPlayerProjection {
         return $this->opponent;
     }
 
-    public function setOpponent(?string $opponent): SleeperPlayerProjection
+    public function setOpponent(?string $opponent): SleeperPlayerProjections
     {
         $this->opponent = $opponent;
         return $this;
@@ -167,7 +167,7 @@ class SleeperPlayerProjection {
         return $this->gameId;
     }
 
-    public function setGameId(?string $gameId): SleeperPlayerProjection
+    public function setGameId(?string $gameId): SleeperPlayerProjections
     {
         $this->gameId = $gameId;
         return $this;
@@ -178,7 +178,7 @@ class SleeperPlayerProjection {
         return $this->date;
     }
 
-    public function setDate(?DateTime $date): SleeperPlayerProjection
+    public function setDate(?DateTime $date): SleeperPlayerProjections
     {
         $this->date = $date;
         return $this;
@@ -189,7 +189,7 @@ class SleeperPlayerProjection {
         return $this->company;
     }
 
-    public function setCompany(?string $company): SleeperPlayerProjection
+    public function setCompany(?string $company): SleeperPlayerProjections
     {
         $this->company = $company;
         return $this;
@@ -200,18 +200,18 @@ class SleeperPlayerProjection {
         return $this->category;
     }
 
-    public function setCategory(?string $category): SleeperPlayerProjection
+    public function setCategory(?string $category): SleeperPlayerProjections
     {
         $this->category = $category;
         return $this;
     }
 
-    public function buildFindByCriteriaFromDto(SleeperPlayerProjectionDto $sleeperPlayerProjectionDto): array
+    public function buildFindByCriteriaFromDto(SleeperPlayerProjectionsDto $sleeperPlayerProjectionsDto): array
     {
         return [
-            'playerId' => $sleeperPlayerProjectionDto->getPlayerId(),
-            'season' => $sleeperPlayerProjectionDto->getSeason(),
-            'week' => $sleeperPlayerProjectionDto->getWeek()
+            'playerId' => $sleeperPlayerProjectionsDto->getPlayerId(),
+            'season' => $sleeperPlayerProjectionsDto->getSeason(),
+            'week' => $sleeperPlayerProjectionsDto->getWeek()
         ];
     }
 }
