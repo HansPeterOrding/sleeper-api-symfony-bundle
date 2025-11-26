@@ -11,7 +11,8 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperRosterRepository;
 class SleeperRosterConverter implements ConverterInterface {
     public function __construct(
         private readonly SleeperRosterRepository        $sleeperRosterRepository,
-        private readonly SleeperRosterSettingsConverter $sleeperRosterSettingsConverter
+        private readonly SleeperRosterSettingsConverter $sleeperRosterSettingsConverter,
+        private readonly SleeperRosterMetadataConverter $sleeperRosterMetadataConverter,
     )
     {
     }
@@ -25,6 +26,8 @@ class SleeperRosterConverter implements ConverterInterface {
         $sleeperRosterEntity->setLeagueId($sleeperRosterDto->getLeagueId());
         $sleeperRosterEntity->setStarters($sleeperRosterDto->getStarters());
         $sleeperRosterEntity->setReserve($sleeperRosterDto->getReserve());
+        $sleeperRosterEntity->setKeepers($sleeperRosterDto->getKeepers());
+        $sleeperRosterEntity->setTaxi($sleeperRosterDto->getTaxi());
         $sleeperRosterEntity->setPlayers($sleeperRosterDto->getPlayers());
 
         $sleeperRosterSettingsEntity = $this->sleeperRosterSettingsConverter->toEntity(
@@ -34,6 +37,11 @@ class SleeperRosterConverter implements ConverterInterface {
         $sleeperRosterEntity->setSettings($sleeperRosterSettingsEntity);
 
         $sleeperRosterEntity->setCoOwners($sleeperRosterDto->getCoOwners());
+
+        $sleeperRosterMetadataEntity = $this->sleeperRosterMetadataConverter->toEntity(
+            $sleeperRosterDto->getMetadata(),
+            $sleeperRosterEntity->getMetadata()
+        );
 
         return $sleeperRosterEntity;
     }

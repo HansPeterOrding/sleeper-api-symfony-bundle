@@ -36,6 +36,12 @@ class SleeperRoster {
     private ?array $reserve = [];
 
     #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $keepers = [];
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $taxi = [];
+
+    #[ORM\Column(type: 'json', nullable: true)]
     private ?array $players = [];
 
     #[ORM\Embedded(class: SleeperRosterSettings::class, columnPrefix: 'rostersettings_')]
@@ -43,6 +49,9 @@ class SleeperRoster {
 
     #[ORM\Column(type: 'json', nullable: true, options: ['jsonb' => true])]
     private ?array $coOwners = [];
+
+    #[ORM\Embedded(class: SleeperRosterMetadata::class, columnPrefix: 'rostermetadata_')]
+    private SleeperRosterMetadata $metadata;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class)]
     #[ORM\JoinColumn(name: 'internal_owner_id', referencedColumnName: 'id')]
@@ -79,6 +88,7 @@ class SleeperRoster {
     public function __construct()
     {
         $this->settings = new SleeperRosterSettings();
+        $this->metadata = new SleeperRosterMetadata();
         $this->draftPicks = new ArrayCollection();
         $this->tradedPicks = new ArrayCollection();
     }
@@ -149,6 +159,28 @@ class SleeperRoster {
         return $this;
     }
 
+    public function getKeepers(): ?array
+    {
+        return $this->keepers;
+    }
+
+    public function setKeepers(?array $keepers): SleeperRoster
+    {
+        $this->keepers = $keepers;
+        return $this;
+    }
+
+    public function getTaxi(): ?array
+    {
+        return $this->taxi;
+    }
+
+    public function setTaxi(?array $taxi): SleeperRoster
+    {
+        $this->taxi = $taxi;
+        return $this;
+    }
+
     public function getPlayers(): ?array
     {
         return $this->players;
@@ -179,6 +211,17 @@ class SleeperRoster {
     public function setCoOwners(?array $coOwners): SleeperRoster
     {
         $this->coOwners = $coOwners;
+        return $this;
+    }
+
+    public function getMetadata(): SleeperRosterMetadata
+    {
+        return $this->metadata;
+    }
+
+    public function setMetadata(SleeperRosterMetadata $metadata): SleeperRoster
+    {
+        $this->metadata = $metadata;
         return $this;
     }
 

@@ -104,6 +104,9 @@ services:
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterSettingsConverter'
     
+    HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterMetadataConverter: ~
+    hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_metadata: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterMetadataConverter'
+    
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter: ~
     hpo_sleeper_api_symfony_bundle.converter.sleeper_stats: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperStatsConverter'
     
@@ -164,6 +167,7 @@ services:
         arguments:
             $sleeperRosterRepository: '@hpo_sleeper_api_symfony_bundle.repository.sleeper_roster'
             $sleeperRosterSettingsConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_settings'
+            $sleeperRosterMetadataConverter: '@hpo_sleeper_api_symfony_bundle.converter.sleeper_roster_metadata'
     hpo_sleeper_api_symfony_bundle.converter.sleeper_roster: '@HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperRosterConverter'
     
     HansPeterOrding\SleeperApiSymfonyBundle\Converter\SleeperTradedPickConverter:
