@@ -132,6 +132,7 @@ class SleeperStatsConverter implements ConverterInterface {
         $sleeperStatsEntity->setFgm4049($sleeperStatsDto->getFgm4049());
         $sleeperStatsEntity->setFgm50p($sleeperStatsDto->getFgm50p());
         $sleeperStatsEntity->setFgm5059($sleeperStatsDto->getFgm5059());
+        $sleeperStatsEntity->setFgm60p($sleeperStatsDto->getFgm60p());
         $sleeperStatsEntity->setFgmLng($sleeperStatsDto->getFgmLng());
         $sleeperStatsEntity->setFgmPct($sleeperStatsDto->getFgmPct());
         $sleeperStatsEntity->setFgmYds($sleeperStatsDto->getFgmYds());
@@ -147,7 +148,11 @@ class SleeperStatsConverter implements ConverterInterface {
         $sleeperStatsEntity->setFgmiss50p($sleeperStatsDto->getFgmiss50p());
         $sleeperStatsEntity->setFgmiss5059($sleeperStatsDto->getFgmiss5059());
         $sleeperStatsEntity->setFgmiss60p($sleeperStatsDto->getFgmiss60p());
+        $sleeperStatsEntity->setFgBlkd($sleeperStatsDto->getFgBlkd());
         $sleeperStatsEntity->setXpmiss($sleeperStatsDto->getXpmiss());
+        $sleeperStatsEntity->setPuntNetYd($sleeperStatsDto->getPuntNetYd());
+        $sleeperStatsEntity->setPuntYds($sleeperStatsDto->getPuntYds());
+        $sleeperStatsEntity->setPunts($sleeperStatsDto->getPunts());
 
         // Team defense
         $sleeperStatsEntity->setDefTd($sleeperStatsDto->getDefTd());
@@ -178,6 +183,8 @@ class SleeperStatsConverter implements ConverterInterface {
         $sleeperStatsEntity->setIntRetYd($sleeperStatsDto->getIntRetYd());
         $sleeperStatsEntity->setFumRec($sleeperStatsDto->getFumRec());
         $sleeperStatsEntity->setFumRetYd($sleeperStatsDto->getFumRetYd());
+        $sleeperStatsEntity->setFumRecEzTds($sleeperStatsDto->getFumRecEzTds());
+        $sleeperStatsEntity->setMiscRetYd($sleeperStatsDto->getMiscRetYd());
         $sleeperStatsEntity->setTklLoss($sleeperStatsDto->getTklLoss());
         $sleeperStatsEntity->setTklAst($sleeperStatsDto->getTklAst());
         $sleeperStatsEntity->setTklAstMisc($sleeperStatsDto->getTklAstMisc());
@@ -230,6 +237,7 @@ class SleeperStatsConverter implements ConverterInterface {
 
         // Misc
         $sleeperStatsEntity->setTd($sleeperStatsDto->getTd());
+        $sleeperStatsEntity->setMiscTd($sleeperStatsDto->getMiscTd());
         $sleeperStatsEntity->setFum($sleeperStatsDto->getFum());
         $sleeperStatsEntity->setFumLost($sleeperStatsDto->getFumLost());
         $sleeperStatsEntity->setFumRecTd($sleeperStatsDto->getFumRecTd());

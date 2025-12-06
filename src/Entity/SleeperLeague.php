@@ -311,6 +311,17 @@ class SleeperLeague {
         return $this;
     }
 
+    public function getRosterBySleeperUserId(int $sleeperUserId): ?SleeperRoster
+    {
+        foreach($this->rosters as $roster) {
+            if($roster->getOwner()->getId() === $sleeperUserId) {
+                return $roster;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @return Collection<int, SleeperTradedPick>
      */
@@ -397,6 +408,16 @@ class SleeperLeague {
     public function getMatchups(): Collection
     {
         return $this->matchups;
+    }
+
+    public function getMatchupByRosterIdAndWeek(int $rosterId, int $week): ?SleeperMatchup
+    {
+        foreach($this->matchups as $matchup) {
+            if($matchup->getRosterId() === $rosterId && $matchup->getWeek() === $week) {
+                return $matchup;
+            }
+        }
+        return null;
     }
 
     /**

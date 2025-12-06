@@ -30,6 +30,11 @@ class SleeperRosterMetadata {
     #[ORM\Column]
     private array $playerNicknames = [];
 
+    public function __construct()
+    {
+        $this->playerNicknames = [];
+    }
+
     public function getAllowPnInactiveStarters(): ?string
     {
         return $this->allowPnInactiveStarters;
