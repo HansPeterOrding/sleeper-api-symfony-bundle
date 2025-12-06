@@ -61,6 +61,6 @@ class SyncSleeperPlayerProjectionsBatchHandler extends AbstractSyncStatsHandler
             return;
         }
 
-        $this->upsert($rows);
+        $this->upsert($rows, 'projections');
     }
 }

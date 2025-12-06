@@ -68,7 +68,7 @@ abstract class AbstractSyncStatsHandler {
         return $row;
     }
 
-    protected function upsert(array $rows): void
+    protected function upsert(array $rows, string $type = 'stats'): void
     {
         $columns = array_keys($rows[0]);
 
@@ -92,9 +92,10 @@ abstract class AbstractSyncStatsHandler {
         }
 
         $sql = sprintf(
-            'INSERT INTO public.sasb_sleeper_player_stats (%s) VALUES %s
+            'INSERT INTO public.%s (%s) VALUES %s
      ON CONFLICT (season, week, player_id)
      DO UPDATE SET %s',
+            $type === 'stats'?'sasb_sleeper_player_stats':'sasb_sleeper_player_projections',
             implode(', ', $columns),
             implode(', ', $valuesSqlParts),
             implode(', ', $updateAssignments),
