@@ -19,7 +19,7 @@ class SyncSleeperPlayerProjectionsBatchHandler extends AbstractSyncStatsHandler
             return;
         }
 
-        $this->db->beginTransaction();
+//        $this->db->beginTransaction();
         try {
             $externalPids = array_map(
                 static fn(SleeperPlayerProjections $dto) => (string)$dto->getPlayerId(),
@@ -29,9 +29,9 @@ class SyncSleeperPlayerProjectionsBatchHandler extends AbstractSyncStatsHandler
 
             $this->bulkUpsertProjections($message, $playerIdMap);
 
-            $this->db->commit();
+//            $this->db->commit();
         } catch (\Throwable $e) {
-            $this->db->rollBack();
+//            $this->db->rollBack();
             throw $e;
         }
     }
