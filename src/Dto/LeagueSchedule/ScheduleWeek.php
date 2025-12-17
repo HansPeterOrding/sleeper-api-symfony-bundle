@@ -60,6 +60,19 @@ class ScheduleWeek {
         return null;
     }
 
+    public function getPlayoffMatchupByRosterId(int $rosterId): ?PlayoffMatchup
+    {
+        foreach ($this->playoffMatchups as $playoffMatchup) {
+            if ($playoffMatchup->getSleeperPlayoffMatchup()->getRosterTeam1()?->getRosterId() === $rosterId) {
+                return $playoffMatchup;
+            } elseif ($playoffMatchup->getSleeperPlayoffMatchup()->getRosterTeam2()?->getRosterId() === $rosterId) {
+                return $playoffMatchup;
+            }
+        }
+
+        return null;
+    }
+
     public function getOwnSleeperMatchupByRosterId(int $rosterId): ?SleeperMatchup
     {
         if (null !== ($matchup = $this->getMatchupByRosterId($rosterId))) {
