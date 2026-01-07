@@ -15,12 +15,16 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\FantasyPositionEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 
+
 #[ORM\Entity]
-#[ORM\Index(columns: ['draft_id'])]
-#[ORM\Index(columns: ['league_id'])]
-#[ORM\Index(columns: ['season'])]
+#[ORM\Table(name: 'sasb_sleeper_draft')]
+#[ORM\Index(name: 'idx_sasb_sleeper_draft_draft_id', columns: ['draft_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_draft_league_id', columns: ['league_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_draft_season', columns: ['season'])]
 class SleeperDraft {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private int $id;
 
     #[ORM\Column]

@@ -10,11 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjections as SleeperPlayerProjectionsDto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(name: 'sasb_player_projections_unique', columns: ['season', 'week', 'player_id'])]
+#[ORM\Table(name: 'sasb_sleeper_player_projections')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_player_projections', columns: ['season', 'week', 'player_id'])]
 class SleeperPlayerProjections {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]

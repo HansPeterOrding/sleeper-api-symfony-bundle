@@ -11,12 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(name: 'sasb_player_unique', columns: ['player_id'])]
-#[ORM\Index(fields: ['id', 'player_id'])]
+#[ORM\Table(name: 'sasb_sleeper_player')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_player_player_id', columns: ['player_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_player_id_player_id', columns: ['id', 'player_id'])]
 class SleeperPlayer {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private int $id;
 
     #[ORM\Column]

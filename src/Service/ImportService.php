@@ -14,6 +14,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperRosterImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTradedPickImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperTransactionImporter;
 use HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ImportService {
     public const IMPORT_ENTITY_LEAGUE = 'import_entity_league';
@@ -55,52 +56,77 @@ class ImportService {
         ];
     }
 
-    public function importSleeperLeague(string $sleeperLeagueId, ?array $importEntities = null): void
+    public function importSleeperLeague(string $sleeperLeagueId, ?array $importEntities = null): mixed
     {
         if (!$importEntities) {
             $importEntities = $this->getDefaultImportEntities();
         }
 
+        $stopwatch = new Stopwatch();
+        $stopwatch->start('import_league');
+
         $sleeperUsers = [];
         $sleeperRosters = [];
         $sleeperDraft = null;
 
+        $stopwatch->openSection();
         $sleeperLeague = $this->sleeperLeagueImporter->import($sleeperLeagueId);
+        $stopwatch->stopSection('league');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_USERS, $importEntities)) {
             $sleeperUsers = $this->sleeperUserImporter->importLeagueUsers($sleeperLeagueId);
         }
+        $stopwatch->stopSection('users');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_ROSTERS, $importEntities)) {
             $sleeperRosters = $this->sleeperRosterImporter->importLeagueRosters($sleeperLeagueId, $sleeperUsers, $sleeperLeague);
         }
+        $stopwatch->stopSection('rosters');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
             $sleeperDraft = $this->sleeperDraftImporter->import($sleeperLeague->getDraftId(), $sleeperLeague);
         }
+        $stopwatch->stopSection('draft');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_DRAFT_PICKS, $importEntities)) {
             if (!array_key_exists(self::IMPORT_ENTITY_LEAGUE_DRAFT, $importEntities)) {
                 throw new ImportConfigurationException('Invalid configuration for import: Draft picks can only imported when draft is also imported. Please add ImportService::IMPORT_ENTITY_LEAGUE_DRAFT to defined $importEntities.');
             }
             $sleeperDraftPicks = $this->sleeperDraftPickImporter->importDraftPicks($sleeperDraft);
         }
+        $stopwatch->stopSection('draft-picks');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_MATCHUPS, $importEntities)) {
             $this->sleeperMatchupImporter->importBulkMatchups($sleeperLeague, $sleeperRosters, $importEntities[self::IMPORT_ENTITY_LEAGUE_MATCHUPS]);
             #$this->sleeperMatchupImporter->importMatchups($sleeperLeague, $sleeperRosters, $importEntities[self::IMPORT_ENTITY_LEAGUE_MATCHUPS]);
         }
+        $stopwatch->stopSection('matchups');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_PLAYOFF_MATCHUPS, $importEntities)) {
             $sleeperPlayoffMatchups = $this->sleeperPlayoffMatchupImporter->importPlayoffMatchups($sleeperLeague);
         }
+        $stopwatch->stopSection('playoff-matchups');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_TRADED_PICKS, $importEntities)) {
             $sleeperTradedPicks = $this->sleeperTradedPickImporter->importTradedPicks($sleeperLeague, $sleeperDraft);
         }
+        $stopwatch->stopSection('traded-picks');
 
+        $stopwatch->openSection();
         if (array_key_exists(self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS, $importEntities)) {
             $sleeperTransactions = $this->sleeperTransactionImporter->importTransactionBatch($sleeperLeague, $importEntities[self::IMPORT_ENTITY_LEAGUE_TRANSACTIONS]);
         }
+        $stopwatch->stopSection('transactions');
+
+        $stopwatch->stop('import_league');
+
+        return $stopwatch->getSections();
     }
 }

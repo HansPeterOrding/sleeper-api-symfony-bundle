@@ -10,12 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperUser as SleeperUserDto;
 
 #[ORM\Entity]
-#[ORM\Index(columns: ['user_id'])]
-#[ORM\Index(columns: ['display_name'])]
+#[ORM\Table(name: 'sasb_sleeper_user')]
+#[ORM\Index(name: 'idx_sasb_sleeper_user_user_id', columns: ['user_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_user_display_name', columns: ['display_name'])]
 class SleeperUser {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

@@ -8,15 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto as Dto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(
-    name: 'sasb_sleeper_playoff_matchup_unique',
-    columns: ['league_id', 'branch', 'm']
-)]
-#[ORM\Index(columns: ['league_id'])]
+#[ORM\Table(name: 'sasb_sleeper_playoff_matchup')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_playoff_matchup', columns: ['league_id', 'branch', 'm'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_playoff_matchup_league_id', columns: ['league_id'])]
 class SleeperPlayoffMatchup {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column]

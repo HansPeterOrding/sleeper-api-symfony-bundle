@@ -8,11 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTradedPick as SleeperTradedPickDto;
 
 #[ORM\Entity]
-#[ORM\Index(columns: ['league_id'])]
-#[ORM\Index(columns: ['draft_id'])]
-#[ORM\Index(columns: ['season'])]
+#[ORM\Table(name: 'sasb_sleeper_traded_pick')]
+#[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_league_id', columns: ['league_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_draft_id', columns: ['draft_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_season', columns: ['season'])]
 class SleeperTradedPick {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private int $id;
 
     #[ORM\Column]

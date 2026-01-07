@@ -12,10 +12,13 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionTypeEnum;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'sasb_sleeper_transaction')]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Index(columns: ['transaction_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_transaction_transaction_id', columns: ['transaction_id'])]
 class SleeperTransaction {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private int $id;
 
     #[ORM\Embedded(class: SleeperTransactionWaiverBudget::class, columnPrefix: 'waiver_budget_')]
@@ -81,7 +84,7 @@ class SleeperTransaction {
      * @var Collection<int, SleeperPlayer>
      */
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
-    #[ORM\JoinTable(name: 'sleeper_transactions_dropped_players')]
+    #[ORM\JoinTable(name: 'sasb_sleeper_transactions_dropped_players')]
     #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
     private Collection $droppedPlayers;
@@ -90,7 +93,7 @@ class SleeperTransaction {
      * @var Collection<int, SleeperPlayer>
      */
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
-    #[ORM\JoinTable(name: 'sleeper_transactions_added_players')]
+    #[ORM\JoinTable(name: 'sasb_sleeper_transactions_added_players')]
     #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
     private Collection $addedPlayers;
@@ -99,7 +102,7 @@ class SleeperTransaction {
      * @var Collection<int, SleeperRoster>
      */
     #[ORM\ManyToMany(targetEntity: SleeperRoster::class)]
-    #[ORM\JoinTable(name: 'sleeper_transactions_consenter_users')]
+    #[ORM\JoinTable(name: 'sasb_sleeper_transactions_consenter_users')]
     #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id')]
     private Collection $consenterRosters;

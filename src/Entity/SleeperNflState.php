@@ -8,11 +8,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperNflStateRepository;
 
 #[ORM\Entity(repositoryClass: SleeperNflStateRepository::class)]
-#[ORM\Index(columns: ['season'])]
+#[ORM\Table(name: 'sasb_sleeper_nfl_state')]
+#[ORM\Index(name: 'idx_sasb_sleeper_nfl_state_season', columns: ['season'])]
 class SleeperNflState {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column]

@@ -10,16 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto as Dto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(
-    name: 'sasb_sleeper_matchup_unique',
-    columns: ['league_id', 'week', 'roster_id']
-)]
-#[ORM\Index(columns: ['league_id'])]
-#[ORM\Index(columns: ['internal_league_id', 'week'])]
+#[ORM\Table(name: 'sasb_sleeper_matchup')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_matchup', columns: ['league_id', 'week', 'roster_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_matchup_league_id', columns: ['league_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_matchup_internal_league_id_and_week', columns: ['internal_league_id', 'week'])]
 class SleeperMatchup {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -56,7 +54,7 @@ class SleeperMatchup {
     #[ORM\JoinColumn(name: 'internal_league_id')]
     private ?SleeperLeague $league = null;
 
-    #[ORM\JoinTable(name: 'matchup_starters')]
+    #[ORM\JoinTable(name: 'sasb_matchup_starters')]
     #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
@@ -65,7 +63,7 @@ class SleeperMatchup {
     /**
      * @var array<int, SleeperPlayer>
      */
-    #[ORM\JoinTable(name: 'matchup_players')]
+    #[ORM\JoinTable(name: 'sasb_matchup_players')]
     #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]

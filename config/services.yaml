@@ -1,7 +1,3 @@
-# mapping from bundle name to table prefix
-parameters:
-    sasb_table_prefix: sasb_
-        
 services:
     _defaults:
         # this means you cannot fetch services directly from the container via $container->get()
@@ -9,13 +5,7 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        
-    HansPeterOrding\SleeperApiSymfonyBundle\DoctrineExtensions\TablePrefixEventListener:
-        arguments:
-            $prefix: '%sasb_table_prefix%'
-        tags:
-            - { name: doctrine.event_listener, event: loadClassMetadata, method: loadClassMetadata }
-                
+                    
     HansPeterOrding\SleeperApiSymfonyBundle\Util\ScheduleUtils: ~
     
     # Repositories

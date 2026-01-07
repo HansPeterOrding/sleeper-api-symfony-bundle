@@ -8,8 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftPick as SleeperDraftPickDto;
 
 #[ORM\Entity]
+#[ORM\Table(name: 'sasb_sleeper_draft_pick')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_draft_pick', columns: ['draft_id', 'pick_no'])]
 class SleeperDraftPick {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column]

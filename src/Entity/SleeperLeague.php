@@ -12,12 +12,13 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\LeagueStatusEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 
 #[ORM\Entity]
-#[ORM\Index(columns: ['league_id'])]
-#[ORM\Index(columns: ['season'])]
+#[ORM\Table(name: 'sasb_sleeper_league')]
+#[ORM\Index(name: 'idx_sasb_sleeper_league_league_id', columns: ['league_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_league_season', columns: ['season'])]
 class SleeperLeague {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
     #[ORM\Column]

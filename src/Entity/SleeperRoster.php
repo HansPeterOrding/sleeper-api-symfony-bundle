@@ -11,13 +11,14 @@ use HansPeterOrding\SleeperApiClient\ApiClient\Endpoints\User;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 
 #[ORM\Entity]
-#[ORM\UniqueConstraint(name: 'sasb_sleeper_roster_unique', columns: ['league_id', 'roster_id'])]
-#[ORM\Index(columns: ['league_id'])]
-#[ORM\Index(columns: ['internal_owner_id', 'internal_league_id'])]
+#[ORM\Table(name: 'sasb_sleeper_roster')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_roster', columns: ['league_id', 'roster_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_roster_league_id', columns: ['league_id'])]
+#[ORM\Index(name: 'idx_sasb_sleeper_roster_internal_owner_id_internal_league_id', columns: ['internal_owner_id', 'internal_league_id'])]
 class SleeperRoster {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(type: 'bigint')]
     private int $id;
 
     #[ORM\Column]
