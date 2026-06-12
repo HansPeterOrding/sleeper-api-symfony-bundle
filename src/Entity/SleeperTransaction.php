@@ -78,6 +78,7 @@ class SleeperTransaction {
      * @var Collection<int, SleeperRoster>
      */
     #[ORM\ManyToMany(targetEntity: SleeperRoster::class)]
+    #[ORM\JoinTable(name: 'sasb_sleeper_transaction_sleeper_roster')]
     private Collection $rosters;
 
     /**

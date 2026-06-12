@@ -76,7 +76,9 @@ class SleeperDraftPickImporter extends AbstractImporter {
 
         $playerIdMap = $this->fetchPlayerIdMap($externalPlayerIds); // [external player_id => internal id]
         $userIdMap   = $this->fetchUserIdMap($externalUserIds);     // [external user_id   => internal id]
-        $rosterIdMap = $this->fetchRosterMapByLeagueId($leagueId);  // [roster_id          => internal id]
+        if($leagueId) {
+            $rosterIdMap = $this->fetchRosterMapByLeagueId($leagueId);  // [roster_id          => internal id]
+        }
 
         $rows     = [];
 
@@ -139,7 +141,7 @@ class SleeperDraftPickImporter extends AbstractImporter {
         }
     }
 
-    private function fetchLeagueIdForDraft(string $draftId): string
+    private function fetchLeagueIdForDraft(string $draftId): ?string
     {
         $leagueId = $this->db->fetchOne(
             'SELECT league_id FROM public.sasb_sleeper_draft WHERE draft_id = ?',
@@ -147,7 +149,7 @@ class SleeperDraftPickImporter extends AbstractImporter {
         );
 
         if (!$leagueId) {
-            throw new \RuntimeException("Draft $draftId not found (run draft importer first).");
+            return null;
         }
 
         return (string)$leagueId;
