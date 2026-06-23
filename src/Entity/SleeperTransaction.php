@@ -13,9 +13,11 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\TransactionTypeEnum;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'sasb_sleeper_transaction')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_transaction_transaction_id', columns: ['transaction_id'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Index(name: 'idx_sasb_sleeper_transaction_transaction_id', columns: ['transaction_id'])]
-class SleeperTransaction {
+class SleeperTransaction
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -79,6 +81,8 @@ class SleeperTransaction {
      */
     #[ORM\ManyToMany(targetEntity: SleeperRoster::class)]
     #[ORM\JoinTable(name: 'sasb_sleeper_transaction_sleeper_roster')]
+    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id')]
     private Collection $rosters;
 
     /**
@@ -377,7 +381,7 @@ class SleeperTransaction {
 
     public function getDroppedPlayerById(string $playerId): ?SleeperPlayer
     {
-        foreach($this->droppedPlayers as $droppedPlayer) {
+        foreach ($this->droppedPlayers as $droppedPlayer) {
             if ($droppedPlayer->getPlayerId() === $playerId) {
                 return $droppedPlayer;
             }
@@ -405,7 +409,7 @@ class SleeperTransaction {
 
     public function getAddedPlayerById(string $playerId): ?SleeperPlayer
     {
-        foreach($this->addedPlayers as $addedPlayer) {
+        foreach ($this->addedPlayers as $addedPlayer) {
             if ($addedPlayer->getPlayerId() === $playerId) {
                 return $addedPlayer;
             }

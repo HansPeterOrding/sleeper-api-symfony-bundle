@@ -18,10 +18,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SportEnum;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'sasb_sleeper_draft')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_draft_draft_id', columns: ['draft_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_draft_draft_id', columns: ['draft_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_draft_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_draft_season', columns: ['season'])]
-class SleeperDraft {
+class SleeperDraft
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -436,18 +438,18 @@ class SleeperDraft {
 
     public function getOwnerByDraftSlot(int $draftSlot): ?SleeperUser
     {
-        if(!$this->draftOrder || !$this->getLeague()->getRosters()) {
+        if (!$this->draftOrder || !$this->getLeague()->getRosters()) {
             return null;
         }
 
-        foreach($this->draftOrder as $ownerId => $claimedDraftSlot) {
-            if($claimedDraftSlot === $draftSlot) {
+        foreach ($this->draftOrder as $ownerId => $claimedDraftSlot) {
+            if ($claimedDraftSlot === $draftSlot) {
                 break;
             }
         }
 
-        foreach($this->getLeague()->getRosters() as $roster) {
-            if($roster->getOwner()->getUserId() === (string)$ownerId) {
+        foreach ($this->getLeague()->getRosters() as $roster) {
+            if ($roster->getOwner()->getUserId() === (string)$ownerId) {
                 return $roster->getOwner();
             }
         }

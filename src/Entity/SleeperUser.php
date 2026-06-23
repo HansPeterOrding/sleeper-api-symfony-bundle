@@ -11,9 +11,11 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperUser as SleeperUserDto;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'sasb_sleeper_user')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_user_user_id', columns: ['user_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_user_user_id', columns: ['user_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_user_display_name', columns: ['display_name'])]
-class SleeperUser {
+class SleeperUser
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]

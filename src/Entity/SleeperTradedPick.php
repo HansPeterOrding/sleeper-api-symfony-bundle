@@ -9,10 +9,12 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperTradedPick as SleeperTradedPickD
 
 #[ORM\Entity]
 #[ORM\Table(name: 'sasb_sleeper_traded_pick')]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_traded_pick', columns: ['league_id', 'draft_id', 'season', 'round', 'roster_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_draft_id', columns: ['draft_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_traded_pick_season', columns: ['season'])]
-class SleeperTradedPick {
+class SleeperTradedPick
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]

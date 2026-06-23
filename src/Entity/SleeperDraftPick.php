@@ -10,22 +10,23 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperDraftPick as SleeperDraftPickDto
 #[ORM\Entity]
 #[ORM\Table(name: 'sasb_sleeper_draft_pick')]
 #[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_draft_pick', columns: ['draft_id', 'pick_no'])]
-class SleeperDraftPick {
+class SleeperDraftPick
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $round = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $rosterId = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $playerId;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $pickedBy;
 
     #[ORM\Column]
@@ -37,7 +38,7 @@ class SleeperDraftPick {
     #[ORM\Column(nullable: true)]
     private ?bool $isKeeper = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $draftSlot = null;
 
     #[ORM\Column]

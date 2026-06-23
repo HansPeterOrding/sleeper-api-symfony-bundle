@@ -244,9 +244,52 @@ services:
     hpo_sleeper_api_symfony_bundle.importer.sleeper_user: '@HansPeterOrding\SleeperApiSymfonyBundle\Importer\SleeperUserImporter'
     
     HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupHandler: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupBatchHandler: ~
+    HansPeterOrding\SleeperApiSymfonyBundle\Service\SleeperImportService: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerProjectionsBatchHandler: ~
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerStatsBatchHandler: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionHandler: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionBatchHandler: ~
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayersBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperLeagueHandler:
+        arguments:
+            $leagueImporter: '@hpo_sleeper_api_symfony_bundle.importer.sleeper_league'
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperDraftHandler:
+        arguments:
+            $draftImporter: '@hpo_sleeper_api_symfony_bundle.importer.sleeper_draft'
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperUsersAndRostersBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperRostersBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperRostersHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperMatchupsBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayoffMatchupsBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperDraftPicksBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTradedPicksBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperTransactionsBatchHandler: ~
+    
+    # Utils
+    hpo_sleeper_api_symfony_bundle.logger:
+        alias: 'logger'
+        public: true
+    
+    # Client
+    HansPeterOrding\SleeperApiClient\ApiClient\SleeperApiClientFactory: ~
+    
+    HansPeterOrding\SleeperApiClient\ApiClient\SleeperApiClientInterface:
+        factory: [ '@HansPeterOrding\SleeperApiClient\ApiClient\SleeperApiClientFactory', 'getSleeperApiClient' ]
+        arguments:
+            $logger: '@logger'

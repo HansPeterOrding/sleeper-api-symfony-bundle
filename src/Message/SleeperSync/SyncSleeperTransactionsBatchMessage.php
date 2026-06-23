@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync;
 
-use HansPeterOrding\SleeperApiClient\Dto\SleeperMatchup;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperTransaction;
 
-class SyncSleeperTransactionBatch {
+readonly class SyncSleeperTransactionsBatchMessage
+{
     /**
      * @param SleeperTransaction[] $transactions
      */
     public function __construct(
-        public readonly string $leagueId,
-        public readonly array  $transactions
-    )
-    {
-    }
+        public string $leagueId,
+        public array  $transactions,
+    ) {}
 }
