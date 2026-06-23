@@ -7,6 +7,7 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;
+use HansPeterOrding\SleeperApiClient\ApiClient\Endpoints\AbstractEndpoint;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayoffMatchup;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperPlayoffMatchupsBatchMessage;
 use Psr\Log\LoggerInterface;
@@ -40,10 +41,10 @@ class SyncSleeperPlayoffMatchupsBatchHandler
 
             $rows = [];
             foreach ($message->winnersData as $dto) {
-                $rows[] = $this->buildRow($dto, 'winners', $message->leagueId, $internalLeagueId, $rosterMap, $matchupMap, $playoffWeekStart);
+                $rows[] = $this->buildRow($dto, AbstractEndpoint::BRANCH_WINNERS, $message->leagueId, $internalLeagueId, $rosterMap, $matchupMap, $playoffWeekStart);
             }
             foreach ($message->losersData as $dto) {
-                $rows[] = $this->buildRow($dto, 'losers', $message->leagueId, $internalLeagueId, $rosterMap, $matchupMap, $playoffWeekStart);
+                $rows[] = $this->buildRow($dto, AbstractEndpoint::BRANCH_LOSERS, $message->leagueId, $internalLeagueId, $rosterMap, $matchupMap, $playoffWeekStart);
             }
 
             foreach (array_chunk($rows, 200) as $chunk) {
