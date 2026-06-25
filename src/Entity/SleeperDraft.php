@@ -470,6 +470,17 @@ class SleeperDraft
         return null;
     }
 
+    public function getSlotByRosterId(int $rosterId): ?int
+    {
+        foreach($this->getSlotToRosterId() as $slot => $assignedRosterId) {
+            if($assignedRosterId === $rosterId) {
+                return $slot;
+            }
+        }
+
+        return null;
+    }
+
     private function getDraftSlotPositionToPositionMapping(): array
     {
         return [
