@@ -200,10 +200,10 @@ SQL;
             $params[] = $metadata?->getTeam();
             $params[] = $metadata?->getYearsExp();
             $params[] = $metadata?->getSport();
-            $params[] = $metadata?->getStatus();
+            $params[] = ($metadata?->getStatus() ?: null);
             $params[] = $metadata?->getNumber();
             $params[] = $metadata?->getNewsUpdated();
-            $params[] = $metadata?->getInjuryStatus();
+            $params[] = ($metadata?->getInjuryStatus() ?: null);
             $params[] = $metadata?->getAmount();
         }
 
