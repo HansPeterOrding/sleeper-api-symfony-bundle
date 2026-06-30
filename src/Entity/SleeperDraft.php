@@ -449,7 +449,7 @@ class SleeperDraft
         }
 
         foreach ($this->getLeague()->getRosters() as $roster) {
-            if ($roster->getOwner()->getUserId() === (string)$ownerId) {
+            if ($roster->getOwner()?->getUserId() === (string)$ownerId) {
                 return $roster->getOwner();
             }
         }
