@@ -15,7 +15,8 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 #[ORM\Table(name: 'sasb_sleeper_league')]
 #[ORM\Index(name: 'idx_sasb_sleeper_league_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_league_season', columns: ['season'])]
-class SleeperLeague {
+class SleeperLeague
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -59,6 +60,13 @@ class SleeperLeague {
 
     #[ORM\Column(nullable: true)]
     private ?string $avatar = null;
+
+    /**
+     * Sleeper list ordering from the user/{id}/leagues response. -1 = archived.
+     * Null when the league was not hydrated from a user-list response.
+     */
+    #[ORM\Column(nullable: true)]
+    private ?int $displayOrder = null;
 
     /**
      * @var Collection<int, SleeperDraft>
@@ -210,6 +218,17 @@ class SleeperLeague {
         return $this;
     }
 
+    public function getDisplayOrder(): ?int
+    {
+        return $this->displayOrder;
+    }
+
+    public function setDisplayOrder(?int $displayOrder): SleeperLeague
+    {
+        $this->displayOrder = $displayOrder;
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -314,8 +333,8 @@ class SleeperLeague {
 
     public function getRosterBySleeperUserId(int $sleeperUserId): ?SleeperRoster
     {
-        foreach($this->rosters as $roster) {
-            if($roster->getOwner()->getId() === $sleeperUserId) {
+        foreach ($this->rosters as $roster) {
+            if ($roster->getOwner()->getId() === $sleeperUserId) {
                 return $roster;
             }
         }
@@ -413,8 +432,8 @@ class SleeperLeague {
 
     public function getMatchupByRosterIdAndWeek(int $rosterId, int $week): ?SleeperMatchup
     {
-        foreach($this->matchups as $matchup) {
-            if($matchup->getRosterId() === $rosterId && $matchup->getWeek() === $week) {
+        foreach ($this->matchups as $matchup) {
+            if ($matchup->getRosterId() === $rosterId && $matchup->getWeek() === $week) {
                 return $matchup;
             }
         }

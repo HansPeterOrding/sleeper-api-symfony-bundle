@@ -10,7 +10,8 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague as SleeperLeagueEntity;
 use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperLeagueRepository;
 
-class SleeperLeagueConverter implements ConverterInterface {
+class SleeperLeagueConverter implements ConverterInterface
+{
     public function __construct(
         private readonly SleeperLeagueRepository               $sleeperLeagueRepository,
         private readonly SleeperLeagueSettingsConverter        $sleeperLeagueSettingsConverter,
@@ -34,6 +35,7 @@ class SleeperLeagueConverter implements ConverterInterface {
         $sleeperLeagueEntity->setLeagueId($sleeperLeagueDto->getLeagueId());
         $sleeperLeagueEntity->setDraftId($sleeperLeagueDto->getDraftId());
         $sleeperLeagueEntity->setAvatar($sleeperLeagueDto->getAvatar());
+        $sleeperLeagueEntity->setDisplayOrder($sleeperLeagueDto->getDisplayOrder());
 
         $sleeperLeagueSettingsEntity = $this->sleeperLeagueSettingsConverter->toEntity(
             $sleeperLeagueDto->getSettings(),
