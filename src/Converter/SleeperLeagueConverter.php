@@ -35,7 +35,6 @@ class SleeperLeagueConverter implements ConverterInterface
         $sleeperLeagueEntity->setLeagueId($sleeperLeagueDto->getLeagueId());
         $sleeperLeagueEntity->setDraftId($sleeperLeagueDto->getDraftId());
         $sleeperLeagueEntity->setAvatar($sleeperLeagueDto->getAvatar());
-        $sleeperLeagueEntity->setDisplayOrder($sleeperLeagueDto->getDisplayOrder());
 
         $sleeperLeagueSettingsEntity = $this->sleeperLeagueSettingsConverter->toEntity(
             $sleeperLeagueDto->getSettings(),

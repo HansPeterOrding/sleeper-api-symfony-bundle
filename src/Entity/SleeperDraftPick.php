@@ -45,19 +45,19 @@ class SleeperDraftPick
     private string $draftId;
 
     #[ORM\ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'draftPicks')]
-    #[ORM\JoinColumn(name: 'internal_draft_id')]
+    #[ORM\JoinColumn(name: 'internal_draft_id', onDelete: 'CASCADE')]
     private ?SleeperDraft $draft = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperPlayer::class, inversedBy: 'draftPicks')]
-    #[ORM\JoinColumn(name: 'internal_player_id')]
+    #[ORM\JoinColumn(name: 'internal_player_id', onDelete: 'SET NULL')]
     private ?SleeperPlayer $player = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'draftPicks')]
-    #[ORM\JoinColumn(name: 'internal_roster_id')]
+    #[ORM\JoinColumn(name: 'internal_roster_id', onDelete: 'SET NULL')]
     private ?SleeperRoster $roster = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'draftPicks')]
-    #[ORM\JoinColumn(name: 'internal_user_id')]
+    #[ORM\JoinColumn(name: 'internal_user_id', onDelete: 'SET NULL')]
     private ?SleeperUser $user = null;
 
     public function __construct()

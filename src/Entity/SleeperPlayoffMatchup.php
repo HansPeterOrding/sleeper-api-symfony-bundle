@@ -11,7 +11,8 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
 #[ORM\Table(name: 'sasb_sleeper_playoff_matchup')]
 #[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_playoff_matchup', columns: ['league_id', 'branch', 'm'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_playoff_matchup_league_id', columns: ['league_id'])]
-class SleeperPlayoffMatchup {
+class SleeperPlayoffMatchup
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -51,23 +52,23 @@ class SleeperPlayoffMatchup {
     private ?int $p = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'playoffMatchups')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'playoffMatchupsHome')]
-    #[ORM\JoinColumn(name: 'internal_roster_id_t1')]
+    #[ORM\JoinColumn(name: 'internal_roster_id_t1', onDelete: 'SET NULL')]
     private ?SleeperRoster $rosterTeam1 = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'playoffMatchupsAway')]
-    #[ORM\JoinColumn(name: 'internal_roster_id_t2')]
+    #[ORM\JoinColumn(name: 'internal_roster_id_t2', onDelete: 'SET NULL')]
     private ?SleeperRoster $rosterTeam2 = null;
 
     #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
-    #[ORM\JoinColumn(name: 'internal_matchup_id_t1')]
+    #[ORM\JoinColumn(name: 'internal_matchup_id_t1', onDelete: 'SET NULL')]
     private ?SleeperMatchup $matchupTeam1 = null;
 
     #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
-    #[ORM\JoinColumn(name: 'internal_matchup_id_t2')]
+    #[ORM\JoinColumn(name: 'internal_matchup_id_t2', onDelete: 'SET NULL')]
     private ?SleeperMatchup $matchupTeam2 = null;
 
     public function getId(): ?int

@@ -62,13 +62,6 @@ class SleeperLeague
     private ?string $avatar = null;
 
     /**
-     * Sleeper list ordering from the user/{id}/leagues response. -1 = archived.
-     * Null when the league was not hydrated from a user-list response.
-     */
-    #[ORM\Column(nullable: true)]
-    private ?int $displayOrder = null;
-
-    /**
      * @var Collection<int, SleeperDraft>
      */
     #[ORM\OneToOne(targetEntity: SleeperDraft::class, mappedBy: 'league')]
@@ -215,17 +208,6 @@ class SleeperLeague
     public function setPreviousLeagueId(?string $previousLeagueId): SleeperLeague
     {
         $this->previousLeagueId = $previousLeagueId;
-        return $this;
-    }
-
-    public function getDisplayOrder(): ?int
-    {
-        return $this->displayOrder;
-    }
-
-    public function setDisplayOrder(?int $displayOrder): SleeperLeague
-    {
-        $this->displayOrder = $displayOrder;
         return $this;
     }
 

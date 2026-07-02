@@ -42,23 +42,23 @@ class SleeperTradedPick
     private ?string $leagueId = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'tradedPicks')]
-    #[ORM\JoinColumn(name: 'internal_roster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'internal_roster_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private ?SleeperRoster $roster = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'soldPicks')]
-    #[ORM\JoinColumn(name: 'internal_previous_owner_id')]
+    #[ORM\JoinColumn(name: 'internal_previous_owner_id', onDelete: 'SET NULL')]
     private ?SleeperUser $previousOwner = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'acquiredPicks')]
-    #[ORM\JoinColumn(name: 'internal_owner_id')]
+    #[ORM\JoinColumn(name: 'internal_owner_id', onDelete: 'SET NULL')]
     private ?SleeperUser $owner = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperDraft::class, inversedBy: 'tradedPicks')]
-    #[ORM\JoinColumn(name: 'internal_draft_id')]
+    #[ORM\JoinColumn(name: 'internal_draft_id', onDelete: 'SET NULL')]
     private ?SleeperDraft $draft = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'tradedPicks')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     public function getId(): int

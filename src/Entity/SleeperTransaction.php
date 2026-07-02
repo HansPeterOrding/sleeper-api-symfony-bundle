@@ -60,7 +60,7 @@ class SleeperTransaction
     private string $creator;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class, inversedBy: 'transactions')]
-    #[ORM\JoinColumn(name: 'internal_sleeper_user_id')]
+    #[ORM\JoinColumn(name: 'internal_sleeper_user_id', onDelete: 'SET NULL')]
     private ?SleeperUser $creatorUser = null;
 
     #[ORM\Column(type: 'bigint')]
@@ -73,7 +73,7 @@ class SleeperTransaction
     private ?array $adds;
 
     #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'transactions')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     /**
@@ -81,8 +81,8 @@ class SleeperTransaction
      */
     #[ORM\ManyToMany(targetEntity: SleeperRoster::class)]
     #[ORM\JoinTable(name: 'sasb_sleeper_transaction_sleeper_roster')]
-    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $rosters;
 
     /**
@@ -90,8 +90,8 @@ class SleeperTransaction
      */
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
     #[ORM\JoinTable(name: 'sasb_sleeper_transactions_dropped_players')]
-    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $droppedPlayers;
 
     /**
@@ -99,8 +99,8 @@ class SleeperTransaction
      */
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
     #[ORM\JoinTable(name: 'sasb_sleeper_transactions_added_players')]
-    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $addedPlayers;
 
     /**
@@ -108,8 +108,8 @@ class SleeperTransaction
      */
     #[ORM\ManyToMany(targetEntity: SleeperRoster::class)]
     #[ORM\JoinTable(name: 'sasb_sleeper_transactions_consenter_users')]
-    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'transaction_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'roster_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $consenterRosters;
 
     #[ORM\Column(nullable: true)]

@@ -15,7 +15,8 @@ use HansPeterOrding\SleeperApiClient\Dto\SleeperRoster as SleeperRosterDto;
 #[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_roster', columns: ['league_id', 'roster_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_roster_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_roster_internal_owner_id_internal_league_id', columns: ['internal_owner_id', 'internal_league_id'])]
-class SleeperRoster {
+class SleeperRoster
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -55,11 +56,11 @@ class SleeperRoster {
     private SleeperRosterMetadata $metadata;
 
     #[ORM\ManyToOne(targetEntity: SleeperUser::class)]
-    #[ORM\JoinColumn(name: 'internal_owner_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'internal_owner_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private ?SleeperUser $owner = null;
 
     #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'rosters')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     /**

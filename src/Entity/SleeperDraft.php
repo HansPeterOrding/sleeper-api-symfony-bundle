@@ -87,7 +87,7 @@ class SleeperDraft
     private Collection $draftPicks;
 
     #[ORM\OneToOne(targetEntity: SleeperLeague::class, inversedBy: 'draft')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     /**

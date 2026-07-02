@@ -14,7 +14,8 @@ use HansPeterOrding\SleeperApiClient\Dto as Dto;
 #[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_matchup', columns: ['league_id', 'week', 'roster_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_matchup_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_matchup_internal_league_id_and_week', columns: ['internal_league_id', 'week'])]
-class SleeperMatchup {
+class SleeperMatchup
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column(type: 'bigint')]
@@ -51,12 +52,12 @@ class SleeperMatchup {
     private ?float $customPoints;
 
     #[ORM\ManyToOne(targetEntity: SleeperLeague::class, inversedBy: 'matchups')]
-    #[ORM\JoinColumn(name: 'internal_league_id')]
+    #[ORM\JoinColumn(name: 'internal_league_id', onDelete: 'CASCADE')]
     private ?SleeperLeague $league = null;
 
     #[ORM\JoinTable(name: 'sasb_matchup_starters')]
-    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
     private Collection $sleeperStarterPlayers;
 
@@ -64,13 +65,13 @@ class SleeperMatchup {
      * @var array<int, SleeperPlayer>
      */
     #[ORM\JoinTable(name: 'sasb_matchup_players')]
-    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id')]
-    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'matchup_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'player_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\ManyToMany(targetEntity: SleeperPlayer::class)]
     private Collection $sleeperPlayers;
 
     #[ORM\ManyToOne(targetEntity: SleeperRoster::class, inversedBy: 'matchups')]
-    #[ORM\JoinColumn(name: 'internal_roster_id')]
+    #[ORM\JoinColumn(name: 'internal_roster_id', onDelete: 'SET NULL')]
     private ?SleeperRoster $roster = null;
 
     public function __construct()
