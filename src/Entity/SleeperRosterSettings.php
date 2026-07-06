@@ -38,6 +38,9 @@ class SleeperRosterSettings {
     #[ORM\Column]
     private int $fpts = 0;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $eliminated = null;
+
     public function getWins(): int
     {
         return $this->wins;
@@ -145,6 +148,17 @@ class SleeperRosterSettings {
     public function setFpts(int $fpts): SleeperRosterSettings
     {
         $this->fpts = $fpts;
+        return $this;
+    }
+
+    public function getEliminated(): ?int
+    {
+        return $this->eliminated;
+    }
+
+    public function setEliminated(?int $eliminated): SleeperRosterSettings
+    {
+        $this->eliminated = $eliminated;
         return $this;
     }
 }

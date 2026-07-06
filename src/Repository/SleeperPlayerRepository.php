@@ -8,6 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\ArrayParameterType;
 use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayer as SleeperPlayerDto;
 use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayer as SleeperPlayerEntity;
 
@@ -17,7 +18,10 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperPlayer as SleeperPlaye
  * @method SleeperPlayerEntity[] findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method SleeperPlayerEntity[] findAll()
  */
-class SleeperPlayerRepository extends ServiceEntityRepository {
+class SleeperPlayerRepository extends ServiceEntityRepository
+{
+    use \HansPeterOrding\SleeperApiSymfonyBundle\Repository\Traits\PostgresPlatformAssertionTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SleeperPlayerEntity::class);
@@ -50,4 +54,27 @@ class SleeperPlayerRepository extends ServiceEntityRepository {
 
         return $qb->getQuery()->getResult();
     }
+
+    /** @return array<string,int> [playerId => internal id] */
+    public function pgFetchPlayerIdMap(array $playerIds): array
+    {
+        $this->assertPostgres();
+        $playerIds = array_values(array_unique(array_filter(array_map('strval', $playerIds))));
+        if ($playerIds === []) {
+            return [];
+        }
+        $map = [];
+        foreach (array_chunk($playerIds, 1000) as $chunk) {
+            $rows = $this->db()->fetchAllAssociative(
+                'SELECT player_id, id FROM public.sasb_sleeper_player WHERE player_id IN (?)',
+                [$chunk],
+                [ArrayParameterType::STRING]
+            );
+            foreach ($rows as $r) {
+                $map[(string)$r['player_id']] = (int)$r['id'];
+            }
+        }
+        return $map;
+    }
+
 }

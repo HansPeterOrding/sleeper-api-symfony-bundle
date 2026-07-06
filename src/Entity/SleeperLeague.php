@@ -15,6 +15,7 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\SeasonTypeEnum;
 #[ORM\Table(name: 'sasb_sleeper_league')]
 #[ORM\Index(name: 'idx_sasb_sleeper_league_league_id', columns: ['league_id'])]
 #[ORM\Index(name: 'idx_sasb_sleeper_league_season', columns: ['season'])]
+#[ORM\UniqueConstraint(name: 'uniq_sasb_sleeper_league_league_id', columns: ['league_id'])]
 class SleeperLeague
 {
     #[ORM\Id]
