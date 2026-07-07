@@ -115,7 +115,7 @@ class SleeperPlayoffMatchupRepository extends ServiceEntityRepository
         $t2 = $dto->getT2();
         $r = $dto->getR();
 
-        $matchupWeek = $r !== null ? $playoffWeekStart + $r - 1 : null;
+        $matchupWeek = ($r !== null && $playoffWeekStart >= 1) ? $playoffWeekStart + $r - 1 : null;
         $matchupT1Id = ($t1 !== null && $matchupWeek !== null) ? ($matchupMap["{$t1}:{$matchupWeek}"] ?? null) : null;
         $matchupT2Id = ($t2 !== null && $matchupWeek !== null) ? ($matchupMap["{$t2}:{$matchupWeek}"] ?? null) : null;
 

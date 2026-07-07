@@ -63,11 +63,11 @@ class SleeperPlayoffMatchup
     #[ORM\JoinColumn(name: 'internal_roster_id_t2', onDelete: 'SET NULL')]
     private ?SleeperRoster $rosterTeam2 = null;
 
-    #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
+    #[ORM\ManyToOne(targetEntity: SleeperMatchup::class)]
     #[ORM\JoinColumn(name: 'internal_matchup_id_t1', onDelete: 'SET NULL')]
     private ?SleeperMatchup $matchupTeam1 = null;
 
-    #[ORM\OneToOne(targetEntity: SleeperMatchup::class)]
+    #[ORM\ManyToOne(targetEntity: SleeperMatchup::class)]
     #[ORM\JoinColumn(name: 'internal_matchup_id_t2', onDelete: 'SET NULL')]
     private ?SleeperMatchup $matchupTeam2 = null;
 
