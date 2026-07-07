@@ -10,6 +10,7 @@ enum ScoringTypeEnum: string {
     case HALF_PPR = 'half_ppr';
     case TWO_QB = '2qb';
     case IDP = 'idp';
+    case IDP_1QB = 'idp_1qb';
     case DYNASTY_STANDARD = 'dynasty_standard';
     case DYNASTY_PPR = 'dynasty_ppr';
     case DYNASTY_HALF_PPR = 'dynasty_half_ppr';
