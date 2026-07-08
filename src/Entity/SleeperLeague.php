@@ -317,7 +317,11 @@ class SleeperLeague
     public function getRosterBySleeperUserId(int $sleeperUserId): ?SleeperRoster
     {
         foreach ($this->rosters as $roster) {
-            if ($roster->getOwner()->getId() === $sleeperUserId) {
+            // A roster can legitimately have no owner (a manager left the
+            // league, a vacated/placeholder slot, etc.) — such a roster can
+            // never match a specific sleeperUserId, so it's simply not a hit,
+            // not an error.
+            if ($roster->getOwner()?->getId() === $sleeperUserId) {
                 return $roster;
             }
         }
