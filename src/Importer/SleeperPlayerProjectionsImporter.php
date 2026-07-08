@@ -7,7 +7,6 @@ namespace HansPeterOrding\SleeperApiSymfonyBundle\Importer;
 use Doctrine\ORM\EntityManagerInterface;
 use HansPeterOrding\SleeperApiClient\ApiClient\Endpoints\AbstractEndpoint;
 use HansPeterOrding\SleeperApiSymfonyBundle\Converter\ConverterInterface;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperLeague;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperPlayerProjectionsBatch;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -16,30 +15,39 @@ use Symfony\Component\Messenger\MessageBusInterface;
  */
 class SleeperPlayerProjectionsImporter extends AbstractImporter
 {
-    private const DEFAULT_BATCH_SIZE = 200;
+    private const int DEFAULT_BATCH_SIZE = 200;
 
     public function __construct(
         ConverterInterface                   $converter,
         EntityManagerInterface               $entityManager,
         private readonly MessageBusInterface $messageBus,
-    ) {
+    )
+    {
         parent::__construct($converter, $entityManager);
     }
 
     /**
-     * Importiert Player-Projections für eine Season/Week und dispatcht Batch-Messages.
+     * Importiert Player-Projections für eine Season/Week und dispatcht
+     * Batch-Messages.
      *
-     * @param string        $season
-     * @param int           $week
-     * @param string[]      $positions
-     * @param int           $batchSize
+     * $positions wird als EIN Array an den Client übergeben -> EIN HTTP-Call an
+     * Sleeper pro Aufruf dieser Methode, unabhängig davon wie viele Positionen
+     * angefragt werden (Sleeper akzeptiert position[]=... mehrfach in der
+     * Query-String). Die Granularität "ein Call pro Woche" wird vom Aufrufer
+     * bestimmt (siehe DispatchStatsSyncCommand), nicht hier.
+     *
+     * @param string $season
+     * @param int|null $week
+     * @param string[] $positions
+     * @param int $batchSize Anzahl Player pro Batch-Message
      */
     public function importPlayerProjections(
-        string        $season,
+        string $season,
         ?int   $week = null,
-        array         $positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF', 'DL', 'LB', 'DB'],
-        int           $batchSize = self::DEFAULT_BATCH_SIZE,
-    ): void {
+        array  $positions = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF', 'DL', 'LB', 'DB'],
+        int    $batchSize = self::DEFAULT_BATCH_SIZE,
+    ): void
+    {
         $projections = $this->sleeperApiClient->projections()->list(
             $season,
             AbstractEndpoint::SEASON_TYPE_REGULAR,
@@ -51,19 +59,11 @@ class SleeperPlayerProjectionsImporter extends AbstractImporter
             return;
         }
 
-        // 2) in Batches splitten und Messages dispatchen
-        $chunks       = array_chunk($projections, $batchSize);
-        $isFirstBatch = true;
-
-        foreach ($chunks as $chunk) {
-            $message = new SyncSleeperPlayerProjectionsBatch(
-                $season,
-                $week,
-                $chunk,
-            );
-
-            $this->messageBus->dispatch($message);
-            $isFirstBatch = false;
+        foreach (array_chunk($projections, $batchSize) as $chunk) {
+            $this->messageBus->dispatch(new SyncSleeperPlayerProjectionsBatch($season, $week, $chunk));
         }
+
+        unset($projections);
+        gc_collect_cycles();
     }
 }

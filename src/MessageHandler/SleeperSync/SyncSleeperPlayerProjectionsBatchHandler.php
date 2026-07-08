@@ -4,63 +4,36 @@ declare(strict_types=1);
 
 namespace HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync;
 
-use Doctrine\DBAL\Connection;
-use HansPeterOrding\SleeperApiClient\Dto\SleeperPlayerProjections;
-use HansPeterOrding\SleeperApiSymfonyBundle\Entity\SleeperStats;
 use HansPeterOrding\SleeperApiSymfonyBundle\Message\SleeperSync\SyncSleeperPlayerProjectionsBatch;
+use HansPeterOrding\SleeperApiSymfonyBundle\Repository\SleeperPlayerProjectionsRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+/**
+ * Thin by design: all SQL lives in
+ * SleeperPlayerProjectionsRepository::pgBulkUpsertProjections() (pg-prefixed
+ * repository method convention). This handler only unpacks the message and
+ * delegates — no player-id resolution, no row building, no SQL here any more
+ * (that used to live in the now-removed AbstractSyncStatsHandler).
+ */
 #[AsMessageHandler]
-class SyncSleeperPlayerProjectionsBatchHandler extends AbstractSyncStatsHandler
+final class SyncSleeperPlayerProjectionsBatchHandler
 {
-    public function __invoke(SyncSleeperPlayerProjectionsBatch $message): void
+    public function __construct(
+        private readonly SleeperPlayerProjectionsRepository $sleeperPlayerProjectionsRepository,
+    )
     {
-        if (empty($message->projections)) {
-            return;
-        }
-
-//        $this->db->beginTransaction();
-        try {
-            $externalPids = array_map(
-                static fn(SleeperPlayerProjections $dto) => (string)$dto->getPlayerId(),
-                $message->projections
-            );
-            $playerIdMap = $this->fetchPlayerIdMap($externalPids);
-
-            $this->bulkUpsertProjections($message, $playerIdMap);
-
-//            $this->db->commit();
-        } catch (\Throwable $e) {
-//            $this->db->rollBack();
-            throw $e;
-        }
     }
 
-    /**
-     * @param array<string,int> $playerIdMap
-     */
-    private function bulkUpsertProjections(SyncSleeperPlayerProjectionsBatch $message, array $playerIdMap): void
+    public function __invoke(SyncSleeperPlayerProjectionsBatch $message): void
     {
-        $rows   = [];
-        $params = [];
-
-        foreach ($message->projections as $dto) {
-            if (!($dto instanceof SleeperPlayerProjections)) {
-                continue;
-            }
-
-            $row = $this->buildRow($dto, $playerIdMap);
-            if(!$row) {
-                continue;
-            }
-
-            $rows[] = $row;
-        }
-
-        if ($rows === []) {
+        if ($message->projections === []) {
             return;
         }
 
-        $this->upsert($rows, 'projections');
+        $this->sleeperPlayerProjectionsRepository->pgBulkUpsertProjections(
+            $message->season,
+            $message->week,
+            $message->projections,
+        );
     }
 }
