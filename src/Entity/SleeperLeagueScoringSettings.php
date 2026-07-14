@@ -170,9 +170,9 @@ class SleeperLeagueScoringSettings {
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $ydsAllow = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def3andOut = null;
+    private ?float $def3AndOut = null;
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $def4andStop = null;
+    private ?float $def4AndStop = null;
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $qbHit = null;
     #[ORM\Column(type: 'float', nullable: true)]
@@ -1166,25 +1166,25 @@ class SleeperLeagueScoringSettings {
         return $this;
     }
 
-    public function getDef3andOut(): ?float
+    public function getDef3AndOut(): ?float
     {
-        return $this->def3andOut;
+        return $this->def3AndOut;
     }
 
-    public function setDef3andOut(?float $def3andOut): SleeperLeagueScoringSettings
+    public function setDef3AndOut(?float $def3AndOut): SleeperLeagueScoringSettings
     {
-        $this->def3andOut = $def3andOut;
+        $this->def3AndOut = $def3AndOut;
         return $this;
     }
 
-    public function getDef4andStop(): ?float
+    public function getDef4AndStop(): ?float
     {
-        return $this->def4andStop;
+        return $this->def4AndStop;
     }
 
-    public function setDef4andStop(?float $def4andStop): SleeperLeagueScoringSettings
+    public function setDef4AndStop(?float $def4AndStop): SleeperLeagueScoringSettings
     {
-        $this->def4andStop = $def4andStop;
+        $this->def4AndStop = $def4AndStop;
         return $this;
     }
 
