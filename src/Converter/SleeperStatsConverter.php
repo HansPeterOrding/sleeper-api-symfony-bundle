@@ -238,6 +238,8 @@ class SleeperStatsConverter implements ConverterInterface {
         $sleeperStatsEntity->setStTklSolo($sleeperStatsDto->getStTklSolo());
         $sleeperStatsEntity->setPr($sleeperStatsDto->getPr());
         $sleeperStatsEntity->setPrTd($sleeperStatsDto->getPrTd());
+        $sleeperStatsEntity->setKr($sleeperStatsDto->getKr());
+        $sleeperStatsEntity->setKrTd($sleeperStatsDto->getKrTd());
         $sleeperStatsEntity->setPrYd($sleeperStatsDto->getPrYd());
         $sleeperStatsEntity->setPrLng($sleeperStatsDto->getPrLng());
         $sleeperStatsEntity->setPrYpa($sleeperStatsDto->getPrYpa());
