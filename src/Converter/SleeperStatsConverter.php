@@ -51,6 +51,18 @@ class SleeperStatsConverter implements ConverterInterface {
         // ADP
         $sleeperStatsEntity->setPosAdpDdPpr($sleeperStatsDto->getPosAdpDdPpr());
         $sleeperStatsEntity->setAdpDdPpr($sleeperStatsDto->getAdpDdPpr());
+        $sleeperStatsEntity->setAdp2qb($sleeperStatsDto->getAdp2qb());
+        $sleeperStatsEntity->setAdpDynasty($sleeperStatsDto->getAdpDynasty());
+        $sleeperStatsEntity->setAdpDynasty2qb($sleeperStatsDto->getAdpDynasty2qb());
+        $sleeperStatsEntity->setAdpDynastyHalfPpr($sleeperStatsDto->getAdpDynastyHalfPpr());
+        $sleeperStatsEntity->setAdpDynastyPpr($sleeperStatsDto->getAdpDynastyPpr());
+        $sleeperStatsEntity->setAdpDynastyStd($sleeperStatsDto->getAdpDynastyStd());
+        $sleeperStatsEntity->setAdpHalfPpr($sleeperStatsDto->getAdpHalfPpr());
+        $sleeperStatsEntity->setAdpIdp($sleeperStatsDto->getAdpIdp());
+        $sleeperStatsEntity->setAdpIdp1qb($sleeperStatsDto->getAdpIdp1qb());
+        $sleeperStatsEntity->setAdpPpr($sleeperStatsDto->getAdpPpr());
+        $sleeperStatsEntity->setAdpRookie($sleeperStatsDto->getAdpRookie());
+        $sleeperStatsEntity->setAdpStd($sleeperStatsDto->getAdpStd());
 
         // Passing
         $sleeperStatsEntity->setPassYd($sleeperStatsDto->getPassYd());
