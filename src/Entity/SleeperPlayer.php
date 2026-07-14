@@ -87,6 +87,9 @@ class SleeperPlayer {
     private ?int $espnId = null;
 
     #[ORM\Column(nullable: true)]
+    private ?int $searchRank = null;
+
+    #[ORM\Column(nullable: true)]
     private ?int $fantasyDataId = null;
 
     #[ORM\Column(nullable: true)]
@@ -377,6 +380,17 @@ class SleeperPlayer {
     public function setEspnId(?int $espnId): SleeperPlayer
     {
         $this->espnId = $espnId;
+        return $this;
+    }
+
+    public function getSearchRank(): ?int
+    {
+        return $this->searchRank;
+    }
+
+    public function setSearchRank(?int $searchRank): SleeperPlayer
+    {
+        $this->searchRank = $searchRank;
         return $this;
     }
 

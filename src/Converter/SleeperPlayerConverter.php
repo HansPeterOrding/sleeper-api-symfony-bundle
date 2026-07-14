@@ -41,6 +41,7 @@ class SleeperPlayerConverter implements ConverterInterface {
         $sleeperPlayerEntity->setBirthCountry($sleeperPlayerDto->getBirthCountry());
         $sleeperPlayerEntity->setYearsExp($sleeperPlayerDto->getYearsExp());
         $sleeperPlayerEntity->setEspnId($sleeperPlayerDto->getEspnId());
+        $sleeperPlayerEntity->setSearchRank($sleeperPlayerDto->getSearchRank());
         $sleeperPlayerEntity->setFantasyDataId($sleeperPlayerDto->getFantasyDataId());
         $sleeperPlayerEntity->setGsisId($sleeperPlayerDto->getGsisId());
         $sleeperPlayerEntity->setPandascoreId($sleeperPlayerDto->getPandascoreId());
