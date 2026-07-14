@@ -245,8 +245,12 @@ services:
     
     HansPeterOrding\SleeperApiSymfonyBundle\Service\ImportService: ~
     HansPeterOrding\SleeperApiSymfonyBundle\Service\SleeperImportService: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerProjectionsBatchHandler: ~
-    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerStatsBatchHandler: ~
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerProjectionsBatchHandler:
+        arguments:
+            $logger: '@logger'
+    HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayerStatsBatchHandler:
+        arguments:
+            $logger: '@logger'
     HansPeterOrding\SleeperApiSymfonyBundle\MessageHandler\SleeperSync\SyncSleeperPlayersBatchHandler:
         arguments:
             $logger: '@logger'
