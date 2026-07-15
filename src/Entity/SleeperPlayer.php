@@ -119,6 +119,75 @@ class SleeperPlayer {
     #[ORM\Column(nullable: true)]
     private ?string $injuryStatus = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $fullName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $hashtag = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $searchFirstName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $searchLastName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $searchFullName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $sport = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $playerShard = null;
+
+    // ms-Epoch (z. B. 1653351613345) — bigint, Muster wie $id
+    #[ORM\Column(type: 'bigint', nullable: true)]
+    private ?int $newsUpdated = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $injuryBodyPart = null;
+
+    // Freitext -> TEXT (Konvention aus dem ESPN-Bundle)
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $injuryNotes = null;
+
+    // im Feed bisher nur null beobachtet; bewusst string, Format unverifiziert
+    #[ORM\Column(nullable: true)]
+    private ?string $injuryStartDate = null;
+
+    // Freitext -> TEXT
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $practiceDescription = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $practiceParticipation = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $kalshiId = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $oddsjamId = null;
+
+    // im Feed bisher nur null beobachtet
+    #[ORM\Column(nullable: true)]
+    private ?string $optaId = null;
+
+    // im Feed bisher nur null beobachtet
+    #[ORM\Column(nullable: true)]
+    private ?string $teamAbbr = null;
+
+    // im Feed bisher nur null beobachtet; vermutlich Timestamp-String
+    #[ORM\Column(nullable: true)]
+    private ?string $teamChangedAt = null;
+
+    // rohes Sleeper-Metadata-Objekt (channel_id, rookie_year, injury_override_* u. a.) -> json
+    #[ORM\Column(nullable: true)]
+    private ?array $metadata = null;
+
+    // -> json
+    #[ORM\Column(nullable: true)]
+    private ?array $competitions = null;
+
     /**
      * @var Collection<int, SleeperDraftPick>
      */
@@ -520,5 +589,225 @@ class SleeperPlayer {
         return [
             'playerId' => $sleeperPlayerDto->getPlayerId()
         ];
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): SleeperPlayer
+    {
+        $this->fullName = $fullName;
+        return $this;
+    }
+
+    public function getHashtag(): ?string
+    {
+        return $this->hashtag;
+    }
+
+    public function setHashtag(?string $hashtag): SleeperPlayer
+    {
+        $this->hashtag = $hashtag;
+        return $this;
+    }
+
+    public function getSearchFirstName(): ?string
+    {
+        return $this->searchFirstName;
+    }
+
+    public function setSearchFirstName(?string $searchFirstName): SleeperPlayer
+    {
+        $this->searchFirstName = $searchFirstName;
+        return $this;
+    }
+
+    public function getSearchLastName(): ?string
+    {
+        return $this->searchLastName;
+    }
+
+    public function setSearchLastName(?string $searchLastName): SleeperPlayer
+    {
+        $this->searchLastName = $searchLastName;
+        return $this;
+    }
+
+    public function getSearchFullName(): ?string
+    {
+        return $this->searchFullName;
+    }
+
+    public function setSearchFullName(?string $searchFullName): SleeperPlayer
+    {
+        $this->searchFullName = $searchFullName;
+        return $this;
+    }
+
+    public function getSport(): ?string
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?string $sport): SleeperPlayer
+    {
+        $this->sport = $sport;
+        return $this;
+    }
+
+    public function getPlayerShard(): ?string
+    {
+        return $this->playerShard;
+    }
+
+    public function setPlayerShard(?string $playerShard): SleeperPlayer
+    {
+        $this->playerShard = $playerShard;
+        return $this;
+    }
+
+    public function getNewsUpdated(): ?int
+    {
+        return $this->newsUpdated;
+    }
+
+    public function setNewsUpdated(?int $newsUpdated): SleeperPlayer
+    {
+        $this->newsUpdated = $newsUpdated;
+        return $this;
+    }
+
+    public function getInjuryBodyPart(): ?string
+    {
+        return $this->injuryBodyPart;
+    }
+
+    public function setInjuryBodyPart(?string $injuryBodyPart): SleeperPlayer
+    {
+        $this->injuryBodyPart = $injuryBodyPart;
+        return $this;
+    }
+
+    public function getInjuryNotes(): ?string
+    {
+        return $this->injuryNotes;
+    }
+
+    public function setInjuryNotes(?string $injuryNotes): SleeperPlayer
+    {
+        $this->injuryNotes = $injuryNotes;
+        return $this;
+    }
+
+    public function getInjuryStartDate(): ?string
+    {
+        return $this->injuryStartDate;
+    }
+
+    public function setInjuryStartDate(?string $injuryStartDate): SleeperPlayer
+    {
+        $this->injuryStartDate = $injuryStartDate;
+        return $this;
+    }
+
+    public function getPracticeDescription(): ?string
+    {
+        return $this->practiceDescription;
+    }
+
+    public function setPracticeDescription(?string $practiceDescription): SleeperPlayer
+    {
+        $this->practiceDescription = $practiceDescription;
+        return $this;
+    }
+
+    public function getPracticeParticipation(): ?string
+    {
+        return $this->practiceParticipation;
+    }
+
+    public function setPracticeParticipation(?string $practiceParticipation): SleeperPlayer
+    {
+        $this->practiceParticipation = $practiceParticipation;
+        return $this;
+    }
+
+    public function getKalshiId(): ?string
+    {
+        return $this->kalshiId;
+    }
+
+    public function setKalshiId(?string $kalshiId): SleeperPlayer
+    {
+        $this->kalshiId = $kalshiId;
+        return $this;
+    }
+
+    public function getOddsjamId(): ?string
+    {
+        return $this->oddsjamId;
+    }
+
+    public function setOddsjamId(?string $oddsjamId): SleeperPlayer
+    {
+        $this->oddsjamId = $oddsjamId;
+        return $this;
+    }
+
+    public function getOptaId(): ?string
+    {
+        return $this->optaId;
+    }
+
+    public function setOptaId(?string $optaId): SleeperPlayer
+    {
+        $this->optaId = $optaId;
+        return $this;
+    }
+
+    public function getTeamAbbr(): ?string
+    {
+        return $this->teamAbbr;
+    }
+
+    public function setTeamAbbr(?string $teamAbbr): SleeperPlayer
+    {
+        $this->teamAbbr = $teamAbbr;
+        return $this;
+    }
+
+    public function getTeamChangedAt(): ?string
+    {
+        return $this->teamChangedAt;
+    }
+
+    public function setTeamChangedAt(?string $teamChangedAt): SleeperPlayer
+    {
+        $this->teamChangedAt = $teamChangedAt;
+        return $this;
+    }
+
+    public function getMetadata(): ?array
+    {
+        return $this->metadata;
+    }
+
+    public function setMetadata(?array $metadata): SleeperPlayer
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    public function getCompetitions(): ?array
+    {
+        return $this->competitions;
+    }
+
+    public function setCompetitions(?array $competitions): SleeperPlayer
+    {
+        $this->competitions = $competitions;
+        return $this;
     }
 }
