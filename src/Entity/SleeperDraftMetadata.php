@@ -9,8 +9,12 @@ use HansPeterOrding\SleeperApiSymfonyBundle\Entity\Enum\ScoringTypeEnum;
 
 #[ORM\Embeddable]
 class SleeperDraftMetadata {
-    #[ORM\Column]
-    private ScoringTypeEnum $scoringType;
+    // Nullable so an unrecognised Sleeper scoring type degrades to null instead
+    // of aborting the import. Also removes an uninitialised-typed-property trap:
+    // the old non-nullable declaration had no default, so any read before the
+    // converter had run would have thrown.
+    #[ORM\Column(nullable: true)]
+    private ?ScoringTypeEnum $scoringType = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $name = null;
@@ -21,12 +25,12 @@ class SleeperDraftMetadata {
     #[ORM\Column(nullable: true)]
     private ?string $description = null;
 
-    public function getScoringType(): ScoringTypeEnum
+    public function getScoringType(): ?ScoringTypeEnum
     {
         return $this->scoringType;
     }
 
-    public function setScoringType(ScoringTypeEnum $scoringType): void
+    public function setScoringType(?ScoringTypeEnum $scoringType): void
     {
         $this->scoringType = $scoringType;
     }
